@@ -402,7 +402,7 @@
   <!-- sss.png — fully visible, no overlay -->
   <div style="max-width:1160px;margin:0 auto 52px;padding:0 24px;">
     <div style="border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(10,77,140,0.13);border:1px solid rgba(10,77,140,0.08);">
-      <img src="sss.png" alt="Серіктес компаниялар" style="width:100%;display:block;object-fit:cover;max-height:420px;object-position:center center;"/>
+      <img src="sss.png" alt="Серіктес компаниялар" style="width:100%;display:block;height:auto;"/>
     </div>
   </div>
 
@@ -491,6 +491,20 @@
         <div class="font-bold text-gray-900 text-sm mb-1">Ramstore Social</div>
         <div class="text-xs text-gray-400 mb-4 leading-snug" data-i18n="pro.ramf">Қазақстан · Ramstore</div>
         <a href="https://www.facebook.com/ramstore.all.in/mentions/" target="_blank" rel="noopener" class="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-blue-600 border border-blue-200 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all" data-i18n="pro.btn">толығырақ →</a>
+      </div>
+
+      <div class="mk-card p-6 flex flex-col items-center text-center reveal hover:-translate-y-1 transition-all">
+        <div style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#7B3FE4,#00C2C7);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;color:#fff;margin-bottom:12px;box-shadow:0 4px 14px rgba(123,63,228,0.3);">AC</div>
+        <div class="font-bold text-gray-900 text-sm mb-1">AYCOM</div>
+        <div class="text-xs text-gray-400 mb-4 leading-snug" data-i18n="pro.aycom">Қазақстан · IT шешімдері</div>
+        <a href="https://aycom.kz/" target="_blank" rel="noopener" class="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-blue-600 border border-blue-200 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all" data-i18n="pro.btn">толығырақ →</a>
+      </div>
+
+      <div class="mk-card p-6 flex flex-col items-center text-center reveal hover:-translate-y-1 transition-all">
+        <div style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#E83030,#c0392b);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;color:#fff;margin-bottom:12px;box-shadow:0 4px 14px rgba(232,48,48,0.3);">JQ</div>
+        <div class="font-bold text-gray-900 text-sm mb-1">Jaqyn</div>
+        <div class="text-xs text-gray-400 mb-4 leading-snug" data-i18n="pro.jaqyn">Қазақстан · Дүкен желісі</div>
+        <a href="https://www.instagram.com/jaqyn_kz/" target="_blank" rel="noopener" class="mt-auto inline-flex items-center gap-1 text-xs font-semibold text-blue-600 border border-blue-200 px-4 py-2 rounded-lg hover:bg-blue-50 transition-all" data-i18n="pro.btn">толығырақ →</a>
       </div>
 
     </div>
@@ -752,7 +766,7 @@ const T = {
     'con.cta.h':'Орта Азияда жүйеңізді бірге орнатайық','con.cta.d':'16+ жылдық Migros, Şok Market, Ecober тәжірибесін Қазақстан мен Орта Азия нарығына қолдана аламын. WMS, Виртуал нарық, HoReCa немесе тарату желісі.',
     'con.cta.b1':'📞 Қазір хабарласу','con.cta.b2':'✉️ E-пошта',
     'pro.eyebrow':'Серіктес компаниялар','pro.title':'Жобалар','pro.sub':'Түркиядан Орта Азияға дейін — бірлесіп жұмыс жасаған компаниялар','pro.btn':'толығырақ →',
-    'pro.sok':'Türkiye · WMS жобасы','pro.astoras':'Türkiye · Серіктес','pro.ecober':'Орта Азия · HoReCa','pro.migros':'Türkiye · Sanal Market','pro.obase':'Türkiye · Retail DB','pro.encore':'Türkiye · Касса жүйесі','pro.ashk':'Қазақстан · Серіктес','pro.nurbank':'Қазақстан · Банк','pro.evim':'Қазақстан · Жылжымайтын мүлік','pro.regardal':'Қазақстан · Қонақ үй','pro.ramo':'Қазақстан · E-Commerce','pro.ramf':'Қазақстан · Ramstore',
+    'pro.sok':'Türkiye · WMS жобасы','pro.astoras':'Türkiye · Серіктес','pro.ecober':'Орта Азия · HoReCa','pro.migros':'Türkiye · Sanal Market','pro.obase':'Türkiye · Retail DB','pro.encore':'Türkiye · Касса жүйесі','pro.ashk':'Қазақстан · Серіктес','pro.nurbank':'Қазақстан · Банк','pro.evim':'Қазақстан · Жылжымайтын мүлік','pro.regardal':'Қазақстан · Қонақ үй','pro.ramo':'Қазақстан · E-Commerce','pro.ramf':'Қазақстан · Ramstore','pro.aycom':'Қазақстан · IT шешімдері','pro.jaqyn':'Қазақстан · Дүкен желісі',
     'foot.copy':'© 2025 · COO · Retail &amp; HoReCa сарапшысы · Алматы, Қазақстан','foot.brands':'Migros · Şok Market · Ecober · Ramstore · SAMGA-NIITS',
   },
   ru: {
@@ -781,7 +795,7 @@ const T = {
     'con.cta.h':'Давайте вместе построим вашу систему в Центральной Азии','con.cta.d':'Могу применить 16+ лет опыта Migros, Şok Market и Ecober на рынке Казахстана и Центральной Азии. WMS, Виртуальный маркет, HoReCa или дистрибуторская сеть.',
     'con.cta.b1':'📞 Позвонить сейчас','con.cta.b2':'✉️ E-mail',
     'pro.eyebrow':'Компании-партнёры','pro.title':'Проекты','pro.sub':'От Турции до Центральной Азии — компании, с которыми мы работали вместе','pro.btn':'подробнее →',
-    'pro.sok':'Турция · Проект WMS','pro.astoras':'Турция · Партнёр','pro.ecober':'Центральная Азия · HoReCa','pro.migros':'Турция · Виртуальный маркет','pro.obase':'Турция · Retail DB','pro.encore':'Турция · Кассовая система','pro.ashk':'Казахстан · Партнёр','pro.nurbank':'Казахстан · Банк','pro.evim':'Казахстан · Недвижимость','pro.regardal':'Казахстан · Отель','pro.ramo':'Казахстан · E-Commerce','pro.ramf':'Казахстан · Ramstore',
+    'pro.sok':'Турция · Проект WMS','pro.astoras':'Турция · Партнёр','pro.ecober':'Центральная Азия · HoReCa','pro.migros':'Турция · Виртуальный маркет','pro.obase':'Турция · Retail DB','pro.encore':'Турция · Кассовая система','pro.ashk':'Казахстан · Партнёр','pro.nurbank':'Казахстан · Банк','pro.evim':'Казахстан · Недвижимость','pro.regardal':'Казахстан · Отель','pro.ramo':'Казахстан · E-Commerce','pro.ramf':'Казахстан · Ramstore','pro.aycom':'Казахстан · IT решения','pro.jaqyn':'Казахстан · Сеть магазинов',
     'foot.copy':'© 2025 · COO · Эксперт Retail &amp; HoReCa · Алматы, Казахстан','foot.brands':'Migros · Şok Market · Ecober · Ramstore · SAMGA-NIITS',
   },
   en: {
@@ -810,7 +824,7 @@ const T = {
     'con.cta.h':'Let\'s build your system in Central Asia together','con.cta.d':'I can apply 16+ years of Migros, Şok Market and Ecober experience to the Kazakhstan and Central Asia market. WMS, Virtual Market, HoReCa or distribution network.',
     'con.cta.b1':'📞 Call Now','con.cta.b2':'✉️ E-mail',
     'pro.eyebrow':'Partner Companies','pro.title':'Projects','pro.sub':'From Turkey to Central Asia — companies we have worked with','pro.btn':'learn more →',
-    'pro.sok':'Turkey · WMS project','pro.astoras':'Turkey · Partner','pro.ecober':'Central Asia · HoReCa','pro.migros':'Turkey · Sanal Market','pro.obase':'Turkey · Retail DB','pro.encore':'Turkey · POS System','pro.ashk':'Kazakhstan · Partner','pro.nurbank':'Kazakhstan · Bank','pro.evim':'Kazakhstan · Real Estate','pro.regardal':'Kazakhstan · Hotel','pro.ramo':'Kazakhstan · E-Commerce','pro.ramf':'Kazakhstan · Ramstore',
+    'pro.sok':'Turkey · WMS project','pro.astoras':'Turkey · Partner','pro.ecober':'Central Asia · HoReCa','pro.migros':'Turkey · Sanal Market','pro.obase':'Turkey · Retail DB','pro.encore':'Turkey · POS System','pro.ashk':'Kazakhstan · Partner','pro.nurbank':'Kazakhstan · Bank','pro.evim':'Kazakhstan · Real Estate','pro.regardal':'Kazakhstan · Hotel','pro.ramo':'Kazakhstan · E-Commerce','pro.ramf':'Kazakhstan · Ramstore','pro.aycom':'Kazakhstan · IT Solutions','pro.jaqyn':'Kazakhstan · Retail Chain',
     'foot.copy':'© 2025 · COO · Retail &amp; HoReCa Expert · Almaty, Kazakhstan','foot.brands':'Migros · Şok Market · Ecober · Ramstore · SAMGA-NIITS',
   },
   tr: {
@@ -839,7 +853,7 @@ const T = {
     'con.cta.h':'Orta Asya\'da sisteminizi birlikte kuralım','con.cta.d':'16+ yıllık Migros, Şok Market ve Ecober deneyimini Kazakistan ve Orta Asya pazarına uygulayabilirim. WMS, Sanal Market, HoReCa veya dağıtım ağı.',
     'con.cta.b1':'📞 Hemen Ara','con.cta.b2':'✉️ E-posta',
     'pro.eyebrow':'İş Ortağı Şirketler','pro.title':'Projeler','pro.sub':'Türkiye\'den Orta Asya\'ya — birlikte çalıştığım şirketler','pro.btn':'detaylar →',
-    'pro.sok':'Türkiye · WMS projesi','pro.astoras':'Türkiye · İş Ortağı','pro.ecober':'Orta Asya · HoReCa','pro.migros':'Türkiye · Sanal Market','pro.obase':'Türkiye · Retail DB','pro.encore':'Türkiye · Yazar Kassa','pro.ashk':'Kazakistan · İş Ortağı','pro.nurbank':'Kazakistan · Banka','pro.evim':'Kazakistan · Gayrimenkul','pro.regardal':'Kazakistan · Otel','pro.ramo':'Kazakistan · E-Ticaret','pro.ramf':'Kazakistan · Ramstore',
+    'pro.sok':'Türkiye · WMS projesi','pro.astoras':'Türkiye · İş Ortağı','pro.ecober':'Orta Asya · HoReCa','pro.migros':'Türkiye · Sanal Market','pro.obase':'Türkiye · Retail DB','pro.encore':'Türkiye · Yazar Kassa','pro.ashk':'Kazakistan · İş Ortağı','pro.nurbank':'Kazakistan · Banka','pro.evim':'Kazakistan · Gayrimenkul','pro.regardal':'Kazakistan · Otel','pro.ramo':'Kazakistan · E-Ticaret','pro.ramf':'Kazakistan · Ramstore','pro.aycom':'Kazakistan · BT Çözümleri','pro.jaqyn':'Kazakistan · Mağaza Zinciri',
     'foot.copy':'© 2025 · COO · Retail &amp; HoReCa Expert · Almatı, Kazakistan','foot.brands':'Migros · Şok Market · Ecober · Ramstore · SAMGA-NIITS',
   },
   zh: {
@@ -868,7 +882,7 @@ const T = {
     'con.cta.h':'让我们共同在中亚建立您的系统','con.cta.d':'我可以将16+年的Migros、Şok Market和Ecober经验应用于哈萨克斯坦和中亚市场。WMS、虚拟超市、HoReCa或分销网络。',
     'con.cta.b1':'📞 立即致电','con.cta.b2':'✉️ 发邮件',
     'pro.eyebrow':'合作公司','pro.title':'项目','pro.sub':'从土耳其到中亚——共同合作的公司','pro.btn':'详情 →',
-    'pro.sok':'土耳其 · WMS项目','pro.astoras':'土耳其 · 合作伙伴','pro.ecober':'中亚 · HoReCa','pro.migros':'土耳其 · 虚拟超市','pro.obase':'土耳其 · 零售数据库','pro.encore':'土耳其 · 收银系统','pro.ashk':'哈萨克斯坦 · 合作伙伴','pro.nurbank':'哈萨克斯坦 · 银行','pro.evim':'哈萨克斯坦 · 房地产','pro.regardal':'哈萨克斯坦 · 酒店','pro.ramo':'哈萨克斯坦 · 电子商务','pro.ramf':'哈萨克斯坦 · Ramstore',
+    'pro.sok':'土耳其 · WMS项目','pro.astoras':'土耳其 · 合作伙伴','pro.ecober':'中亚 · HoReCa','pro.migros':'土耳其 · 虚拟超市','pro.obase':'土耳其 · 零售数据库','pro.encore':'土耳其 · 收银系统','pro.ashk':'哈萨克斯坦 · 合作伙伴','pro.nurbank':'哈萨克斯坦 · 银行','pro.evim':'哈萨克斯坦 · 房地产','pro.regardal':'哈萨克斯坦 · 酒店','pro.ramo':'哈萨克斯坦 · 电子商务','pro.ramf':'哈萨克斯坦 · Ramstore','pro.aycom':'哈萨克斯坦 · IT解决方案','pro.jaqyn':'哈萨克斯坦 · 零售连锁',
     'foot.copy':'© 2025 · COO · 零售与餐饮专家 · 阿拉木图，哈萨克斯坦','foot.brands':'Migros · Şok Market · Ecober · Ramstore · SAMGA-NIITS',
   },
   mn: {
@@ -897,7 +911,7 @@ const T = {
     'con.cta.h':'Төв Азид таны системийг хамт байгуулцгаая','con.cta.d':'16+ жилийн Migros, Şok Market, Ecober туршлагыг Казахстан болон Төв Азийн зах зээлд хэрэглэж чадна. WMS, виртуал зах зээл, HoReCa буюу түгээлтийн сүлжээ.',
     'con.cta.b1':'📞 Одоо залгах','con.cta.b2':'✉️ И-мэйл',
     'pro.eyebrow':'Түнш компаниуд','pro.title':'Төслүүд','pro.sub':'Туркиас Төв Азид хүртэл — хамтран ажилласан компаниуд','pro.btn':'дэлгэрэнгүй →',
-    'pro.sok':'Турк · WMS төсөл','pro.astoras':'Турк · Түнш','pro.ecober':'Төв Азия · HoReCa','pro.migros':'Турк · Виртуал зах зээл','pro.obase':'Турк · Retail DB','pro.encore':'Турк · Кассын систем','pro.ashk':'Казахстан · Түнш','pro.nurbank':'Казахстан · Банк','pro.evim':'Казахстан · Үл хөдлөх хөрөнгө','pro.regardal':'Казахстан · Зочид буудал','pro.ramo':'Казахстан · E-Commerce','pro.ramf':'Казахстан · Ramstore',
+    'pro.sok':'Турк · WMS төсөл','pro.astoras':'Турк · Түнш','pro.ecober':'Төв Азия · HoReCa','pro.migros':'Турк · Виртуал зах зээл','pro.obase':'Турк · Retail DB','pro.encore':'Турк · Кассын систем','pro.ashk':'Казахстан · Түнш','pro.nurbank':'Казахстан · Банк','pro.evim':'Казахстан · Үл хөдлөх хөрөнгө','pro.regardal':'Казахстан · Зочид буудал','pro.ramo':'Казахстан · E-Commerce','pro.ramf':'Казахстан · Ramstore','pro.aycom':'Казахстан · IT шийдэл','pro.jaqyn':'Казахстан · Дэлгүүрийн сүлжээ',
     'foot.copy':'© 2025 · COO · Retail &amp; HoReCa мэргэжилтэн · Алматы, Казахстан','foot.brands':'Migros · Şok Market · Ecober · Ramstore · SAMGA-NIITS',
   }
 };
