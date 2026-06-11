@@ -410,23 +410,16 @@ function submitForm(e) {
 }
 
 // ── SCROLL REVEAL ────────────────────────────
-// Skip animation for prefers-reduced-motion users; content stays visible by default (CSS)
-if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('will-animate');
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(el => {
-    el.classList.add('will-animate');
-    revealObserver.observe(el);
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Stagger children with .reveal inside containers
+    }
   });
-}
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ── STAGGER GRID ITEMS ───────────────────────
 document.querySelectorAll('.about-card, .partner-card, .team-card, .step-item').forEach((el, i) => {
