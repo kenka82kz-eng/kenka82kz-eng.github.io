@@ -1,0 +1,5 @@
+serve.ps1
+temporary screenshots/
+localhostsamga/
+.claude/
+*.output
