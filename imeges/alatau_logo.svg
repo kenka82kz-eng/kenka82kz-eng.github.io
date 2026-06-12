@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Red background -->
+  <rect x="0" y="0" width="100" height="100" rx="12" fill="#CC1A1A"/>
+  <!-- Mountain peaks (white) -->
+  <polygon points="6,72 22,34 36,54 50,16 64,54 78,34 94,72" fill="white"/>
+  <!-- АЛАТАУ text -->
+  <text x="50" y="84" text-anchor="middle"
+    font-family="Arial,sans-serif" font-weight="900" font-size="12"
+    fill="white" letter-spacing="3">АЛАТАУ</text>
+  <!-- Bottom red banner -->
+  <path d="M0,88 H100 V88 Q100,100 88,100 H12 Q0,100 0,88 Z" fill="#9B0F0F"/>
+  <text x="50" y="97.5" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="8" fill="white" letter-spacing="1.2">ОПТОМАРКЕТ</text>
+</svg>
