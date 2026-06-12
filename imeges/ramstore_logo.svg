@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <clipPath id="circ"><circle cx="250" cy="250" r="247"/></clipPath>
+    <path id="topArc"    d="M 42,250 a208,208 0 0,1 416,0"/>
+    <path id="btmArc"    d="M 58,250 a192,192 0 0,0 384,0"/>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="250" cy="250" r="250" fill="#ED6C20"/>
+  <circle cx="250" cy="250" r="233" fill="none" stroke="#C8480A" stroke-width="16"/>
+  <circle cx="250" cy="250" r="216" fill="none" stroke="white" stroke-width="2"/>
+  <circle cx="250" cy="250" r="204" fill="none" stroke="white" stroke-width="1.5"/>
+
+  <!-- ── KANGAROO ── -->
+  <g clip-path="url(#circ)">
+    <!-- Tail -->
+    <path d="M 315,310 Q 375,325 370,375 Q 362,400 338,395" stroke="#4A9E28" stroke-width="28" fill="none" stroke-linecap="round"/>
+
+    <!-- Hind legs -->
+    <ellipse cx="222" cy="328" rx="24" ry="52" fill="#55AA32"/>
+    <ellipse cx="278" cy="328" rx="24" ry="52" fill="#55AA32"/>
+    <!-- Feet -->
+    <ellipse cx="213" cy="377" rx="32" ry="13" fill="#3D8820" transform="rotate(-12,213,377)"/>
+    <ellipse cx="289" cy="377" rx="32" ry="13" fill="#3D8820" transform="rotate(12,289,377)"/>
+
+    <!-- Body -->
+    <ellipse cx="250" cy="235" rx="75" ry="95" fill="#55AA32"/>
+
+    <!-- Front arms -->
+    <ellipse cx="172" cy="242" rx="19" ry="52" fill="#55AA32" transform="rotate(-18,172,242)"/>
+    <ellipse cx="328" cy="242" rx="19" ry="52" fill="#55AA32" transform="rotate(18,328,242)"/>
+    <!-- Paws -->
+    <ellipse cx="162" cy="290" rx="16" ry="10" fill="#3D8820"/>
+    <ellipse cx="338" cy="290" rx="16" ry="10" fill="#3D8820"/>
+
+    <!-- Belly patch -->
+    <ellipse cx="250" cy="250" rx="42" ry="58" fill="#6DC040" opacity="0.55"/>
+
+    <!-- Neck -->
+    <ellipse cx="250" cy="152" rx="38" ry="22" fill="#55AA32"/>
+
+    <!-- Head -->
+    <ellipse cx="250" cy="118" rx="58" ry="56" fill="#55AA32"/>
+
+    <!-- Ears -->
+    <ellipse cx="207" cy="76" rx="17" ry="32" fill="#55AA32" transform="rotate(-10,207,76)"/>
+    <ellipse cx="293" cy="76" rx="17" ry="32" fill="#55AA32" transform="rotate(10,293,76)"/>
+    <ellipse cx="207" cy="77" rx="9"  ry="21" fill="#ED6C20" opacity="0.7" transform="rotate(-10,207,77)"/>
+    <ellipse cx="293" cy="77" rx="9"  ry="21" fill="#ED6C20" opacity="0.7" transform="rotate(10,293,77)"/>
+
+    <!-- Muzzle -->
+    <ellipse cx="262" cy="135" rx="28" ry="20" fill="#6DC040"/>
+    <ellipse cx="262" cy="140" rx="22" ry="14" fill="#88D255" opacity="0.6"/>
+
+    <!-- Eyes -->
+    <ellipse cx="232" cy="108" rx="14" ry="15" fill="white"/>
+    <ellipse cx="268" cy="108" rx="14" ry="15" fill="white"/>
+    <circle  cx="235" cy="109" r="8"  fill="#1a1a1a"/>
+    <circle  cx="271" cy="109" r="8"  fill="#1a1a1a"/>
+    <circle  cx="238" cy="106" r="3"  fill="white"/>
+    <circle  cx="274" cy="106" r="3"  fill="white"/>
+    <!-- Eyebrows (friendly) -->
+    <path d="M 222,96 Q 234,90 246,96" stroke="#2a6010" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 258,96 Q 270,90 282,96" stroke="#2a6010" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- Nose -->
+    <ellipse cx="260" cy="130" rx="9" ry="6" fill="#1a1a1a"/>
+    <!-- Smile -->
+    <path d="M 246,140 Q 260,150 274,140" stroke="#2a6010" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Bow-tie / orange chest badge -->
+    <path d="M 236,188 L 248,198 L 236,208 Z" fill="#ED6C20"/>
+    <path d="M 264,188 L 252,198 L 264,208 Z" fill="#ED6C20"/>
+    <circle cx="250" cy="198" r="6" fill="#C8480A"/>
+  </g>
+
+  <!-- "Рамстор" -->
+  <text x="250" y="432" text-anchor="middle"
+    font-family="'Arial Black',Arial,sans-serif" font-weight="900"
+    font-size="56" fill="#D01E1E" letter-spacing="-1">Рамстор</text>
+
+  <!-- "ONLINE.RAMSTORE.KZ" -->
+  <text x="250" y="462" text-anchor="middle"
+    font-family="Arial,sans-serif" font-size="17" fill="white" font-weight="700">ONLINE.RAMSTORE.KZ</text>
+
+  <!-- Circular top text -->
+  <text font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="white" letter-spacing="3">
+    <textPath href="#topArc" startOffset="8%">ИНТЕРНЕТ ДҮКЕНІ · ИНТЕРНЕТ МАГАЗИН</textPath>
+  </text>
+</svg>
