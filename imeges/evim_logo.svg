@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 90" width="200" height="90">
+  <!-- House icon -->
+  <g transform="translate(8, 5)">
+    <!-- Chimney -->
+    <rect x="14" y="14" width="8" height="14" fill="#CC2929"/>
+    <!-- Roof -->
+    <polygon points="4,36 44,36 24,14" fill="#CC2929"/>
+    <!-- Wall -->
+    <rect x="8" y="36" width="32" height="24" fill="#CC2929"/>
+    <!-- Door -->
+    <rect x="18" y="46" width="12" height="14" rx="6" fill="white"/>
+    <!-- Window -->
+    <rect x="10" y="40" width="8" height="8" rx="1" fill="white" opacity="0.8"/>
+    <rect x="30" y="40" width="8" height="8" rx="1" fill="white" opacity="0.8"/>
+  </g>
+  <!-- EVIM text -->
+  <text x="68" y="44" font-family="Arial Black, Arial" font-weight="900" font-size="30" fill="#CC2929" letter-spacing="2">EVIM</text>
+  <!-- Subtitle -->
+  <text x="68" y="62" font-family="Arial, sans-serif" font-size="10.5" fill="#888" letter-spacing="0.5">для дома и жизни</text>
+</svg>
