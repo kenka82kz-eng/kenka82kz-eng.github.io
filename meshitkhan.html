@@ -1494,8 +1494,18 @@ document.querySelectorAll('#projeler .mk-card').forEach((el, i) => {
 const _saved = localStorage.getItem('mk_lang');
 setLang(_saved && T[_saved] ? _saved : 'kk');
 
-// ===== ЖҰМЫС УАҚЫТЫНДАҒЫ ЕСТЕЛІКТЕР — Gallery (IndexedDB) =====
-let _gDb = null, _gCompany = '', _gCompanyName = '';
+// ===== ЖҰМЫС УАҚЫТЫНДАҒЫ ЕСТЕЛІКТЕР — Gallery with Categories (IndexedDB) =====
+const GCATS = [
+  { id:'all',      icon:'🗂',  label:'Барлығы'    },
+  { id:'photo',    icon:'📷',  label:'Фото'       },
+  { id:'video',    icon:'🎥',  label:'Видео'      },
+  { id:'team',     icon:'👥',  label:'Команда'    },
+  { id:'events',   icon:'🎉',  label:'Іс-шаралар' },
+  { id:'projects', icon:'💼',  label:'Жобалар'    },
+  { id:'travel',   icon:'✈️',  label:'Сапарлар'   },
+  { id:'other',    icon:'📌',  label:'Басқа'      },
+];
+let _gDb = null, _gCompany = '', _gCompanyName = '', _gActiveCat = 'all';
 
 function _gInitDB() {
   return new Promise((res, rej) => {
@@ -1512,10 +1522,10 @@ function _gInitDB() {
     req.onerror = e => rej(e.target.error);
   });
 }
-function _gSave(company, type, dataURL, name) {
+function _gSave(company, type, dataURL, name, category) {
   return _gInitDB().then(db => new Promise((res, rej) => {
     const tx = db.transaction('media', 'readwrite');
-    tx.objectStore('media').add({ company, type, data: dataURL, name, date: Date.now() });
+    tx.objectStore('media').add({ company, type, data: dataURL, name, category: category||'other', date: Date.now() });
     tx.oncomplete = res; tx.onerror = e => rej(e.target.error);
   }));
 }
@@ -1534,10 +1544,11 @@ function _gDelete(id) {
 }
 
 async function openGallery(company, companyName) {
-  _gCompany = company; _gCompanyName = companyName;
+  _gCompany = company; _gCompanyName = companyName; _gActiveCat = 'all';
   document.getElementById('galleryCompanyName').textContent = companyName;
   document.getElementById('galleryModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  _gBuildCatTabs();
   await _gRender();
 }
 function closeGallery() {
@@ -1546,48 +1557,82 @@ function closeGallery() {
   document.getElementById('galleryFileInput').value = '';
 }
 
+function _gBuildCatTabs() {
+  const bar = document.getElementById('galleryCatBar');
+  bar.innerHTML = '';
+  GCATS.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.dataset.cat = cat.id;
+    btn.innerHTML = cat.icon + ' ' + cat.label;
+    const active = cat.id === _gActiveCat;
+    btn.style.cssText = `padding:6px 14px;border-radius:20px;border:1.5px solid ${active?'#10B981':'#E5E7EB'};background:${active?'#10B981':'#fff'};color:${active?'#fff':'#6B7280'};font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
+    btn.onclick = async () => { _gActiveCat = cat.id; _gBuildCatTabs(); await _gRender(); };
+    bar.appendChild(btn);
+  });
+}
+
 async function _gRender() {
   const grid = document.getElementById('galleryGrid');
   const countEl = document.getElementById('galleryCount');
-  const items = await _gGetAll(_gCompany);
-  countEl.textContent = items.length ? items.length + ' файл сақталған' : '';
+  const allItems = await _gGetAll(_gCompany);
+
+  // Category filter
+  let items = allItems;
+  if (_gActiveCat === 'photo')  items = allItems.filter(i => i.type === 'image');
+  else if (_gActiveCat === 'video') items = allItems.filter(i => i.type === 'video');
+  else if (_gActiveCat !== 'all')   items = allItems.filter(i => i.category === _gActiveCat);
+
+  const catLabel = GCATS.find(c => c.id === _gActiveCat);
+  countEl.innerHTML = allItems.length
+    ? `<span style="color:#6B7280">${allItems.length} файл барлығы</span>${items.length !== allItems.length ? ` · <span style="color:#10B981;font-weight:700">${items.length} ${catLabel?.label || ''}</span>` : ''}`
+    : '';
+
   grid.innerHTML = '';
   if (!items.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:52px 20px;color:#9CA3AF;"><div style="font-size:52px;margin-bottom:14px;">🖼️</div><div style="font-size:14px;line-height:1.7;">Әзірге ештеңе жоқ.<br>Жоғарыдан фото немесе видео жүктеңіз!</div></div>';
+    const catName = catLabel ? catLabel.icon + ' ' + catLabel.label : '';
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:52px 20px;color:#9CA3AF;"><div style="font-size:48px;margin-bottom:14px;">${_gActiveCat==='all'?'🖼️':catLabel?.icon||'📂'}</div><div style="font-size:14px;line-height:1.7;">${_gActiveCat==='all'?'Әзірге ештеңе жоқ.<br>Жоғарыдан фото немесе видео жүктеңіз!':'<b>'+catName+'</b> категориясында ештеңе жоқ.'}</div></div>`;
     return;
   }
   [...items].sort((a,b) => b.date - a.date).forEach(item => {
+    const cat = GCATS.find(c => c.id === item.category) || GCATS[GCATS.length-1];
     const wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative;border-radius:14px;overflow:hidden;background:#F3F4F6;aspect-ratio:1;';
     const media = document.createElement(item.type === 'video' ? 'video' : 'img');
     media.src = item.data;
     media.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
     if (item.type === 'video') { media.controls = true; media.preload = 'metadata'; }
+    // Category badge
+    const badge = document.createElement('div');
+    badge.style.cssText = 'position:absolute;top:7px;left:7px;padding:2px 8px;border-radius:10px;background:rgba(0,0,0,0.52);color:white;font-size:10px;font-weight:700;';
+    badge.textContent = cat.icon + ' ' + cat.label;
+    // Delete
     const del = document.createElement('button');
     del.innerHTML = '🗑';
     del.title = 'Жою';
     del.style.cssText = 'position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.58);color:white;border:none;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
     del.onclick = async e => { e.stopPropagation(); if (confirm('Жою керек пе?')) { await _gDelete(item.id); await _gRender(); } };
+    // File name
     const nm = document.createElement('div');
-    nm.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.6));color:white;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
+    nm.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:white;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
     nm.textContent = item.name;
-    wrap.append(media, del, nm);
+    wrap.append(media, badge, del, nm);
     grid.appendChild(wrap);
   });
 }
 
 async function handleGalleryUpload(files) {
   if (!files || !files.length) return;
-  const label = document.getElementById('galleryUploadLabel');
-  const info = label.querySelector('.gallery-upload-info');
+  const cat = document.getElementById('galleryCatSelect').value;
+  const info = document.getElementById('galleryUploadLabel').querySelector('.gallery-upload-info');
   info.innerHTML = '<div style="font-weight:700;color:#10B981;font-size:13px;">Жүктелуде… (' + files.length + ' файл)</div><div style="font-size:11px;color:#9CA3AF;margin-top:2px;">Күтіңіз…</div>';
   for (const file of files) {
     const type = file.type.startsWith('video/') ? 'video' : 'image';
     const dataURL = await new Promise(r => { const fr = new FileReader(); fr.onload = e => r(e.target.result); fr.readAsDataURL(file); });
-    await _gSave(_gCompany, type, dataURL, file.name);
+    await _gSave(_gCompany, type, dataURL, file.name, cat);
   }
   info.innerHTML = '<div style="font-weight:700;color:#374151;font-size:13px;">Фото немесе видео жүктеу</div><div style="font-size:11px;color:#9CA3AF;margin-top:2px;">JPG · PNG · GIF · MP4 · MOV · WEBM</div>';
   document.getElementById('galleryFileInput').value = '';
+  _gActiveCat = cat; _gBuildCatTabs();
   await _gRender();
 }
 
@@ -1595,8 +1640,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('galleryModal').addEventListener('click', function(e) {
     if (e.target === this) closeGallery();
   });
-
-  // Inject "Жұмыс уақытында" button into every partner card
   document.querySelectorAll('#projeler .mk-card').forEach(card => {
     const nameEl = card.querySelector('.font-bold.text-gray-900');
     if (!nameEl) return;
@@ -1613,33 +1656,51 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<!-- ===== GALLERY MODAL ===== -->
+<!-- ===== GALLERY MODAL with Categories ===== -->
 <div id="galleryModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;">
-  <div style="background:#fff;border-radius:24px;width:100%;max-width:940px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);">
+  <div style="background:#fff;border-radius:24px;width:100%;max-width:980px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);">
 
     <!-- Header -->
-    <div style="padding:20px 24px 16px;border-bottom:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+    <div style="padding:18px 24px 14px;border-bottom:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
       <div>
-        <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#10B981;margin-bottom:5px;">📸 Жұмыс естеліктері</div>
-        <div id="galleryCompanyName" style="font-weight:800;font-size:21px;color:#111827;font-family:'Manrope',sans-serif;"></div>
+        <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#10B981;margin-bottom:4px;">📸 Жұмыс естеліктері</div>
+        <div id="galleryCompanyName" style="font-weight:800;font-size:20px;color:#111827;font-family:'Manrope',sans-serif;"></div>
       </div>
       <button onclick="closeGallery()" style="width:40px;height:40px;border-radius:50%;background:#F3F4F6;border:none;font-size:22px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">×</button>
     </div>
 
+    <!-- Category tabs -->
+    <div style="padding:12px 24px;border-bottom:1px solid #F3F4F6;flex-shrink:0;">
+      <div id="galleryCatBar" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+    </div>
+
     <!-- Upload zone -->
-    <div style="padding:14px 24px;border-bottom:1px solid #F9FAFB;flex-shrink:0;">
-      <label id="galleryUploadLabel" style="display:flex;align-items:center;gap:16px;padding:14px 20px;border:2px dashed #D1D5DB;border-radius:14px;cursor:pointer;background:#FAFAFA;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='#10B981'" onmouseleave="this.style.borderColor='#D1D5DB'">
-        <span style="font-size:30px;flex-shrink:0;">📁</span>
-        <div class="gallery-upload-info">
-          <div style="font-weight:700;color:#374151;font-size:13px;">Фото немесе видео жүктеу</div>
-          <div style="font-size:11px;color:#9CA3AF;margin-top:2px;">JPG · PNG · GIF · MP4 · MOV · WEBM</div>
+    <div style="padding:12px 24px;border-bottom:1px solid #F9FAFB;flex-shrink:0;">
+      <div style="display:flex;gap:10px;align-items:stretch;">
+        <label id="galleryUploadLabel" style="flex:1;display:flex;align-items:center;gap:14px;padding:11px 16px;border:2px dashed #D1D5DB;border-radius:14px;cursor:pointer;background:#FAFAFA;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='#10B981'" onmouseleave="this.style.borderColor='#D1D5DB'">
+          <span style="font-size:26px;flex-shrink:0;">📁</span>
+          <div class="gallery-upload-info">
+            <div style="font-weight:700;color:#374151;font-size:13px;">Фото немесе видео жүктеу</div>
+            <div style="font-size:11px;color:#9CA3AF;margin-top:1px;">JPG · PNG · GIF · MP4 · MOV · WEBM</div>
+          </div>
+          <input type="file" multiple accept="image/*,video/*" id="galleryFileInput" style="display:none;" onchange="handleGalleryUpload(this.files)"/>
+        </label>
+        <!-- Category selector -->
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:4px;flex-shrink:0;">
+          <div style="font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:0.5px;">КАТЕГОРИЯ</div>
+          <select id="galleryCatSelect" style="padding:8px 12px;border-radius:10px;border:1.5px solid #E5E7EB;background:#fff;font-size:12px;font-weight:700;color:#374151;cursor:pointer;font-family:inherit;min-width:150px;">
+            <option value="team">👥 Команда</option>
+            <option value="events">🎉 Іс-шаралар</option>
+            <option value="projects">💼 Жобалар</option>
+            <option value="travel">✈️ Сапарлар</option>
+            <option value="other">📌 Басқа</option>
+          </select>
         </div>
-        <input type="file" multiple accept="image/*,video/*" id="galleryFileInput" style="display:none;" onchange="handleGalleryUpload(this.files)"/>
-      </label>
+      </div>
     </div>
 
     <!-- File count -->
-    <div id="galleryCount" style="padding:10px 24px 0;font-size:11.5px;color:#9CA3AF;font-weight:600;flex-shrink:0;"></div>
+    <div id="galleryCount" style="padding:8px 24px 0;font-size:11.5px;font-weight:600;flex-shrink:0;"></div>
 
     <!-- Grid -->
     <div id="galleryGrid" style="flex:1;overflow-y:auto;padding:14px 24px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:13px;align-content:start;min-height:180px;"></div>
