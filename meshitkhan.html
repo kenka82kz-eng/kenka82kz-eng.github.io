@@ -1524,17 +1524,50 @@ document.querySelectorAll('#projeler .mk-card').forEach((el, i) => {
 const _saved = localStorage.getItem('mk_lang');
 setLang(_saved && T[_saved] ? _saved : 'kk');
 
-// ===== ЖҰМЫС УАҚЫТЫНДАҒЫ ЕСТЕЛІКТЕР — Gallery with Categories (IndexedDB) =====
-const GCATS = [
-  { id:'all',      icon:'🗂',  label:'Барлығы'    },
-  { id:'photo',    icon:'📷',  label:'Фото'       },
-  { id:'video',    icon:'🎥',  label:'Видео'      },
-  { id:'team',     icon:'👥',  label:'Команда'    },
-  { id:'events',   icon:'🎉',  label:'Іс-шаралар' },
-  { id:'projects', icon:'💼',  label:'Жобалар'    },
-  { id:'travel',   icon:'✈️',  label:'Сапарлар'   },
-  { id:'other',    icon:'📌',  label:'Басқа'      },
+// ===== ЖҰМЫС УАҚЫТЫНДАҒЫ ЕСТЕЛІКТЕР — Cluster Gallery System =====
+
+// ── Default clusters ─────────────────────────────────────────────
+const DEFAULT_CLUSTERS = [
+  { id:'jet_market',    icon:'🚀', label:'jet маркет'      },
+  { id:'market',        icon:'🛒', label:'Маркет'          },
+  { id:'supermarket',   icon:'🏬', label:'Супермаркет'     },
+  { id:'hypermarket',   icon:'🏢', label:'Гипермаркет'     },
+  { id:'koyma',         icon:'📦', label:'Қойма'           },
+  { id:'ortalyk_koyma', icon:'🏭', label:'Орталық қойма'   },
+  { id:'internet',      icon:'🌐', label:'Интернет-магазин'},
 ];
+
+function _gAllClusters() {
+  const custom = JSON.parse(localStorage.getItem('mkCustomClusters_v3') || '[]');
+  return [...DEFAULT_CLUSTERS, ...custom];
+}
+function _gCompanyClusters(co) {
+  return JSON.parse(localStorage.getItem('mkCompanyClusters_v3') || '{}')[co]; // undefined = not set
+}
+function _gSaveCompanyClusters(co, ids) {
+  const saved = JSON.parse(localStorage.getItem('mkCompanyClusters_v3') || '{}');
+  saved[co] = ids;
+  localStorage.setItem('mkCompanyClusters_v3', JSON.stringify(saved));
+}
+function _gToggleCluster(co, id) {
+  const cur = _gCompanyClusters(co) || [];
+  _gSaveCompanyClusters(co, cur.includes(id) ? cur.filter(x=>x!==id) : [...cur, id]);
+}
+function _gAddCustomCluster(label) {
+  const custom = JSON.parse(localStorage.getItem('mkCustomClusters_v3') || '[]');
+  const id = 'custom_' + Date.now();
+  custom.push({ id, icon:'📌', label });
+  localStorage.setItem('mkCustomClusters_v3', JSON.stringify(custom));
+  return id;
+}
+function _gDeleteCustomCluster(id) {
+  let custom = JSON.parse(localStorage.getItem('mkCustomClusters_v3') || '[]');
+  localStorage.setItem('mkCustomClusters_v3', JSON.stringify(custom.filter(c=>c.id!==id)));
+  const saved = JSON.parse(localStorage.getItem('mkCompanyClusters_v3') || '{}');
+  Object.keys(saved).forEach(c => { saved[c] = saved[c].filter(x=>x!==id); });
+  localStorage.setItem('mkCompanyClusters_v3', JSON.stringify(saved));
+}
+
 let _gDb = null, _gCompany = '', _gCompanyName = '', _gActiveCat = 'all';
 
 function _gInitDB() {
@@ -1573,168 +1606,260 @@ function _gDelete(id) {
   }));
 }
 
+// ── Modal view switcher ───────────────────────────────────────────
+function _gShowView(id) {
+  ['galleryViewClusters','galleryViewGallery'].forEach(v =>
+    document.getElementById(v).style.display = v===id ? 'flex' : 'none'
+  );
+}
+
 async function openGallery(company, companyName) {
   _gCompany = company; _gCompanyName = companyName; _gActiveCat = 'all';
-  document.getElementById('galleryCompanyName').textContent = companyName;
   document.getElementById('galleryModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  _gBuildCatTabs();
-  await _gRender();
+  if (_gCompanyClusters(company) === undefined) {
+    _gSaveCompanyClusters(company, []); // init
+    _gShowView('galleryViewClusters');
+    _gRenderClusterSelector();
+  } else {
+    _gShowView('galleryViewGallery');
+    _gBuildGalleryTabs(); await _gRender();
+  }
 }
 function closeGallery() {
   document.getElementById('galleryModal').style.display = 'none';
   document.body.style.overflow = '';
-  document.getElementById('galleryFileInput').value = '';
+  const fi = document.getElementById('galleryFileInput');
+  if (fi) fi.value = '';
+}
+function openClusterSettings() {
+  _gShowView('galleryViewClusters');
+  _gRenderClusterSelector();
+}
+async function proceedToGallery() {
+  _gShowView('galleryViewGallery');
+  document.getElementById('galleryGalleryCompanyName').textContent = _gCompanyName;
+  _gActiveCat = 'all'; _gBuildGalleryTabs(); await _gRender();
 }
 
-function _gBuildCatTabs() {
-  const bar = document.getElementById('galleryCatBar');
+// ── Cluster selector ─────────────────────────────────────────────
+function _gRenderClusterSelector() {
+  document.getElementById('gallerySelectorCompanyName').textContent = _gCompanyName;
+  const enabled = _gCompanyClusters(_gCompany) || [];
+  const all = _gAllClusters();
+  const container = document.getElementById('clusterChipsContainer');
+  container.innerHTML = '';
+
+  all.forEach(cl => {
+    const on = enabled.includes(cl.id);
+    const chip = document.createElement('div');
+    chip.style.cssText = `position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:18px 10px 14px;border-radius:16px;border:2.5px solid ${on?'#10B981':'#E5E7EB'};background:${on?'linear-gradient(135deg,#ECFDF5,#D1FAE5)':'#FAFAFA'};cursor:pointer;transition:all 0.15s;min-width:96px;text-align:center;user-select:none;`;
+    chip.innerHTML = `
+      ${on?`<div style="position:absolute;top:7px;right:7px;width:19px;height:19px;border-radius:50%;background:#10B981;color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;">✓</div>`:''}
+      <span style="font-size:28px;line-height:1;">${cl.icon}</span>
+      <span style="font-weight:700;font-size:11.5px;color:${on?'#065F46':'#4B5563'};line-height:1.3;">${cl.label}</span>
+    `;
+    chip.onclick = () => { _gToggleCluster(_gCompany, cl.id); _gRenderClusterSelector(); };
+    if (cl.id.startsWith('custom_')) {
+      const x = document.createElement('button');
+      x.innerHTML = '×';
+      x.title = 'Жою';
+      x.style.cssText = 'position:absolute;top:-7px;left:-7px;width:21px;height:21px;border-radius:50%;background:#FEE2E2;color:#EF4444;border:1px solid #FCA5A5;cursor:pointer;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;padding:0;';
+      x.onclick = e => { e.stopPropagation(); if(confirm(`"${cl.label}" жою керек пе?`)){_gDeleteCustomCluster(cl.id);_gRenderClusterSelector();} };
+      chip.appendChild(x);
+    }
+    container.appendChild(chip);
+  });
+
+  // Add cluster button
+  const add = document.createElement('div');
+  add.style.cssText = `display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:18px 10px 14px;border-radius:16px;border:2.5px dashed #D1D5DB;background:#fff;cursor:pointer;min-width:96px;text-align:center;color:#9CA3AF;transition:all 0.15s;`;
+  add.innerHTML = `<span style="font-size:28px;">➕</span><span style="font-weight:700;font-size:11.5px;">Жаңа қосу</span>`;
+  add.onmouseenter = ()=>{add.style.borderColor='#10B981';add.style.color='#10B981';};
+  add.onmouseleave = ()=>{add.style.borderColor='#D1D5DB';add.style.color='#9CA3AF';};
+  add.onclick = () => {
+    const label = prompt('Жаңа кластердің атауын жазыңыз:');
+    if (label && label.trim()) {
+      const id = _gAddCustomCluster(label.trim());
+      _gToggleCluster(_gCompany, id);
+      _gRenderClusterSelector();
+    }
+  };
+  container.appendChild(add);
+
+  const cnt = (enabled.length);
+  document.getElementById('clusterSelectedCount').textContent = cnt ? `${cnt} кластер таңдалды` : 'Ешнәрсе таңдалмаған';
+  document.getElementById('clusterProceedBtn').style.opacity = cnt ? '1' : '0.45';
+}
+
+// ── Gallery tabs ─────────────────────────────────────────────────
+function _gBuildGalleryTabs() {
+  const bar = document.getElementById('galleryClusterTabs');
+  const enabled = _gCompanyClusters(_gCompany) || [];
+  const active = _gAllClusters().filter(c => enabled.includes(c.id));
   bar.innerHTML = '';
-  GCATS.forEach(cat => {
+  [{ id:'all', icon:'🗂', label:'Барлығы' }, ...active].forEach(c => {
     const btn = document.createElement('button');
-    btn.dataset.cat = cat.id;
-    btn.innerHTML = cat.icon + ' ' + cat.label;
-    const active = cat.id === _gActiveCat;
-    btn.style.cssText = `padding:6px 14px;border-radius:20px;border:1.5px solid ${active?'#10B981':'#E5E7EB'};background:${active?'#10B981':'#fff'};color:${active?'#fff':'#6B7280'};font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
-    btn.onclick = async () => { _gActiveCat = cat.id; _gBuildCatTabs(); await _gRender(); };
+    const on = c.id === _gActiveCat;
+    btn.style.cssText = `padding:7px 16px;border-radius:20px;border:1.5px solid ${on?'#10B981':'#E5E7EB'};background:${on?'#10B981':'#fff'};color:${on?'#fff':'#6B7280'};font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;flex-shrink:0;`;
+    btn.innerHTML = c.icon + ' ' + c.label;
+    btn.onclick = async () => { _gActiveCat = c.id; _gBuildGalleryTabs(); await _gRender(); };
     bar.appendChild(btn);
   });
 }
 
+// ── Gallery render ────────────────────────────────────────────────
 async function _gRender() {
   const grid = document.getElementById('galleryGrid');
   const countEl = document.getElementById('galleryCount');
-  const allItems = await _gGetAll(_gCompany);
+  const all = await _gGetAll(_gCompany);
+  const items = _gActiveCat === 'all' ? all : all.filter(i => i.category === _gActiveCat);
+  const allClusters = _gAllClusters();
+  const enabled = _gCompanyClusters(_gCompany) || [];
+  const activeCl = allClusters.filter(c => enabled.includes(c.id));
 
-  // Category filter
-  let items = allItems;
-  if (_gActiveCat === 'photo')  items = allItems.filter(i => i.type === 'image');
-  else if (_gActiveCat === 'video') items = allItems.filter(i => i.type === 'video');
-  else if (_gActiveCat !== 'all')   items = allItems.filter(i => i.category === _gActiveCat);
+  // Sync upload dropdown
+  const sel = document.getElementById('galleryCatSelect');
+  if (sel) sel.innerHTML = activeCl.length
+    ? activeCl.map(c=>`<option value="${c.id}">${c.icon} ${c.label}</option>`).join('')
+    : '<option value="other">📌 Басқа</option>';
 
-  const catLabel = GCATS.find(c => c.id === _gActiveCat);
-  countEl.innerHTML = allItems.length
-    ? `<span style="color:#6B7280">${allItems.length} файл барлығы</span>${items.length !== allItems.length ? ` · <span style="color:#10B981;font-weight:700">${items.length} ${catLabel?.label || ''}</span>` : ''}`
+  countEl.innerHTML = all.length
+    ? `<span style="color:#6B7280;">${all.length} файл барлығы</span>${items.length!==all.length?` · <span style="color:#10B981;font-weight:700;">${items.length} осы кластерде</span>`:''}`
     : '';
 
   grid.innerHTML = '';
   if (!items.length) {
-    const catName = catLabel ? catLabel.icon + ' ' + catLabel.label : '';
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:52px 20px;color:#9CA3AF;"><div style="font-size:48px;margin-bottom:14px;">${_gActiveCat==='all'?'🖼️':catLabel?.icon||'📂'}</div><div style="font-size:14px;line-height:1.7;">${_gActiveCat==='all'?'Әзірге ештеңе жоқ.<br>Жоғарыдан фото немесе видео жүктеңіз!':'<b>'+catName+'</b> категориясында ештеңе жоқ.'}</div></div>`;
+    const cl = allClusters.find(c=>c.id===_gActiveCat);
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:52px 20px;color:#9CA3AF;">
+      <div style="font-size:50px;margin-bottom:14px;">${_gActiveCat==='all'?'🖼️':cl?.icon||'📂'}</div>
+      <div style="font-size:14px;line-height:1.8;">${_gActiveCat==='all'?'Әзірге ештеңе жоқ.<br>Жоғарыдан жүктеңіз!':'<b>'+(cl?.label||'')+'</b> кластерінде ештеңе жоқ.'}</div>
+    </div>`;
     return;
   }
-  [...items].sort((a,b) => b.date - a.date).forEach(item => {
-    const cat = GCATS.find(c => c.id === item.category) || GCATS[GCATS.length-1];
+  [...items].sort((a,b)=>b.date-a.date).forEach(item => {
+    const cl = allClusters.find(c=>c.id===item.category);
     const wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative;border-radius:14px;overflow:hidden;background:#F3F4F6;aspect-ratio:1;';
-    const media = document.createElement(item.type === 'video' ? 'video' : 'img');
+    const media = document.createElement(item.type==='video'?'video':'img');
     media.src = item.data;
     media.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
-    if (item.type === 'video') { media.controls = true; media.preload = 'metadata'; }
-    // Category badge
-    const badge = document.createElement('div');
-    badge.style.cssText = 'position:absolute;top:7px;left:7px;padding:2px 8px;border-radius:10px;background:rgba(0,0,0,0.52);color:white;font-size:10px;font-weight:700;';
-    badge.textContent = cat.icon + ' ' + cat.label;
-    // Delete
-    const del = document.createElement('button');
-    del.innerHTML = '🗑';
-    del.title = 'Жою';
-    del.style.cssText = 'position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.58);color:white;border:none;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
-    del.onclick = async e => { e.stopPropagation(); if (confirm('Жою керек пе?')) { await _gDelete(item.id); await _gRender(); } };
-    // File name
-    const nm = document.createElement('div');
-    nm.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:white;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
-    nm.textContent = item.name;
-    wrap.append(media, badge, del, nm);
+    if(item.type==='video'){media.controls=true;media.preload='metadata';}
+    if(cl){
+      const badge=document.createElement('div');
+      badge.style.cssText='position:absolute;top:7px;left:7px;padding:3px 8px;border-radius:10px;background:rgba(0,0,0,0.55);color:#fff;font-size:10px;font-weight:700;';
+      badge.textContent=cl.icon+' '+cl.label;
+      wrap.appendChild(badge);
+    }
+    const del=document.createElement('button');
+    del.innerHTML='🗑'; del.title='Жою';
+    del.style.cssText='position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.58);color:#fff;border:none;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+    del.onclick=async e=>{e.stopPropagation();if(confirm('Жою керек пе?')){await _gDelete(item.id);await _gRender();}};
+    const nm=document.createElement('div');
+    nm.style.cssText='position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:#fff;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
+    nm.textContent=item.name;
+    wrap.append(media,del,nm);
     grid.appendChild(wrap);
   });
 }
 
 async function handleGalleryUpload(files) {
-  if (!files || !files.length) return;
-  const cat = document.getElementById('galleryCatSelect').value;
-  const info = document.getElementById('galleryUploadLabel').querySelector('.gallery-upload-info');
-  info.innerHTML = '<div style="font-weight:700;color:#10B981;font-size:13px;">Жүктелуде… (' + files.length + ' файл)</div><div style="font-size:11px;color:#9CA3AF;margin-top:2px;">Күтіңіз…</div>';
-  for (const file of files) {
-    const type = file.type.startsWith('video/') ? 'video' : 'image';
-    const dataURL = await new Promise(r => { const fr = new FileReader(); fr.onload = e => r(e.target.result); fr.readAsDataURL(file); });
-    await _gSave(_gCompany, type, dataURL, file.name, cat);
+  if(!files||!files.length) return;
+  const cat = document.getElementById('galleryCatSelect').value || 'other';
+  const info = document.getElementById('galleryUploadInfo');
+  info.innerHTML = `<span style="font-weight:700;color:#10B981;">Жүктелуде… (${files.length} файл)</span><span style="display:block;font-size:11px;color:#9CA3AF;">Күтіңіз…</span>`;
+  for(const file of files){
+    const type=file.type.startsWith('video/')?'video':'image';
+    const dataURL=await new Promise(r=>{const fr=new FileReader();fr.onload=e=>r(e.target.result);fr.readAsDataURL(file);});
+    await _gSave(_gCompany,type,dataURL,file.name,cat);
   }
-  info.innerHTML = '<div style="font-weight:700;color:#374151;font-size:13px;">Фото немесе видео жүктеу</div><div style="font-size:11px;color:#9CA3AF;margin-top:2px;">JPG · PNG · GIF · MP4 · MOV · WEBM</div>';
-  document.getElementById('galleryFileInput').value = '';
-  _gActiveCat = cat; _gBuildCatTabs();
-  await _gRender();
+  info.innerHTML='<span style="font-weight:700;color:#374151;">Фото немесе видео жүктеу</span><span style="display:block;font-size:11px;color:#9CA3AF;margin-top:1px;">JPG · PNG · GIF · MP4 · MOV · WEBM</span>';
+  document.getElementById('galleryFileInput').value='';
+  _gActiveCat=cat; _gBuildGalleryTabs(); await _gRender();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('galleryModal').addEventListener('click', function(e) {
-    if (e.target === this) closeGallery();
-  });
+  document.getElementById('galleryModal').addEventListener('click', function(e){ if(e.target===this) closeGallery(); });
   document.querySelectorAll('#projeler .mk-card').forEach(card => {
     const nameEl = card.querySelector('.font-bold.text-gray-900');
-    if (!nameEl) return;
+    if(!nameEl) return;
     const companyName = nameEl.textContent.trim();
     const slug = companyName.toLowerCase().replace(/[^a-z0-9а-яёәіңғүұқөһ]/gi,'_').replace(/_+/g,'_').replace(/^_|_$/g,'');
     const btn = document.createElement('button');
-    btn.style.cssText = 'margin-top:10px;width:100%;padding:8px 0;border-radius:10px;border:1.5px solid #10B981;background:transparent;color:#059669;font-size:11.5px;font-weight:700;cursor:pointer;transition:all 0.17s;letter-spacing:0.2px;font-family:inherit;';
-    btn.innerHTML = '📸 Жұмыс уақытында';
-    btn.addEventListener('click', () => openGallery(slug, companyName));
-    btn.addEventListener('mouseenter', () => { btn.style.background='#10B981'; btn.style.color='#fff'; btn.style.boxShadow='0 4px 12px rgba(16,185,129,0.25)'; });
-    btn.addEventListener('mouseleave', () => { btn.style.background='transparent'; btn.style.color='#059669'; btn.style.boxShadow='none'; });
+    btn.style.cssText='margin-top:10px;width:100%;padding:8px 0;border-radius:10px;border:1.5px solid #10B981;background:transparent;color:#059669;font-size:11.5px;font-weight:700;cursor:pointer;transition:all 0.17s;letter-spacing:0.2px;font-family:inherit;';
+    btn.innerHTML='📸 Жұмыс уақытында';
+    btn.addEventListener('click',()=>openGallery(slug,companyName));
+    btn.addEventListener('mouseenter',()=>{btn.style.background='#10B981';btn.style.color='#fff';btn.style.boxShadow='0 4px 12px rgba(16,185,129,0.25)';});
+    btn.addEventListener('mouseleave',()=>{btn.style.background='transparent';btn.style.color='#059669';btn.style.boxShadow='none';});
     card.appendChild(btn);
   });
 });
 </script>
 
-<!-- ===== GALLERY MODAL with Categories ===== -->
+<!-- ===== GALLERY MODAL (2-view: cluster selector + gallery) ===== -->
 <div id="galleryModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;">
-  <div style="background:#fff;border-radius:24px;width:100%;max-width:980px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);">
 
+  <!-- ── VIEW 1: Cluster selector ── -->
+  <div id="galleryViewClusters" style="display:none;flex-direction:column;background:#fff;border-radius:24px;width:100%;max-width:680px;max-height:92vh;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);">
+    <!-- Header -->
+    <div style="padding:20px 24px 16px;border-bottom:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+      <div>
+        <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#10B981;margin-bottom:5px;">📍 Кластерлерді таңдаңыз</div>
+        <div id="gallerySelectorCompanyName" style="font-weight:800;font-size:19px;color:#111827;font-family:'Manrope',sans-serif;"></div>
+      </div>
+      <button onclick="closeGallery()" style="width:40px;height:40px;border-radius:50%;background:#F3F4F6;border:none;font-size:22px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">×</button>
+    </div>
+    <!-- Instruction -->
+    <div style="padding:14px 24px 0;font-size:12px;color:#6B7280;flex-shrink:0;">Осы компанияда жұмыс жасаған жерлерді белгілеңіз. Кейін өзгертуге болады (⚙️).</div>
+    <!-- Chip grid -->
+    <div id="clusterChipsContainer" style="flex:1;overflow-y:auto;padding:16px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;align-content:start;"></div>
+    <!-- Footer -->
+    <div style="padding:14px 24px 20px;border-top:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:12px;">
+      <div id="clusterSelectedCount" style="font-size:12px;font-weight:600;color:#6B7280;"></div>
+      <button id="clusterProceedBtn" onclick="proceedToGallery()" style="padding:11px 28px;border-radius:12px;border:none;background:linear-gradient(135deg,#10B981,#059669);color:#fff;font-size:13px;font-weight:800;cursor:pointer;transition:all 0.17s;font-family:inherit;box-shadow:0 4px 14px rgba(16,185,129,0.35);" onmouseenter="this.style.boxShadow='0 6px 18px rgba(16,185,129,0.5)'" onmouseleave="this.style.boxShadow='0 4px 14px rgba(16,185,129,0.35)'">Жалғастыру →</button>
+    </div>
+  </div>
+
+  <!-- ── VIEW 2: Gallery ── -->
+  <div id="galleryViewGallery" style="display:none;flex-direction:column;background:#fff;border-radius:24px;width:100%;max-width:980px;max-height:92vh;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);">
     <!-- Header -->
     <div style="padding:18px 24px 14px;border-bottom:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
       <div>
         <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#10B981;margin-bottom:4px;">📸 Жұмыс естеліктері</div>
-        <div id="galleryCompanyName" style="font-weight:800;font-size:20px;color:#111827;font-family:'Manrope',sans-serif;"></div>
+        <div id="galleryGalleryCompanyName" style="font-weight:800;font-size:20px;color:#111827;font-family:'Manrope',sans-serif;"></div>
       </div>
-      <button onclick="closeGallery()" style="width:40px;height:40px;border-radius:50%;background:#F3F4F6;border:none;font-size:22px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">×</button>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button onclick="openClusterSettings()" title="Кластерлерді реттеу" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:17px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">⚙️</button>
+        <button onclick="closeGallery()" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:22px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">×</button>
+      </div>
     </div>
-
-    <!-- Category tabs -->
-    <div style="padding:12px 24px;border-bottom:1px solid #F3F4F6;flex-shrink:0;">
-      <div id="galleryCatBar" style="display:flex;gap:8px;flex-wrap:wrap;"></div>
+    <!-- Cluster tabs -->
+    <div style="padding:10px 24px;border-bottom:1px solid #F3F4F6;flex-shrink:0;">
+      <div id="galleryClusterTabs" style="display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;"></div>
     </div>
-
     <!-- Upload zone -->
     <div style="padding:12px 24px;border-bottom:1px solid #F9FAFB;flex-shrink:0;">
       <div style="display:flex;gap:10px;align-items:stretch;">
-        <label id="galleryUploadLabel" style="flex:1;display:flex;align-items:center;gap:14px;padding:11px 16px;border:2px dashed #D1D5DB;border-radius:14px;cursor:pointer;background:#FAFAFA;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='#10B981'" onmouseleave="this.style.borderColor='#D1D5DB'">
+        <label style="flex:1;display:flex;align-items:center;gap:14px;padding:11px 16px;border:2px dashed #D1D5DB;border-radius:14px;cursor:pointer;background:#FAFAFA;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='#10B981'" onmouseleave="this.style.borderColor='#D1D5DB'">
           <span style="font-size:26px;flex-shrink:0;">📁</span>
-          <div class="gallery-upload-info">
-            <div style="font-weight:700;color:#374151;font-size:13px;">Фото немесе видео жүктеу</div>
-            <div style="font-size:11px;color:#9CA3AF;margin-top:1px;">JPG · PNG · GIF · MP4 · MOV · WEBM</div>
+          <div id="galleryUploadInfo">
+            <span style="font-weight:700;color:#374151;font-size:13px;">Фото немесе видео жүктеу</span>
+            <span style="display:block;font-size:11px;color:#9CA3AF;margin-top:1px;">JPG · PNG · GIF · MP4 · MOV · WEBM</span>
           </div>
           <input type="file" multiple accept="image/*,video/*" id="galleryFileInput" style="display:none;" onchange="handleGalleryUpload(this.files)"/>
         </label>
-        <!-- Category selector -->
         <div style="display:flex;flex-direction:column;justify-content:center;gap:4px;flex-shrink:0;">
-          <div style="font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:0.5px;">КАТЕГОРИЯ</div>
-          <select id="galleryCatSelect" style="padding:8px 12px;border-radius:10px;border:1.5px solid #E5E7EB;background:#fff;font-size:12px;font-weight:700;color:#374151;cursor:pointer;font-family:inherit;min-width:150px;">
-            <option value="team">👥 Команда</option>
-            <option value="events">🎉 Іс-шаралар</option>
-            <option value="projects">💼 Жобалар</option>
-            <option value="travel">✈️ Сапарлар</option>
-            <option value="other">📌 Басқа</option>
-          </select>
+          <div style="font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:0.5px;">КЛАСТЕР</div>
+          <select id="galleryCatSelect" style="padding:8px 12px;border-radius:10px;border:1.5px solid #E5E7EB;background:#fff;font-size:12px;font-weight:700;color:#374151;cursor:pointer;font-family:inherit;min-width:160px;"></select>
         </div>
       </div>
     </div>
-
-    <!-- File count -->
+    <!-- Count -->
     <div id="galleryCount" style="padding:8px 24px 0;font-size:11.5px;font-weight:600;flex-shrink:0;"></div>
-
     <!-- Grid -->
     <div id="galleryGrid" style="flex:1;overflow-y:auto;padding:14px 24px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:13px;align-content:start;min-height:180px;"></div>
   </div>
+
 </div>
 
 </body>
