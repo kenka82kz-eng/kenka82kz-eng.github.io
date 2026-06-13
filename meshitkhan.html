@@ -1748,15 +1748,15 @@ function _gBuildGalleryTabs() {
     wrap.style.cssText = 'position:relative;display:inline-flex;flex-shrink:0;';
     const btn = document.createElement('button');
     const on = c.id === _gActiveCat;
-    btn.style.cssText = `padding:7px ${(_gAdminMode&&c.id!=='all')?'26px':'16px'} 7px 16px;border-radius:20px;border:1.5px solid ${on?'#10B981':'#E5E7EB'};background:${on?'#10B981':'#fff'};color:${on?'#fff':'#6B7280'};font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
+    btn.style.cssText = `padding:7px ${c.id!=='all'?'26px':'16px'} 7px 16px;border-radius:20px;border:1.5px solid ${on?'#10B981':'#E5E7EB'};background:${on?'#10B981':'#fff'};color:${on?'#fff':'#6B7280'};font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
     btn.innerHTML = c.icon + ' ' + c.label;
     btn.onclick = async () => { _gActiveCat = c.id; _gActiveSubCat = 'all'; _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender(); };
     wrap.appendChild(btn);
-    if(_gAdminMode && c.id !== 'all') {
+    if(c.id !== 'all') {
       const x = document.createElement('button');
       x.innerHTML = '×';
       x.title = 'Жою / Kaldır';
-      x.style.cssText = 'position:absolute;top:50%;right:6px;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;background:rgba(239,68,68,0.9);color:#fff;border:none;cursor:pointer;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:1;';
+      x.style.cssText = 'position:absolute;top:50%;right:6px;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;background:rgba(239,68,68,0.88);color:#fff;border:none;cursor:pointer;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:1;';
       x.onclick = async e => {
         e.stopPropagation();
         if(c.id.startsWith('custom_')) {
@@ -1775,23 +1775,23 @@ function _gBuildGalleryTabs() {
     }
     bar.appendChild(wrap);
   });
-  if(_gAdminMode) {
-    const addBtn = document.createElement('button');
-    addBtn.innerHTML = '＋ Жаңа';
-    addBtn.style.cssText = 'padding:7px 14px;border-radius:20px;border:1.5px dashed #10B981;background:transparent;color:#10B981;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;flex-shrink:0;';
-    addBtn.onmouseenter=()=>{addBtn.style.background='rgba(16,185,129,0.08)';};
-    addBtn.onmouseleave=()=>{addBtn.style.background='transparent';};
-    addBtn.onclick = async () => {
-      const label = prompt('Жаңа санат атауы / Yeni kategori adı:');
-      if(label && label.trim()) {
-        const id = _gAddCustomCluster(label.trim());
-        _gToggleCluster(_gCompany, id);
-        _gActiveCat = id;
-        _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender();
-      }
-    };
-    bar.appendChild(addBtn);
-  }
+  // Always-visible add button
+  const addBtn = document.createElement('button');
+  addBtn.innerHTML = '＋ Жаңа';
+  addBtn.title = 'Жаңа санат қосу / Yeni kategori ekle';
+  addBtn.style.cssText = 'padding:7px 14px;border-radius:20px;border:1.5px dashed #10B981;background:transparent;color:#10B981;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;flex-shrink:0;';
+  addBtn.onmouseenter=()=>{addBtn.style.background='rgba(16,185,129,0.1)';};
+  addBtn.onmouseleave=()=>{addBtn.style.background='transparent';};
+  addBtn.onclick = async () => {
+    const label = prompt('Жаңа санат атауы / Yeni kategori adı:');
+    if(label && label.trim()) {
+      const id = _gAddCustomCluster(label.trim());
+      _gToggleCluster(_gCompany, id);
+      _gActiveCat = id;
+      _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender();
+    }
+  };
+  bar.appendChild(addBtn);
 }
 
 // ── Sub-category tabs (2nd level) ────────────────────────────────
