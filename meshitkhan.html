@@ -1744,13 +1744,54 @@ function _gBuildGalleryTabs() {
   const active = _gAllClusters().filter(c => enabled.includes(c.id));
   bar.innerHTML = '';
   [{ id:'all', icon:'🗂', label:'Барлығы' }, ...active].forEach(c => {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'position:relative;display:inline-flex;flex-shrink:0;';
     const btn = document.createElement('button');
     const on = c.id === _gActiveCat;
-    btn.style.cssText = `padding:7px 16px;border-radius:20px;border:1.5px solid ${on?'#10B981':'#E5E7EB'};background:${on?'#10B981':'#fff'};color:${on?'#fff':'#6B7280'};font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;flex-shrink:0;`;
+    btn.style.cssText = `padding:7px ${(_gAdminMode&&c.id!=='all')?'26px':'16px'} 7px 16px;border-radius:20px;border:1.5px solid ${on?'#10B981':'#E5E7EB'};background:${on?'#10B981':'#fff'};color:${on?'#fff':'#6B7280'};font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
     btn.innerHTML = c.icon + ' ' + c.label;
     btn.onclick = async () => { _gActiveCat = c.id; _gActiveSubCat = 'all'; _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender(); };
-    bar.appendChild(btn);
+    wrap.appendChild(btn);
+    if(_gAdminMode && c.id !== 'all') {
+      const x = document.createElement('button');
+      x.innerHTML = '×';
+      x.title = 'Жою / Kaldır';
+      x.style.cssText = 'position:absolute;top:50%;right:6px;transform:translateY(-50%);width:16px;height:16px;border-radius:50%;background:rgba(239,68,68,0.9);color:#fff;border:none;cursor:pointer;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:1;';
+      x.onclick = async e => {
+        e.stopPropagation();
+        if(c.id.startsWith('custom_')) {
+          if(confirm(`"${c.label}" санатын жою керек пе?`)) {
+            _gDeleteCustomCluster(c.id);
+            if(_gActiveCat===c.id) _gActiveCat='all';
+            _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender();
+          }
+        } else {
+          _gToggleCluster(_gCompany, c.id);
+          if(_gActiveCat===c.id) _gActiveCat='all';
+          _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender();
+        }
+      };
+      wrap.appendChild(x);
+    }
+    bar.appendChild(wrap);
   });
+  if(_gAdminMode) {
+    const addBtn = document.createElement('button');
+    addBtn.innerHTML = '＋ Жаңа';
+    addBtn.style.cssText = 'padding:7px 14px;border-radius:20px;border:1.5px dashed #10B981;background:transparent;color:#10B981;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;flex-shrink:0;';
+    addBtn.onmouseenter=()=>{addBtn.style.background='rgba(16,185,129,0.08)';};
+    addBtn.onmouseleave=()=>{addBtn.style.background='transparent';};
+    addBtn.onclick = async () => {
+      const label = prompt('Жаңа санат атауы / Yeni kategori adı:');
+      if(label && label.trim()) {
+        const id = _gAddCustomCluster(label.trim());
+        _gToggleCluster(_gCompany, id);
+        _gActiveCat = id;
+        _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender();
+      }
+    };
+    bar.appendChild(addBtn);
+  }
 }
 
 // ── Sub-category tabs (2nd level) ────────────────────────────────
@@ -1824,7 +1865,7 @@ async function _gRender() {
     const cl = allClusters.find(c=>c.id===item.category);
     const sc = SUB_CATS.find(s=>s.id===item.subcategory);
     const wrap = document.createElement('div');
-    wrap.style.cssText = 'position:relative;border-radius:16px;overflow:hidden;background:#111;aspect-ratio:1;box-shadow:0 2px 14px rgba(0,0,0,0.14);transition:transform 0.22s ease,box-shadow 0.22s ease;';
+    wrap.style.cssText = 'position:relative;border-radius:16px;overflow:hidden;background:#111;box-shadow:0 2px 14px rgba(0,0,0,0.14);transition:transform 0.22s ease,box-shadow 0.22s ease;';
     const media = document.createElement(item.type==='video'?'video':'img');
     media.src = item.data;
     media.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.38s ease,opacity 0.28s ease;opacity:0;';
@@ -2143,7 +2184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Count -->
     <div id="galleryCount" style="padding:8px 24px 0;font-size:11.5px;font-weight:600;flex-shrink:0;"></div>
     <!-- Grid -->
-    <div id="galleryGrid" style="flex:1;overflow-y:auto;padding:14px 24px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;align-content:start;min-height:180px;"></div>
+    <div id="galleryGrid" style="flex:1;overflow-y:auto;padding:14px 24px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));grid-auto-rows:172px;gap:12px;align-content:start;min-height:180px;"></div>
   </div>
 
 </div>
