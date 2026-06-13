@@ -1901,18 +1901,24 @@ async function _gRender() {
   const enabled = _gCompanyClusters(_gCompany) || [];
   const activeCl = allClusters.filter(c => enabled.includes(c.id));
 
-  // Cluster filter
-  let clusterItems = _gActiveCat === 'all' ? allItems : allItems.filter(i => i.category === _gActiveCat);
-  // Sub-cat filter (only when cluster is selected)
-  const items = (_gActiveCat !== 'all' && _gActiveSubCat !== 'all')
+  // Cluster filter — "all" shows only enabled clusters, specific tab filters strictly
+  let clusterItems = _gActiveCat === 'all'
+    ? allItems.filter(i => enabled.includes(i.category))
+    : allItems.filter(i => i.category === _gActiveCat);
+  // Sub-cat filter
+  const items = _gActiveSubCat !== 'all'
     ? clusterItems.filter(i => i.subcategory === _gActiveSubCat)
     : clusterItems;
 
-  // Sync cluster dropdown
+  // Sync cluster dropdown — always follow active tab
   const sel = document.getElementById('galleryCatSelect');
-  if (sel) sel.innerHTML = activeCl.length
-    ? activeCl.map(c=>`<option value="${c.id}">${c.icon} ${c.label}</option>`).join('')
-    : '<option value="other">📌 Басқа</option>';
+  if (sel) {
+    sel.innerHTML = activeCl.length
+      ? activeCl.map(c=>`<option value="${c.id}">${c.icon} ${c.label}</option>`).join('')
+      : '<option value="other">📌 Басқа</option>';
+    if (_gActiveCat !== 'all' && activeCl.find(c=>c.id===_gActiveCat)) sel.value = _gActiveCat;
+    else if (activeCl.length) sel.value = activeCl[0].id;
+  }
 
   // Count display
   const subCl = _gAllSubCats().find(s => s.id === _gActiveSubCat);
