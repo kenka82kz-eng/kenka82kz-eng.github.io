@@ -1913,9 +1913,17 @@ async function _gRender() {
   // Specific cluster filter
   let clusterItems = allItems.filter(i => i.category === _gActiveCat);
   // Sub-cat filter
-  const items = _gActiveSubCat !== 'all'
-    ? clusterItems.filter(i => i.subcategory === _gActiveSubCat)
-    : clusterItems;
+  const items = clusterItems.filter(i => i.subcategory === _gActiveSubCat);
+  // "Барлығы" subcategory tab — show prompt, no images
+  if (_gActiveSubCat === 'all') {
+    const cl = allClusters.find(c=>c.id===_gActiveCat);
+    countEl.innerHTML = '';
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:52px 20px;color:#9CA3AF;">
+      <div style="font-size:48px;margin-bottom:14px;">${cl?.icon||'📂'}</div>
+      <div style="font-size:14px;line-height:1.8;">Суреттерді көру үшін категория таңдаңыз.</div>
+    </div>`;
+    return;
+  }
 
   // Sync cluster dropdown — always follow active tab
   const sel = document.getElementById('galleryCatSelect');
