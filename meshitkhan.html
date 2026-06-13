@@ -1640,9 +1640,14 @@ async function openGallery(company, companyName) {
   document.getElementById('galleryModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
   if (_gCompanyClusters(company) === undefined) {
-    _gSaveCompanyClusters(company, []); // init
-    _gShowView('galleryViewClusters');
-    _gRenderClusterSelector();
+    _gSaveCompanyClusters(company, []);
+    if(_gAdminMode) {
+      _gShowView('galleryViewClusters');
+      _gRenderClusterSelector();
+    } else {
+      _gShowView('galleryViewGallery');
+      _gBuildGalleryTabs(); _gBuildSubCatTabs(); _gRefreshAdminUI(); await _gRender();
+    }
   } else {
     _gShowView('galleryViewGallery');
     _gBuildGalleryTabs(); _gBuildSubCatTabs(); _gRefreshAdminUI(); await _gRender();
@@ -1655,6 +1660,7 @@ function closeGallery() {
   if (fi) fi.value = '';
 }
 function openClusterSettings() {
+  if(!_gAdminMode) return;
   _gShowView('galleryViewClusters');
   _gRenderClusterSelector();
 }
@@ -1669,6 +1675,8 @@ function _gRefreshAdminUI() {
   if(lockBtn) lockBtn.innerHTML = _gAdminMode ? '🔓' : '🔒';
   const uz = document.getElementById('galleryUploadZone');
   if(uz) uz.style.display = _gAdminMode ? '' : 'none';
+  const settingsBtn = document.getElementById('gallerySettingsBtn');
+  if(settingsBtn) settingsBtn.style.display = _gAdminMode ? 'flex' : 'none';
 }
 function _gToggleAdmin() {
   if(_gAdminMode) {
@@ -2137,7 +2145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       <div style="display:flex;gap:8px;align-items:center;">
         <button id="galleryAdminBtn" onclick="_gToggleAdmin()" title="Әкімші режимі" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:17px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">🔒</button>
-        <button onclick="openClusterSettings()" title="Кластерлерді реттеу" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:17px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">⚙️</button>
+        <button id="gallerySettingsBtn" onclick="openClusterSettings()" title="Кластерлерді реттеу" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:17px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;display:none;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">⚙️</button>
         <button onclick="closeGallery()" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:22px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">×</button>
       </div>
     </div>
