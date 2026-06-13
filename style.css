@@ -227,3 +227,24 @@
   transform: translateY(-6px);
   box-shadow: 0 16px 48px rgba(10,77,140,.16);
 }
+
+/* ── LEAD MODAL ── */
+@keyframes modalIn {
+  from { opacity:0; transform:translateY(22px) scale(.96); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* ── WHATSAPP FLOAT ── */
+#waFloatBtn::before {
+  content:'';
+  position:absolute;
+  inset:-5px;
+  border-radius:50%;
+  background:rgba(37,211,102,.3);
+  animation:waPulse 2.8s ease-out infinite;
+}
+@keyframes waPulse {
+  0%   { opacity:1; transform:scale(1); }
+  70%  { opacity:0; transform:scale(1.45); }
+  100% { opacity:0; }
+}
