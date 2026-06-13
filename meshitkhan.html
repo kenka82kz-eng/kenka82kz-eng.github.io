@@ -1580,6 +1580,8 @@ function _gDeleteCustomCluster(id) {
 }
 
 let _gDb = null, _gCompany = '', _gCompanyName = '', _gActiveCat = 'all', _gActiveSubCat = 'all';
+let _gAdminMode = sessionStorage.getItem('mkAdminMode') === '1';
+const _ADMIN_PASS = 'MK2025'; // ← Парольді осы жерден өзгертуге болады
 
 function _gInitDB() {
   return new Promise((res, rej) => {
@@ -1643,7 +1645,7 @@ async function openGallery(company, companyName) {
     _gRenderClusterSelector();
   } else {
     _gShowView('galleryViewGallery');
-    _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender();
+    _gBuildGalleryTabs(); _gBuildSubCatTabs(); _gRefreshAdminUI(); await _gRender();
   }
 }
 function closeGallery() {
@@ -1659,7 +1661,30 @@ function openClusterSettings() {
 async function proceedToGallery() {
   _gShowView('galleryViewGallery');
   document.getElementById('galleryGalleryCompanyName').textContent = _gCompanyName;
-  _gActiveCat = 'all'; _gActiveSubCat = 'all'; _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender();
+  _gActiveCat = 'all'; _gActiveSubCat = 'all'; _gBuildGalleryTabs(); _gBuildSubCatTabs();
+  _gRefreshAdminUI(); await _gRender();
+}
+function _gRefreshAdminUI() {
+  const lockBtn = document.getElementById('galleryAdminBtn');
+  if(lockBtn) lockBtn.innerHTML = _gAdminMode ? '🔓' : '🔒';
+  const uz = document.getElementById('galleryUploadZone');
+  if(uz) uz.style.display = _gAdminMode ? '' : 'none';
+}
+function _gToggleAdmin() {
+  if(_gAdminMode) {
+    _gAdminMode = false;
+    sessionStorage.removeItem('mkAdminMode');
+    _gRefreshAdminUI(); _gRender();
+  } else {
+    const p = prompt('Әкімші паролі / Admin şifresi:');
+    if(p === _ADMIN_PASS) {
+      _gAdminMode = true;
+      sessionStorage.setItem('mkAdminMode','1');
+      _gRefreshAdminUI(); _gRender();
+    } else if(p !== null) {
+      alert('Қате пароль / Yanlış şifre');
+    }
+  }
 }
 
 // ── Cluster selector ─────────────────────────────────────────────
@@ -1816,26 +1841,32 @@ async function _gRender() {
       badge.textContent=badgeData.icon+' '+badgeData.label;
       wrap.appendChild(badge);
     }
-    // Delete button
-    const del=document.createElement('button');
-    del.innerHTML='🗑'; del.title='Жою';
-    del.style.cssText='position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.58);color:#fff;border:none;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
-    del.onclick=async e=>{e.stopPropagation();if(confirm('Жою керек пе?')){await _gDelete(item.id);await _gRender();}};
-    // Bottom bar: title + edit button
+    // Delete button (admin only)
+    if(_gAdminMode) {
+      const del=document.createElement('button');
+      del.innerHTML='🗑'; del.title='Жою';
+      del.style.cssText='position:absolute;top:7px;right:7px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.58);color:#fff;border:none;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+      del.onclick=async e=>{e.stopPropagation();if(confirm('Жою керек пе?')){await _gDelete(item.id);await _gRender();}};
+      wrap.appendChild(del);
+    }
+    // Bottom bar: title (+ edit button admin only)
     const nm=document.createElement('div');
     nm.style.cssText='position:absolute;bottom:0;left:0;right:0;padding:5px 7px 6px;background:linear-gradient(transparent,rgba(0,0,0,0.75));display:flex;align-items:flex-end;gap:4px;min-height:34px;';
     const titleSpan=document.createElement('span');
     titleSpan.style.cssText='color:#fff;font-size:10px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-bottom:1px;';
     titleSpan.textContent=item.title||item.name;
-    const editBtn=document.createElement('button');
-    editBtn.innerHTML='✏️'; editBtn.title='Тақырып өзгерту';
-    editBtn.style.cssText='background:none;border:none;cursor:pointer;font-size:11px;padding:1px 2px;flex-shrink:0;opacity:0.85;line-height:1;';
-    editBtn.onclick=async e=>{
-      e.stopPropagation();
-      const newT=prompt('Тақырып:', item.title||'');
-      if(newT!==null){ item.title=newT; await _gUpdateTitle(item.id,newT); titleSpan.textContent=newT||item.name; }
-    };
-    nm.append(titleSpan, editBtn);
+    nm.appendChild(titleSpan);
+    if(_gAdminMode) {
+      const editBtn=document.createElement('button');
+      editBtn.innerHTML='✏️'; editBtn.title='Тақырып өзгерту';
+      editBtn.style.cssText='background:none;border:none;cursor:pointer;font-size:11px;padding:1px 2px;flex-shrink:0;opacity:0.85;line-height:1;';
+      editBtn.onclick=async e=>{
+        e.stopPropagation();
+        const newT=prompt('Тақырып:', item.title||'');
+        if(newT!==null){ item.title=newT; await _gUpdateTitle(item.id,newT); titleSpan.textContent=newT||item.name; }
+      };
+      nm.appendChild(editBtn);
+    }
     // For video: expand button to open lightbox
     if(item.type==='video'){
       const exp=document.createElement('button');
@@ -1844,7 +1875,7 @@ async function _gRender() {
       exp.onclick=e=>{e.stopPropagation();_gOpenLightbox(sortedItems,itemIdx);};
       wrap.appendChild(exp);
     }
-    wrap.append(media,del,nm);
+    wrap.append(media,nm);
     grid.appendChild(wrap);
   });
 }
@@ -1868,6 +1899,7 @@ function _gOpenLightbox(items, idx) {
   const editTitleBtn = document.createElement('button');
   editTitleBtn.innerHTML='✏️ Тақырып';
   editTitleBtn.style.cssText='background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:600;color:#fff;flex-shrink:0;font-family:inherit;';
+  editTitleBtn.style.display = _gAdminMode ? '' : 'none';
   editTitleBtn.onclick = async () => {
     const item = items[cur];
     const newT = prompt('Тақырып:', item.title||'');
@@ -2011,6 +2043,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div id="galleryGalleryCompanyName" style="font-weight:800;font-size:20px;color:#111827;font-family:'Manrope',sans-serif;"></div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;">
+        <button id="galleryAdminBtn" onclick="_gToggleAdmin()" title="Әкімші режимі" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:17px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">🔒</button>
         <button onclick="openClusterSettings()" title="Кластерлерді реттеу" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:17px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">⚙️</button>
         <button onclick="closeGallery()" style="width:38px;height:38px;border-radius:50%;background:#F3F4F6;border:none;font-size:22px;cursor:pointer;color:#6B7280;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='#E5E7EB'" onmouseleave="this.style.background='#F3F4F6'">×</button>
       </div>
@@ -2023,8 +2056,8 @@ document.addEventListener('DOMContentLoaded', () => {
     <div style="padding:7px 24px;border-bottom:1px solid #F0F0FF;background:#FAFAFF;flex-shrink:0;min-height:0;">
       <div id="gallerySubCatBar" style="display:none;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:1px;scrollbar-width:none;"></div>
     </div>
-    <!-- Upload zone -->
-    <div style="padding:10px 24px;border-bottom:1px solid #F9FAFB;flex-shrink:0;">
+    <!-- Upload zone (admin only) -->
+    <div id="galleryUploadZone" style="padding:10px 24px;border-bottom:1px solid #F9FAFB;flex-shrink:0;display:none;">
       <div style="display:flex;gap:10px;align-items:stretch;">
         <label style="flex:1;display:flex;align-items:center;gap:14px;padding:10px 16px;border:2px dashed #D1D5DB;border-radius:14px;cursor:pointer;background:#FAFAFA;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='#10B981'" onmouseleave="this.style.borderColor='#D1D5DB'">
           <span style="font-size:24px;flex-shrink:0;">📁</span>
