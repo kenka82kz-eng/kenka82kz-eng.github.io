@@ -1901,10 +1901,17 @@ async function _gRender() {
   const enabled = _gCompanyClusters(_gCompany) || [];
   const activeCl = allClusters.filter(c => enabled.includes(c.id));
 
-  // Cluster filter — "all" shows only enabled clusters, specific tab filters strictly
-  let clusterItems = _gActiveCat === 'all'
-    ? allItems.filter(i => enabled.includes(i.category))
-    : allItems.filter(i => i.category === _gActiveCat);
+  // "Барлығы" tab — show prompt to select a cluster, no images
+  if (_gActiveCat === 'all') {
+    countEl.innerHTML = '';
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:52px 20px;color:#9CA3AF;">
+      <div style="font-size:48px;margin-bottom:14px;">🗂️</div>
+      <div style="font-size:14px;line-height:1.8;">Суреттерді көру үшін жоғарыдан кластер таңдаңыз.</div>
+    </div>`;
+    return;
+  }
+  // Specific cluster filter
+  let clusterItems = allItems.filter(i => i.category === _gActiveCat);
   // Sub-cat filter
   const items = _gActiveSubCat !== 'all'
     ? clusterItems.filter(i => i.subcategory === _gActiveSubCat)
