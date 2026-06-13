@@ -1552,6 +1552,71 @@ function _gAllClusters() {
   const custom = JSON.parse(localStorage.getItem('mkCustomClusters_v3') || '[]');
   return [...DEFAULT_CLUSTERS, ...custom];
 }
+
+// ── Sub-category helpers (dynamic) ───────────────────────────────
+let _gUploadSubCat = 'other';
+function _gAllSubCats() {
+  const custom = JSON.parse(localStorage.getItem('mkCustomSubCats_v1') || '[]');
+  return [...SUB_CATS, ...custom];
+}
+function _gAddCustomSubCat(label) {
+  const custom = JSON.parse(localStorage.getItem('mkCustomSubCats_v1') || '[]');
+  const id = 'subcat_' + Date.now();
+  custom.push({ id, icon:'🏷', label });
+  localStorage.setItem('mkCustomSubCats_v1', JSON.stringify(custom));
+  return id;
+}
+function _gDeleteCustomSubCat(id) {
+  const custom = JSON.parse(localStorage.getItem('mkCustomSubCats_v1') || '[]');
+  localStorage.setItem('mkCustomSubCats_v1', JSON.stringify(custom.filter(c=>c.id!==id)));
+}
+function _gRenderSubCatChips() {
+  const container = document.getElementById('gallerySubCatChips');
+  if(!container) return;
+  container.innerHTML = '';
+  _gAllSubCats().forEach(c => {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'position:relative;display:inline-flex;flex-shrink:0;';
+    const chip = document.createElement('button');
+    const on = _gUploadSubCat === c.id;
+    chip.style.cssText = `padding:5px ${_gAdminMode&&c.id.startsWith('subcat_')?'22px':'12px'} 5px 10px;border-radius:16px;border:1.5px solid ${on?'#6366F1':'#E0E7FF'};background:${on?'#6366F1':'#fff'};color:${on?'#fff':'#4B5563'};font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
+    chip.innerHTML = c.icon+' '+c.label;
+    chip.onclick = () => { _gUploadSubCat=c.id; _gRenderSubCatChips(); };
+    wrap.appendChild(chip);
+    if(_gAdminMode && c.id.startsWith('subcat_')) {
+      const x = document.createElement('button');
+      x.innerHTML='×';
+      x.style.cssText='position:absolute;top:50%;right:5px;transform:translateY(-50%);width:14px;height:14px;border-radius:50%;background:rgba(239,68,68,0.88);color:#fff;border:none;cursor:pointer;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;padding:0;z-index:1;';
+      x.onclick = async e => {
+        e.stopPropagation();
+        if(confirm(`"${c.label}" жою керек пе?`)) {
+          _gDeleteCustomSubCat(c.id);
+          if(_gUploadSubCat===c.id) _gUploadSubCat='other';
+          _gRenderSubCatChips(); _gBuildSubCatTabs(); await _gRender();
+        }
+      };
+      wrap.appendChild(x);
+    }
+    container.appendChild(wrap);
+  });
+  if(_gAdminMode) {
+    const addBtn = document.createElement('button');
+    addBtn.innerHTML='＋';
+    addBtn.title='Жаңа категория қосу';
+    addBtn.style.cssText='padding:5px 10px;border-radius:16px;border:1.5px dashed #6366F1;background:transparent;color:#6366F1;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;flex-shrink:0;';
+    addBtn.onmouseenter=()=>{addBtn.style.background='rgba(99,102,241,0.08)';};
+    addBtn.onmouseleave=()=>{addBtn.style.background='transparent';};
+    addBtn.onclick = async () => {
+      const label = prompt('Жаңа категория атауы / Yeni kategori adı:');
+      if(label && label.trim()) {
+        const id = _gAddCustomSubCat(label.trim());
+        _gUploadSubCat = id;
+        _gRenderSubCatChips(); _gBuildSubCatTabs();
+      }
+    };
+    container.appendChild(addBtn);
+  }
+}
 function _gCompanyClusters(co) {
   return JSON.parse(localStorage.getItem('mkCompanyClusters_v3') || '{}')[co]; // undefined = not set
 }
@@ -1668,7 +1733,7 @@ async function proceedToGallery() {
   _gShowView('galleryViewGallery');
   document.getElementById('galleryGalleryCompanyName').textContent = _gCompanyName;
   _gActiveCat = 'all'; _gActiveSubCat = 'all'; _gBuildGalleryTabs(); _gBuildSubCatTabs();
-  _gRefreshAdminUI(); await _gRender();
+  _gRefreshAdminUI(); _gRenderSubCatChips(); await _gRender();
 }
 function _gRefreshAdminUI() {
   const lockBtn = document.getElementById('galleryAdminBtn');
@@ -1677,6 +1742,7 @@ function _gRefreshAdminUI() {
   if(uz) uz.style.display = _gAdminMode ? '' : 'none';
   const settingsBtn = document.getElementById('gallerySettingsBtn');
   if(settingsBtn) settingsBtn.style.display = _gAdminMode ? 'flex' : 'none';
+  _gRenderSubCatChips();
 }
 function _gToggleAdmin() {
   if(_gAdminMode) {
@@ -1808,7 +1874,7 @@ function _gBuildSubCatTabs() {
   if (_gActiveCat === 'all') { bar.style.display = 'none'; bar.innerHTML = ''; return; }
   bar.style.display = 'flex';
   bar.innerHTML = '';
-  [{ id:'all', icon:'🗂', label:'Барлығы' }, ...SUB_CATS].forEach(c => {
+  [{ id:'all', icon:'🗂', label:'Барлығы' }, ..._gAllSubCats()].forEach(c => {
     const btn = document.createElement('button');
     const on = c.id === _gActiveSubCat;
     btn.style.cssText = `padding:5px 13px;border-radius:20px;border:1.5px solid ${on?'#6366F1':'#E5E7EB'};background:${on?'#6366F1':'#F9FAFB'};color:${on?'#fff':'#6B7280'};font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;flex-shrink:0;`;
@@ -1816,9 +1882,8 @@ function _gBuildSubCatTabs() {
     btn.onclick = async () => { _gActiveSubCat = c.id; _gBuildSubCatTabs(); await _gRender(); };
     bar.appendChild(btn);
   });
-  // Sync upload sub-cat dropdown to current selection
-  const sel = document.getElementById('gallerySubCatSelect');
-  if (sel) sel.value = _gActiveSubCat === 'all' ? 'other' : _gActiveSubCat;
+  // Sync upload subcategory chips to current tab selection
+  if(_gActiveSubCat !== 'all') { _gUploadSubCat = _gActiveSubCat; _gRenderSubCatChips(); }
 }
 
 // ── Gallery render ────────────────────────────────────────────────
@@ -1844,7 +1909,7 @@ async function _gRender() {
     : '<option value="other">📌 Басқа</option>';
 
   // Count display
-  const subCl = SUB_CATS.find(s => s.id === _gActiveSubCat);
+  const subCl = _gAllSubCats().find(s => s.id === _gActiveSubCat);
   countEl.innerHTML = allItems.length
     ? `<span style="color:#6B7280;">${allItems.length} файл барлығы</span>`
       + (clusterItems.length !== allItems.length ? ` · <span style="color:#10B981;font-weight:700;">${clusterItems.length} кластерде</span>` : '')
@@ -1854,7 +1919,7 @@ async function _gRender() {
   grid.innerHTML = '';
   if (!items.length) {
     const cl = allClusters.find(c=>c.id===_gActiveCat);
-    const sc = SUB_CATS.find(s=>s.id===_gActiveSubCat);
+    const sc = _gAllSubCats().find(s=>s.id===_gActiveSubCat);
     const emptyIcon = _gActiveCat==='all' ? '🖼️' : sc && _gActiveSubCat!=='all' ? sc.icon : cl?.icon||'📂';
     const emptyMsg = _gActiveCat==='all'
       ? 'Әзірге ештеңе жоқ.<br>Жоғарыдан жүктеңіз!'
@@ -1871,7 +1936,7 @@ async function _gRender() {
   const _rawName = /^\d{8}_\d{6}|^IMG_\d|^DSC\d|^VID_\d|^DCIM|^P\d{8}_/i;
   sortedItems.forEach((item, itemIdx) => {
     const cl = allClusters.find(c=>c.id===item.category);
-    const sc = SUB_CATS.find(s=>s.id===item.subcategory);
+    const sc = _gAllSubCats().find(s=>s.id===item.subcategory);
     const wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative;border-radius:16px;overflow:hidden;background:#111;box-shadow:0 2px 14px rgba(0,0,0,0.14);transition:transform 0.22s ease,box-shadow 0.22s ease;';
     const media = document.createElement(item.type==='video'?'video':'img');
@@ -2018,7 +2083,7 @@ function _gOpenLightbox(items, idx) {
     const item = items[cur];
     const allCl = _gAllClusters();
     const cl = allCl.find(c=>c.id===item.category);
-    const sc = SUB_CATS.find(s=>s.id===item.subcategory);
+    const sc = _gAllSubCats().find(s=>s.id===item.subcategory);
     // Smart title
     if(item.title) titleEl.textContent = item.title;
     else if(!_lbRawName.test(item.name)) titleEl.textContent = item.name;
@@ -2080,7 +2145,7 @@ function _gOpenLightbox(items, idx) {
 async function handleGalleryUpload(files) {
   if(!files||!files.length) return;
   const cat = document.getElementById('galleryCatSelect').value || 'other';
-  const subcat = document.getElementById('gallerySubCatSelect').value || 'other';
+  const subcat = _gUploadSubCat || 'other';
   const info = document.getElementById('galleryUploadInfo');
   info.innerHTML = `<span style="font-weight:700;color:#10B981;">Жүктелуде… (${files.length} файл)</span><span style="display:block;font-size:11px;color:#9CA3AF;">Күтіңіз…</span>`;
   for(const file of files){
@@ -2173,19 +2238,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <div style="font-size:9.5px;font-weight:700;color:#10B981;letter-spacing:0.8px;">КЛАСТЕР</div>
           <select id="galleryCatSelect" style="padding:7px 10px;border-radius:10px;border:1.5px solid #E5E7EB;background:#fff;font-size:11.5px;font-weight:700;color:#374151;cursor:pointer;font-family:inherit;min-width:140px;"></select>
         </div>
-        <!-- Sub-category dropdown -->
-        <div style="display:flex;flex-direction:column;justify-content:center;gap:3px;flex-shrink:0;">
+        <!-- Sub-category chips -->
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:5px;flex:1;min-width:0;">
           <div style="font-size:9.5px;font-weight:700;color:#6366F1;letter-spacing:0.8px;">КАТЕГОРИЯ</div>
-          <select id="gallerySubCatSelect" style="padding:7px 10px;border-radius:10px;border:1.5px solid #E0E7FF;background:#fff;font-size:11.5px;font-weight:700;color:#374151;cursor:pointer;font-family:inherit;min-width:150px;">
-            <option value="team">👥 Команда</option>
-            <option value="travel">✈️ Саяхат</option>
-            <option value="sport">⚽ Спорт</option>
-            <option value="workflow">🔧 Жұмыс барысы</option>
-            <option value="contracts">📄 Келісімшарт</option>
-            <option value="meetings">🤝 Кездесулер</option>
-            <option value="results">🏆 Нәтиже</option>
-            <option value="other">📌 Басқа</option>
-          </select>
+          <div id="gallerySubCatChips" style="display:flex;flex-wrap:wrap;gap:5px;align-items:center;"></div>
         </div>
       </div>
     </div>
