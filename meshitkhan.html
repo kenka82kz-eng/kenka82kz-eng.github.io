@@ -1557,7 +1557,8 @@ function _gAllClusters() {
 let _gUploadSubCat = 'other';
 function _gAllSubCats() {
   const custom = JSON.parse(localStorage.getItem('mkCustomSubCats_v1') || '[]');
-  return [...SUB_CATS, ...custom];
+  const hidden = JSON.parse(localStorage.getItem('mkHiddenSubCats_v1') || '[]');
+  return [...SUB_CATS.filter(c=>!hidden.includes(c.id)), ...custom];
 }
 function _gAddCustomSubCat(label) {
   const custom = JSON.parse(localStorage.getItem('mkCustomSubCats_v1') || '[]');
@@ -1570,6 +1571,10 @@ function _gDeleteCustomSubCat(id) {
   const custom = JSON.parse(localStorage.getItem('mkCustomSubCats_v1') || '[]');
   localStorage.setItem('mkCustomSubCats_v1', JSON.stringify(custom.filter(c=>c.id!==id)));
 }
+function _gHideDefaultSubCat(id) {
+  const hidden = JSON.parse(localStorage.getItem('mkHiddenSubCats_v1') || '[]');
+  if(!hidden.includes(id)) { hidden.push(id); localStorage.setItem('mkHiddenSubCats_v1', JSON.stringify(hidden)); }
+}
 function _gRenderSubCatChips() {
   const container = document.getElementById('gallerySubCatChips');
   if(!container) return;
@@ -1579,18 +1584,19 @@ function _gRenderSubCatChips() {
     wrap.style.cssText = 'position:relative;display:inline-flex;flex-shrink:0;';
     const chip = document.createElement('button');
     const on = _gUploadSubCat === c.id;
-    chip.style.cssText = `padding:5px ${_gAdminMode&&c.id.startsWith('subcat_')?'22px':'12px'} 5px 10px;border-radius:16px;border:1.5px solid ${on?'#6366F1':'#E0E7FF'};background:${on?'#6366F1':'#fff'};color:${on?'#fff':'#4B5563'};font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
+    chip.style.cssText = `padding:5px ${_gAdminMode?'22px':'12px'} 5px 10px;border-radius:16px;border:1.5px solid ${on?'#6366F1':'#E0E7FF'};background:${on?'#6366F1':'#fff'};color:${on?'#fff':'#4B5563'};font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
     chip.innerHTML = c.icon+' '+c.label;
     chip.onclick = () => { _gUploadSubCat=c.id; _gRenderSubCatChips(); };
     wrap.appendChild(chip);
-    if(_gAdminMode && c.id.startsWith('subcat_')) {
+    if(_gAdminMode) {
       const x = document.createElement('button');
       x.innerHTML='×';
       x.style.cssText='position:absolute;top:50%;right:5px;transform:translateY(-50%);width:14px;height:14px;border-radius:50%;background:rgba(239,68,68,0.88);color:#fff;border:none;cursor:pointer;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;padding:0;z-index:1;';
       x.onclick = async e => {
         e.stopPropagation();
         if(confirm(`"${c.label}" жою керек пе?`)) {
-          _gDeleteCustomSubCat(c.id);
+          if(c.id.startsWith('subcat_')) _gDeleteCustomSubCat(c.id);
+          else _gHideDefaultSubCat(c.id);
           if(_gUploadSubCat===c.id) _gUploadSubCat='other';
           _gRenderSubCatChips(); _gBuildSubCatTabs(); await _gRender();
         }
