@@ -1713,10 +1713,48 @@ function _gShowView(id) {
   );
 }
 
+// ── Static image auto-seeder ──────────────────────────────────────
+const _ALATAU_IMAGES = [
+  {f:'20211213_130553.jpg',sub:'workflow'},{f:'20211213_185313.jpg',sub:'workflow'},
+  {f:'20211218_163056.jpg',sub:'workflow'},{f:'20211228_132057.jpg',sub:'workflow'},
+  {f:'20211228_132105.jpg',sub:'workflow'},{f:'20211228_132114.jpg',sub:'workflow'},
+  {f:'20211228_132121.jpg',sub:'workflow'},{f:'20211228_132303.jpg',sub:'workflow'},
+  {f:'20211228_132320.jpg',sub:'workflow'},{f:'20211228_132459.jpg',sub:'workflow'},
+  {f:'20211228_132513.jpg',sub:'workflow'},{f:'20211228_132522.jpg',sub:'workflow'},
+];
+async function _gResizeToDataUrl(imgEl, maxW=1600) {
+  const scale = Math.min(1, maxW / imgEl.naturalWidth);
+  const w = Math.round(imgEl.naturalWidth * scale);
+  const h = Math.round(imgEl.naturalHeight * scale);
+  const cv = document.createElement('canvas'); cv.width=w; cv.height=h;
+  cv.getContext('2d').drawImage(imgEl,0,0,w,h);
+  return cv.toDataURL('image/jpeg', 0.88);
+}
+async function _gAutoSeedStatic(company) {
+  if(!company.includes('алатау') && !company.includes('alatau')) return;
+  const existing = await _gGetAll(company);
+  if(existing.length > 0) return;
+  // Auto-enable 'market' cluster for Alatau if nothing set
+  if(!(_gCompanyClusters(company)||[]).length) _gSaveCompanyClusters(company,['market']);
+  const cluster = (_gCompanyClusters(company)||['market'])[0];
+  for(const img of _ALATAU_IMAGES) {
+    try {
+      const dataUrl = await new Promise((res,rej) => {
+        const el = new Image(); el.crossOrigin='anonymous';
+        el.onload = async () => res(await _gResizeToDataUrl(el));
+        el.onerror = rej;
+        el.src = 'imeges/ALATAU/' + img.f;
+      });
+      await _gSave(company,'image',dataUrl,img.f,cluster,img.sub);
+    } catch(e){ console.warn('seed:',img.f,e); }
+  }
+}
+
 async function openGallery(company, companyName) {
   _gCompany = company; _gCompanyName = companyName; _gActiveCat = 'all'; _gActiveSubCat = 'all';
   document.getElementById('galleryModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
+  await _gAutoSeedStatic(company);
   if (_gCompanyClusters(company) === undefined) {
     _gSaveCompanyClusters(company, []);
     if(_gAdminMode) {
