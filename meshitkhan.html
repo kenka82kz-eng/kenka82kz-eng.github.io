@@ -1548,9 +1548,16 @@ const SUB_CATS = [
   { id:'other',     icon:'📌', label:'Басқа'         },
 ];
 
+function _gClusterOverrides() { return JSON.parse(localStorage.getItem('mkClusterLabelOverrides_v1') || '{}'); }
+function _gSetClusterLabel(id, label) {
+  const ov = _gClusterOverrides(); ov[id] = label;
+  localStorage.setItem('mkClusterLabelOverrides_v1', JSON.stringify(ov));
+}
 function _gAllClusters() {
   const custom = JSON.parse(localStorage.getItem('mkCustomClusters_v3') || '[]');
-  return [...DEFAULT_CLUSTERS, ...custom];
+  const ov = _gClusterOverrides();
+  const applyOv = c => ov[c.id] ? {...c, label: ov[c.id]} : c;
+  return [...DEFAULT_CLUSTERS.map(applyOv), ...custom.map(applyOv)];
 }
 
 // ── Sub-category helpers (dynamic) ───────────────────────────────
@@ -1828,11 +1835,26 @@ function _gBuildGalleryTabs() {
     wrap.style.cssText = 'position:relative;display:inline-flex;flex-shrink:0;';
     const btn = document.createElement('button');
     const on = c.id === _gActiveCat;
-    btn.style.cssText = `padding:7px ${(_gAdminMode&&c.id!=='all')?'26px':'16px'} 7px 16px;border-radius:20px;border:1.5px solid ${on?'#10B981':'#E5E7EB'};background:${on?'#10B981':'#fff'};color:${on?'#fff':'#6B7280'};font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
+    btn.style.cssText = `padding:7px ${(_gAdminMode&&c.id!=='all')?'44px':'16px'} 7px 16px;border-radius:20px;border:1.5px solid ${on?'#10B981':'#E5E7EB'};background:${on?'#10B981':'#fff'};color:${on?'#fff':'#6B7280'};font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;`;
     btn.innerHTML = c.icon + ' ' + c.label;
     btn.onclick = async () => { _gActiveCat = c.id; _gActiveSubCat = 'all'; _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender(); };
     wrap.appendChild(btn);
     if(_gAdminMode && c.id !== 'all') {
+      // Rename button ✏️
+      const pen = document.createElement('button');
+      pen.innerHTML = '✏️';
+      pen.title = 'Атауын өзгерту / Yeniden adlandır';
+      pen.style.cssText = 'position:absolute;top:50%;right:24px;transform:translateY(-50%);width:16px;height:16px;border:none;background:transparent;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center;padding:0;z-index:1;';
+      pen.onclick = async e => {
+        e.stopPropagation();
+        const newLabel = prompt('Жаңа атауы / Yeni ad:', c.label);
+        if(newLabel && newLabel.trim()) {
+          _gSetClusterLabel(c.id, newLabel.trim());
+          _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender();
+        }
+      };
+      wrap.appendChild(pen);
+      // Remove button ×
       const x = document.createElement('button');
       x.innerHTML = '×';
       x.title = 'Жою / Kaldır';
