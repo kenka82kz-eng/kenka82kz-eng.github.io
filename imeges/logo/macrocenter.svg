@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 140">
+  <rect width="320" height="140" fill="#1A1A2E" rx="12"/>
+  <!-- Gold accent bar top -->
+  <rect x="0" y="0" width="320" height="5" fill="#C9A84C" rx="12"/>
+  <!-- Large decorative M -->
+  <text x="38" y="100" font-family="'Arial Black',Impact,Arial,sans-serif" font-weight="900" font-size="88" fill="#C9A84C" opacity="0.15">M</text>
+  <!-- MACRO bold white -->
+  <text x="50" y="72" font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="38" fill="#FFFFFF" letter-spacing="-0.5">MACRO</text>
+  <!-- CENTER in gold -->
+  <text x="50" y="108" font-family="'Arial Black',Arial,sans-serif" font-weight="900" font-size="38" fill="#C9A84C" letter-spacing="-0.5">CENTER</text>
+  <!-- Tagline -->
+  <text x="50" y="128" font-family="Arial,sans-serif" font-size="11" fill="#9CA3AF" letter-spacing="2">premium · Migros group</text>
+  <!-- Gold right accent -->
+  <rect x="300" y="20" width="4" height="100" fill="#C9A84C" rx="2"/>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <clipPath id="rc">
+      <rect x="0" y="0" width="100" height="100" rx="10"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#rc)">
+    <rect x="0" y="0" width="100" height="100" fill="#C41B1B"/>
+    <!-- Mountain peaks -->
+    <polygon points="5,72 20,38 32,57 50,16 68,53 80,36 95,72" fill="white"/>
+    <!-- Ridge fill below peaks -->
+    <polygon points="5,72 20,38 32,57 50,16 68,53 80,36 95,72 95,78 5,78" fill="white" opacity="0.15"/>
+    <!-- АЛАТАУ text -->
+    <text x="50" y="83"
+      text-anchor="middle"
+      font-family="'Arial Black',Arial,sans-serif"
+      font-weight="900" font-size="11.5" fill="white" letter-spacing="2.5">АЛАТАУ</text>
+    <!-- Bottom dark band -->
+    <rect x="0" y="88" width="100" height="12" fill="#8B0A0A"/>
+    <text x="50" y="97.5"
+      text-anchor="middle"
+      font-family="Arial,sans-serif"
+      font-size="7.5" fill="white" letter-spacing="1.5">ОПТОМАРКЕТ</text>
+  </g>
+</svg>
