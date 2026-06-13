@@ -248,3 +248,27 @@
   70%  { opacity:0; transform:scale(1.45); }
   100% { opacity:0; }
 }
+
+/* ── LEAD MODAL CARD ── */
+.lead-modal-card { animation: modalIn .32s cubic-bezier(.34,1.56,.64,1) both; }
+
+/* ── CTA STRIP BUTTON ── */
+.cta-strip-btn {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #1A6FBA, #1A9266);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(26,111,186,.28);
+  white-space: nowrap;
+  transition: all .25s;
+}
+.cta-strip-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26,111,186,.45);
+}
