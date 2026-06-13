@@ -1628,6 +1628,20 @@ function _gRenderSubCatChips() {
       }
     };
     container.appendChild(addBtn);
+    // Reset button — restore all default categories
+    const resetBtn = document.createElement('button');
+    resetBtn.innerHTML='↺';
+    resetBtn.title='Барлық санаттарды қалпына келтіру / Tümünü geri yükle';
+    resetBtn.style.cssText='padding:5px 9px;border-radius:16px;border:1.5px solid #D1D5DB;background:transparent;color:#9CA3AF;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;font-family:inherit;flex-shrink:0;';
+    resetBtn.onmouseenter=()=>{resetBtn.style.borderColor='#6B7280';resetBtn.style.color='#374151';};
+    resetBtn.onmouseleave=()=>{resetBtn.style.borderColor='#D1D5DB';resetBtn.style.color='#9CA3AF';};
+    resetBtn.onclick = async () => {
+      localStorage.removeItem('mkHiddenSubCats_v1');
+      localStorage.removeItem('mkCustomSubCats_v1');
+      _gUploadSubCat = 'other';
+      _gRenderSubCatChips(); _gBuildSubCatTabs(); await _gRender();
+    };
+    container.appendChild(resetBtn);
   }
 }
 function _gCompanyClusters(co) {
