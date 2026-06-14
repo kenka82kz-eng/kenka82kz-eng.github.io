@@ -2627,21 +2627,11 @@ async function _gRender() {
       del.style.cssText='position:absolute;top:9px;right:9px;width:30px;height:30px;border-radius:50%;background:rgba(220,38,38,0.82);backdrop-filter:blur(4px);color:#fff;border:none;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
       del.onclick=async e=>{
         e.stopPropagation();
-        if(del.dataset.confirm==='1'){
-          await _gDelete(item.id); await _gRender();
-        } else {
-          del.dataset.confirm='1';
-          del.style.background='rgba(220,38,38,1)';
-          del.style.transform='scale(1.18)';
-          del.innerHTML='✓';
-          del.title='Растау — тағы басыңыз';
-          setTimeout(()=>{
-            del.dataset.confirm='';
-            del.innerHTML='🗑';
-            del.style.background='rgba(220,38,38,0.82)';
-            del.style.transform='scale(1)';
-          }, 2500);
-        }
+        del.disabled=true;
+        del.innerHTML='✓';
+        del.style.background='rgba(239,68,68,1)';
+        try{ if(item.id!==undefined) await _gDelete(item.id); }catch(err){ console.error('del:',err); }
+        await _gRender();
       };
       wrap.appendChild(del);
     }
