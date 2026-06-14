@@ -2356,6 +2356,7 @@ async function _gSeedFromFile(company) {
 
 async function openGallery(company, companyName) {
   _gCompany = company; _gCompanyName = companyName; _gActiveCat = 'all'; _gActiveSubCat = 'all';
+  document.getElementById('galleryGalleryCompanyName').textContent = companyName;
   document.getElementById('galleryModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
   await _gAutoSeedStatic(company);
