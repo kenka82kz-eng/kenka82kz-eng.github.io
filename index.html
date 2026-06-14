@@ -2738,14 +2738,8 @@ async function _gRender() {
     nm.style.cssText='position:absolute;bottom:0;left:0;right:0;padding:30px 10px 9px;background:linear-gradient(to top,rgba(0,0,0,0.80) 0%,rgba(0,0,0,0.32) 55%,transparent 100%);display:flex;align-items:flex-end;gap:4px;';
     const titleSpan=document.createElement('span');
     titleSpan.style.cssText='color:#fff;font-size:10.5px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,0.6);letter-spacing:0.15px;';
-    if(item.title){
-      titleSpan.textContent=item.title;
-    } else if(!_rawName.test(item.name)){
-      titleSpan.textContent=item.name;
-    } else {
-      titleSpan.textContent=cl?(cl.icon+' '+cl.label):'';
-      titleSpan.style.opacity='0.75';
-    }
+    titleSpan.textContent=cl?(cl.icon+' '+cl.label):'';
+    titleSpan.style.opacity='0.85';
     nm.appendChild(titleSpan);
     if(_gAdminMode) {
       const editBtn=document.createElement('button');
