@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Meshitkhan Kyenchilyeg — COO | SAMGA-NIITS</title>
   <meta name="description" content="Migros WMS жүйесін нөлден жасап, ŞOK Market-ті 11 000+ дүкенге жеткізген. SAMGA-NIITS COO."/>
+  <script src="gallery-seed.js" onerror="window._MK_GALLERY_SEED=null;"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -2339,11 +2340,26 @@ async function _gAutoSeedStatic(company) {
   }
 }
 
+// ── Seed from gallery-seed.js (for all visitors) ─────────────────
+async function _gSeedFromFile(company) {
+  if (!window._MK_GALLERY_SEED) return;
+  const seeds = window._MK_GALLERY_SEED.filter(s => s.company === company);
+  if (!seeds.length) return;
+  const existing = await _gGetAll(company);
+  const existingDates = new Set(existing.map(r => r.date + '|' + r.name));
+  for (const s of seeds) {
+    if (!existingDates.has(s.date + '|' + s.name)) {
+      await _gSave(s.company, s.type, s.data, s.name, s.category, s.subcategory);
+    }
+  }
+}
+
 async function openGallery(company, companyName) {
   _gCompany = company; _gCompanyName = companyName; _gActiveCat = 'all'; _gActiveSubCat = 'all';
   document.getElementById('galleryModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
   await _gAutoSeedStatic(company);
+  await _gSeedFromFile(company);
   if (_gCompanyClusters(company) === undefined) {
     _gSaveCompanyClusters(company, []);
     if(_gAdminMode) {
@@ -2374,6 +2390,30 @@ async function proceedToGallery() {
   document.getElementById('galleryGalleryCompanyName').textContent = _gCompanyName;
   _gActiveCat = 'all'; _gActiveSubCat = 'all'; _gBuildGalleryTabs(); _gBuildSubCatTabs();
   _gRefreshAdminUI(); _gRenderSubCatChips(); await _gRender();
+}
+async function _gExportSeed() {
+  const btn = document.getElementById('galleryExportBtn');
+  if(btn){ btn.disabled=true; btn.textContent='Жүктелуде...'; }
+  try {
+    // Collect ALL items from ALL companies
+    const db = await _gInitDB();
+    const all = await new Promise((res,rej)=>{
+      const req = db.transaction('media','readonly').objectStore('media').getAll();
+      req.onsuccess = e => res(e.target.result);
+      req.onerror = e => rej(e.target.error);
+    });
+    const js = 'window._MK_GALLERY_SEED = ' + JSON.stringify(all) + ';\n';
+    const blob = new Blob([js], {type:'text/javascript'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'gallery-seed.js'; a.click();
+    URL.revokeObjectURL(url);
+    if(btn){ btn.disabled=false; btn.textContent='📤 GitHub-қа шығару'; }
+    alert('✅ gallery-seed.js жүктелді!\n\nОсы файлды сайт папкасына салып, GitHub-қа push жасаңыз.\nКонтент барлық келушіге көрінеді.');
+  } catch(e){
+    if(btn){ btn.disabled=false; btn.textContent='📤 GitHub-қа шығару'; }
+    alert('Қате: ' + e.message);
+  }
 }
 async function _gClearAllItems() {
   const btn = document.getElementById('galleryClearAllBtn');
@@ -2412,6 +2452,8 @@ function _gRefreshAdminUI() {
   if(settingsBtn) settingsBtn.style.display = _gAdminMode ? 'flex' : 'none';
   const clearBtn = document.getElementById('galleryClearAllBtn');
   if(clearBtn) clearBtn.style.display = _gAdminMode ? '' : 'none';
+  const exportBtn = document.getElementById('galleryExportBtn');
+  if(exportBtn) exportBtn.style.display = _gAdminMode ? '' : 'none';
   _gRenderSubCatChips();
 }
 function _gToggleAdmin() {
@@ -2965,6 +3007,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- Count + Clear All -->
     <div style="padding:8px 24px 0;display:flex;align-items:center;gap:10px;flex-shrink:0;">
       <div id="galleryCount" style="font-size:11.5px;font-weight:600;flex:1;"></div>
+      <button id="galleryExportBtn" onclick="_gExportSeed()" style="display:none;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.35);color:#059669;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;">📤 GitHub-қа шығару</button>
       <button id="galleryClearAllBtn" onclick="_gClearAllItems()" style="display:none;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.35);color:#dc2626;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;">🗑 Барлығын өшіру</button>
     </div>
     <!-- Grid -->
