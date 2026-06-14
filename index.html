@@ -2680,8 +2680,8 @@ async function _gRender() {
       badge.textContent=badgeData.icon+' '+badgeData.label;
       wrap.appendChild(badge);
     }
-    // Delete button (admin only)
-    if(_gAdminMode) {
+    // Delete button (always visible)
+    {
       const del=document.createElement('button');
       del.innerHTML='🗑'; del.title='Жою';
       del.style.cssText='position:absolute;top:9px;right:9px;width:30px;height:30px;border-radius:50%;background:rgba(220,38,38,0.82);backdrop-filter:blur(4px);color:#fff;border:none;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
