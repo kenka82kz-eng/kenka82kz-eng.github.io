@@ -2256,11 +2256,42 @@ function _gGetAll(company) {
   }));
 }
 function _gDelete(id) {
-  return _gInitDB().then(db => new Promise((res, rej) => {
-    const tx = db.transaction('media', 'readwrite');
-    tx.objectStore('media').delete(id);
-    tx.oncomplete = res; tx.onerror = e => rej(e.target.error);
-  }));
+  _gDb = null; // force fresh connection
+  return new Promise((res, rej) => {
+    const open = indexedDB.open('mkMemories_v1', 1);
+    open.onsuccess = e => {
+      const db = e.target.result;
+      const tx = db.transaction('media', 'readwrite');
+      tx.objectStore('media').delete(id);
+      tx.oncomplete = () => { db.close(); res(); };
+      tx.onerror = ev => { db.close(); rej(ev.target.error); };
+    };
+    open.onerror = e => rej(e.target.error);
+  });
+}
+function _gDeleteByIndex(company, name, date) {
+  // Fallback: delete by cursor matching company+name+date
+  _gDb = null;
+  return new Promise((res, rej) => {
+    const open = indexedDB.open('mkMemories_v1', 1);
+    open.onsuccess = e => {
+      const db = e.target.result;
+      const tx = db.transaction('media', 'readwrite');
+      const store = tx.objectStore('media');
+      const req = store.index('company').openCursor(IDBKeyRange.only(company));
+      req.onsuccess = ev => {
+        const cursor = ev.target.result;
+        if (cursor) {
+          const r = cursor.value;
+          if (r.name === name && r.date === date) cursor.delete();
+          cursor.continue();
+        }
+      };
+      tx.oncomplete = () => { db.close(); res(); };
+      tx.onerror = ev => { db.close(); rej(ev.target.error); };
+    };
+    open.onerror = e => rej(e.target.error);
+  });
 }
 function _gUpdateTitle(id, title) {
   return _gInitDB().then(db => new Promise((res, rej) => {
@@ -2352,6 +2383,33 @@ async function proceedToGallery() {
   _gActiveCat = 'all'; _gActiveSubCat = 'all'; _gBuildGalleryTabs(); _gBuildSubCatTabs();
   _gRefreshAdminUI(); _gRenderSubCatChips(); await _gRender();
 }
+async function _gClearAllItems() {
+  const btn = document.getElementById('galleryClearAllBtn');
+  if(!btn) return;
+  if(btn.dataset.step==='1'){
+    btn.disabled=true;
+    btn.textContent='Өшіруде...';
+    await new Promise((res,rej)=>{
+      const open=indexedDB.open('mkMemories_v1',1);
+      open.onsuccess=e=>{
+        const db=e.target.result;
+        const tx=db.transaction('media','readwrite');
+        const store=tx.objectStore('media');
+        const req=store.index('company').openCursor(IDBKeyRange.only(_gCompany));
+        req.onsuccess=ev=>{const c=ev.target.result;if(c){c.delete();c.continue();}};
+        tx.oncomplete=()=>{db.close();_gDb=null;res();};
+        tx.onerror=ev=>{db.close();rej(ev.target.error);};
+      };
+      open.onerror=e=>rej(e.target.error);
+    }).catch(()=>{});
+    await _gRender();
+  } else {
+    btn.dataset.step='1';
+    btn.textContent='⚠️ Растау — тағы бас';
+    btn.style.background='rgba(220,38,38,0.25)';
+    setTimeout(()=>{btn.dataset.step='';btn.textContent='🗑 Барлығын өшіру';btn.style.background='rgba(220,38,38,0.12)';},3000);
+  }
+}
 function _gRefreshAdminUI() {
   const lockBtn = document.getElementById('galleryAdminBtn');
   if(lockBtn) lockBtn.innerHTML = _gAdminMode ? '🔓' : '🔒';
@@ -2359,6 +2417,8 @@ function _gRefreshAdminUI() {
   if(uz) uz.style.display = _gAdminMode ? '' : 'none';
   const settingsBtn = document.getElementById('gallerySettingsBtn');
   if(settingsBtn) settingsBtn.style.display = _gAdminMode ? 'flex' : 'none';
+  const clearBtn = document.getElementById('galleryClearAllBtn');
+  if(clearBtn) clearBtn.style.display = _gAdminMode ? '' : 'none';
   _gRenderSubCatChips();
 }
 function _gToggleAdmin() {
@@ -2630,7 +2690,15 @@ async function _gRender() {
         del.disabled=true;
         del.innerHTML='✓';
         del.style.background='rgba(239,68,68,1)';
-        try{ if(item.id!==undefined) await _gDelete(item.id); }catch(err){ console.error('del:',err); }
+        try{
+          if(item.id!==undefined && item.id!==null){
+            await _gDelete(item.id);
+          } else {
+            await _gDeleteByIndex(_gCompany, item.name, item.date);
+          }
+        }catch(err){
+          try{ await _gDeleteByIndex(_gCompany, item.name, item.date); }catch(e2){}
+        }
         await _gRender();
       };
       wrap.appendChild(del);
@@ -2907,8 +2975,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     </div>
-    <!-- Count -->
-    <div id="galleryCount" style="padding:8px 24px 0;font-size:11.5px;font-weight:600;flex-shrink:0;"></div>
+    <!-- Count + Clear All -->
+    <div style="padding:8px 24px 0;display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <div id="galleryCount" style="font-size:11.5px;font-weight:600;flex:1;"></div>
+      <button id="galleryClearAllBtn" onclick="_gClearAllItems()" style="display:none;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.35);color:#dc2626;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;">🗑 Барлығын өшіру</button>
+    </div>
     <!-- Grid -->
     <div id="galleryGrid" style="flex:1;overflow-y:auto;padding:14px 24px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));grid-auto-rows:172px;gap:12px;align-content:start;min-height:180px;"></div>
   </div>
