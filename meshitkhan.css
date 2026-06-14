@@ -15,8 +15,17 @@
   --nav-h:       64px;
 }
 
-html { scroll-behavior: smooth; }
-body { font-family: 'Inter', -apple-system, sans-serif; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
 .font-manrope { font-family: 'Manrope', 'Inter', sans-serif; }
 
 /* ── NAV ── */
