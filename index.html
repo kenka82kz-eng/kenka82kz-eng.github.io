@@ -2255,43 +2255,33 @@ function _gGetAll(company) {
     req.onsuccess = e => res(e.target.result); req.onerror = e => rej(e.target.error);
   }));
 }
-function _gDelete(id) {
-  _gDb = null; // force fresh connection
-  return new Promise((res, rej) => {
-    const open = indexedDB.open('mkMemories_v1', 1);
-    open.onsuccess = e => {
-      const db = e.target.result;
-      const tx = db.transaction('media', 'readwrite');
-      tx.objectStore('media').delete(id);
-      tx.oncomplete = () => { db.close(); res(); };
-      tx.onerror = ev => { db.close(); rej(ev.target.error); };
-    };
-    open.onerror = e => rej(e.target.error);
+// ── Nuclear delete: get all → filter out → clear → re-add ──────────
+async function _gDeleteItem(targetItem) {
+  const all = await _gGetAll(_gCompany);
+  // identify item to remove (by date+name, or id if available)
+  const keep = all.filter(r => {
+    if (targetItem.id !== undefined && r.id !== undefined) return r.id !== targetItem.id;
+    return !(r.name === targetItem.name && r.date === targetItem.date);
   });
-}
-function _gDeleteByIndex(company, name, date) {
-  // Fallback: delete by cursor matching company+name+date
+  // wipe all records for this company via cursor
   _gDb = null;
-  return new Promise((res, rej) => {
+  await new Promise((res, rej) => {
     const open = indexedDB.open('mkMemories_v1', 1);
     open.onsuccess = e => {
       const db = e.target.result;
       const tx = db.transaction('media', 'readwrite');
       const store = tx.objectStore('media');
-      const req = store.index('company').openCursor(IDBKeyRange.only(company));
-      req.onsuccess = ev => {
-        const cursor = ev.target.result;
-        if (cursor) {
-          const r = cursor.value;
-          if (r.name === name && r.date === date) cursor.delete();
-          cursor.continue();
-        }
-      };
-      tx.oncomplete = () => { db.close(); res(); };
+      const req = store.index('company').openCursor(IDBKeyRange.only(_gCompany));
+      req.onsuccess = ev => { const c = ev.target.result; if(c){c.delete();c.continue();} };
+      tx.oncomplete = () => { db.close(); _gDb = null; res(); };
       tx.onerror = ev => { db.close(); rej(ev.target.error); };
     };
     open.onerror = e => rej(e.target.error);
   });
+  // re-add remaining items
+  for (const r of keep) {
+    await _gSave(r.company, r.type, r.data, r.name, r.category, r.subcategory);
+  }
 }
 function _gUpdateTitle(id, title) {
   return _gInitDB().then(db => new Promise((res, rej) => {
@@ -2390,6 +2380,7 @@ async function _gClearAllItems() {
     btn.disabled=true;
     btn.textContent='Өшіруде...';
     await new Promise((res,rej)=>{
+      _gDb=null;
       const open=indexedDB.open('mkMemories_v1',1);
       open.onsuccess=e=>{
         const db=e.target.result;
@@ -2690,15 +2681,9 @@ async function _gRender() {
         del.disabled=true;
         del.innerHTML='✓';
         del.style.background='rgba(239,68,68,1)';
-        try{
-          if(item.id!==undefined && item.id!==null){
-            await _gDelete(item.id);
-          } else {
-            await _gDeleteByIndex(_gCompany, item.name, item.date);
-          }
-        }catch(err){
-          try{ await _gDeleteByIndex(_gCompany, item.name, item.date); }catch(e2){}
-        }
+        wrap.style.opacity='0.4';
+        wrap.style.transform='scale(0.92)';
+        try{ await _gDeleteItem(item); }catch(err){ console.error('delete failed:',err); }
         await _gRender();
       };
       wrap.appendChild(del);
