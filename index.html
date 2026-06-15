@@ -3372,168 +3372,165 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <!-- ═══════ WMS MODAL ═══════ -->
-<div id="wmsModal" style="display:none;position:fixed;inset:0;z-index:9100;background:rgba(4,10,24,0.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:linear-gradient(145deg,#0d1f3c 0%,#071428 100%);border:1px solid rgba(255,255,255,0.13);border-radius:26px;max-width:780px;width:100%;max-height:90vh;overflow-y:auto;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#1e3a5f transparent;">
+<div id="wmsModal" style="display:none;position:fixed;inset:0;z-index:9100;background:rgba(2,8,20,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:linear-gradient(145deg,#152b50 0%,#0e1f3a 100%);border:1px solid rgba(255,255,255,0.22);border-radius:26px;max-width:780px;width:100%;max-height:90vh;overflow-y:auto;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#2a5080 transparent;">
 
     <!-- Close -->
-    <button onclick="document.getElementById('wmsModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;" onmouseenter="this.style.background='rgba(255,255,255,0.15)'" onmouseleave="this.style.background='rgba(255,255,255,0.08)'">&times;</button>
+    <button onclick="document.getElementById('wmsModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;" onmouseenter="this.style.background='rgba(255,255,255,0.22)'" onmouseleave="this.style.background='rgba(255,255,255,0.12)'">&times;</button>
 
     <!-- Header -->
     <div style="margin-bottom:8px;padding-right:40px;">
-      <div style="color:#60A5FA;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:4px;">WMS · Logistics · Automation · 2009 – 2022</div>
+      <div style="color:#60A5FA;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:4px;">WMS · LOGISTICS · AUTOMATION · 2009 – 2022</div>
       <div style="color:#fff;font-family:'Manrope',sans-serif;font-weight:900;font-size:21px;line-height:1.2;">Қойма автоматизациясы — 16 жылдық жүйе</div>
     </div>
 
     <!-- Stats -->
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08);">
-      <span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93C5FD;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">30+ Ramstore дүкені</span>
-      <span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93C5FD;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Honeywell сарапшысы</span>
-      <span style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#93C5FD;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Орта Азиядағы бірінші</span>
-      <span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6EE7B7;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Şok 2015+ әлі қолдануда ✓</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.14);">
+      <span style="background:rgba(59,130,246,0.28);border:1px solid rgba(59,130,246,0.55);color:#BFDBFE;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">30+ Ramstore дүкені</span>
+      <span style="background:rgba(59,130,246,0.28);border:1px solid rgba(59,130,246,0.55);color:#BFDBFE;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Honeywell сарапшысы</span>
+      <span style="background:rgba(59,130,246,0.28);border:1px solid rgba(59,130,246,0.55);color:#BFDBFE;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Орта Азиядағы бірінші</span>
+      <span style="background:rgba(16,185,129,0.28);border:1px solid rgba(16,185,129,0.55);color:#A7F3D0;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Şok 2015+ әлі қолдануда ✓</span>
     </div>
 
     <!-- TIMELINE -->
     <div style="position:relative;padding-left:28px;">
-      <!-- vertical line -->
-      <div style="position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,#3B82F6,#10B981,#8B5CF6);border-radius:2px;"></div>
+      <div style="position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,#60A5FA,#34D399,#A78BFA);border-radius:2px;"></div>
 
       <!-- 2009–2010 -->
-      <div style="position:relative;margin-bottom:28px;">
-        <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#3B82F6;box-shadow:0 0 0 3px rgba(59,130,246,0.25);"></div>
-        <div style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:16px;padding:16px 18px;">
+      <div style="position:relative;margin-bottom:24px;">
+        <div style="position:absolute;left:-24px;top:4px;width:13px;height:13px;border-radius:50%;background:#3B82F6;box-shadow:0 0 0 4px rgba(59,130,246,0.35);"></div>
+        <div style="background:rgba(59,130,246,0.18);border:1px solid rgba(59,130,246,0.45);border-radius:16px;padding:16px 18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
             <span style="background:#3B82F6;color:#fff;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;">2009 – 2010</span>
             <span style="color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;">Ramstore Орталық Қойма жүйесі</span>
           </div>
-          <p style="color:rgba(255,255,255,0.75);font-size:12px;line-height:1.75;margin-bottom:10px;">
-            Ramstore орталық қоймасын <strong style="color:#93C5FD;">нөлден</strong> іске асырдық. Бұл жүйе сол кезеңде <strong style="color:#93C5FD;">Орта Азия мен Еуропада аналогы жоқ</strong> автоматизация жүйесі болды. Бұл жобаға қатысу маған терең білім де, бағалы тәжірибе де берді.
+          <p style="color:rgba(255,255,255,0.9);font-size:12px;line-height:1.75;margin-bottom:10px;">
+            Ramstore орталық қоймасын <strong style="color:#BFDBFE;">нөлден</strong> іске асырдық. Бұл жүйе сол кезеңде <strong style="color:#BFDBFE;">Орта Азия мен Еуропада аналогы жоқ</strong> автоматизация жүйесі болды. Бұл жобаға қатысу маған терең білім де, бағалы тәжірибе де берді.
           </p>
           <div style="display:flex;flex-wrap:wrap;gap:5px;">
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">WMS нөлден</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">Автоматизация</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">Орта Азияда бірінші</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">Ramstore</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">WMS нөлден</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">Автоматизация</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">Орта Азияда бірінші</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">Ramstore</span>
           </div>
         </div>
       </div>
 
-      <!-- 2009–2014 -->
-      <div style="position:relative;margin-bottom:28px;">
-        <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,0.25);"></div>
-        <div style="background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:16px;padding:16px 18px;">
+      <!-- 2010–2014 -->
+      <div style="position:relative;margin-bottom:24px;">
+        <div style="position:absolute;left:-24px;top:4px;width:13px;height:13px;border-radius:50%;background:#6366F1;box-shadow:0 0 0 4px rgba(99,102,241,0.35);"></div>
+        <div style="background:rgba(99,102,241,0.18);border:1px solid rgba(99,102,241,0.45);border-radius:16px;padding:16px 18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
             <span style="background:#6366F1;color:#fff;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;">2010 – 2014</span>
             <span style="color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;">30 Ramstore дүкені · Товар қабылдау жүйелері</span>
           </div>
-          <p style="color:rgba(255,255,255,0.75);font-size:12px;line-height:1.75;margin-bottom:12px;">
-            Ramstore желісінің <strong style="color:#A5B4FC;">30-ға жуық дүкенінің</strong> қойма товар қабылдау жүйелерін әзірледім, оқыттым және іске асырдым. <strong style="color:#A5B4FC;">Honeywell</strong> маркалы қол терминалымен жұмыс жасай отырып осы технологияның нағыз сарапшысына айналдым.
+          <p style="color:rgba(255,255,255,0.9);font-size:12px;line-height:1.75;margin-bottom:12px;">
+            Ramstore желісінің <strong style="color:#C7D2FE;">30-ға жуық дүкенінің</strong> қойма товар қабылдау жүйелерін әзірледім, оқыттым және іске асырдым. <strong style="color:#C7D2FE;">Honeywell</strong> маркалы қол терминалымен жұмыс жасай отырып осы технологияның нағыз сарапшысына айналдым.
           </p>
-          <!-- 3 expertise pillars -->
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:7px;margin-bottom:10px;">
-            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:8px 10px;">
-              <div style="color:#A5B4FC;font-size:10px;font-weight:800;margin-bottom:2px;">🏪 Дүкен менеджменті</div>
-              <div style="color:rgba(255,255,255,0.5);font-size:9.5px;line-height:1.4;">Сауда нүктесінің операциялық жүйелері</div>
+            <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);border-radius:10px;padding:8px 10px;">
+              <div style="color:#C7D2FE;font-size:10px;font-weight:800;margin-bottom:2px;">🏪 Дүкен менеджменті</div>
+              <div style="color:rgba(255,255,255,0.72);font-size:9.5px;line-height:1.4;">Сауда нүктесінің операциялық жүйелері</div>
             </div>
-            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:8px 10px;">
-              <div style="color:#A5B4FC;font-size:10px;font-weight:800;margin-bottom:2px;">💳 Касса жүйелері</div>
-              <div style="color:rgba(255,255,255,0.5);font-size:9.5px;line-height:1.4;">NCR · Kasса сервис басқару</div>
+            <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);border-radius:10px;padding:8px 10px;">
+              <div style="color:#C7D2FE;font-size:10px;font-weight:800;margin-bottom:2px;">💳 Касса жүйелері</div>
+              <div style="color:rgba(255,255,255,0.72);font-size:9.5px;line-height:1.4;">NCR · Касса сервис басқару</div>
             </div>
-            <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:8px 10px;">
-              <div style="color:#A5B4FC;font-size:10px;font-weight:800;margin-bottom:2px;">📦 Товар қабылдау</div>
-              <div style="color:rgba(255,255,255,0.5);font-size:9.5px;line-height:1.4;">Honeywell терминал · Штрихкод</div>
+            <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);border-radius:10px;padding:8px 10px;">
+              <div style="color:#C7D2FE;font-size:10px;font-weight:800;margin-bottom:2px;">📦 Товар қабылдау</div>
+              <div style="color:rgba(255,255,255,0.72);font-size:9.5px;line-height:1.4;">Honeywell терминал · Штрихкод</div>
             </div>
           </div>
-          <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border-radius:10px;padding:8px 12px;">
+          <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:10px;padding:8px 12px;">
             <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#C8102E,#8B0000);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
               <span style="font-family:'Arial Black',sans-serif;font-weight:900;font-size:7px;color:#fff;line-height:1.2;text-align:center;">HON<br>EY<br>WELL</span>
             </div>
-            <span style="color:rgba(255,255,255,0.65);font-size:11px;">Honeywell Handheld Terminal — товар қабылдау сарапшысы</span>
+            <span style="color:rgba(255,255,255,0.88);font-size:11px;">Honeywell Handheld Terminal — товар қабылдау сарапшысы</span>
           </div>
         </div>
       </div>
 
       <!-- 2015+ Şok -->
-      <div style="position:relative;margin-bottom:28px;">
-        <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,0.25);"></div>
-        <div style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.25);border-radius:16px;padding:16px 18px;">
+      <div style="position:relative;margin-bottom:24px;">
+        <div style="position:absolute;left:-24px;top:4px;width:13px;height:13px;border-radius:50%;background:#10B981;box-shadow:0 0 0 4px rgba(16,185,129,0.35);"></div>
+        <div style="background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.45);border-radius:16px;padding:16px 18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
             <span style="background:#10B981;color:#fff;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;">2015 → Бүгін</span>
             <span style="color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;">Şok Market — Жүйе тірі!</span>
           </div>
-          <p style="color:rgba(255,255,255,0.75);font-size:12px;line-height:1.75;margin-bottom:12px;">
-            Тестіден өткен жүйені <strong style="color:#6EE7B7;">Şok Market 2015 жылдан бері әлі күнге дейін пайдалануда.</strong> Қазақстанда құрылған бұл жүйе қазір <strong style="color:#6EE7B7;">12 000 дүкенге</strong> орталық қойма жүйесін мінсіз атқарып тұр — яғни қазіргі заманға сай, заманауи деңгейде жұмыс істейді. Жасаған жобаларымның өмір сүруі — адамды мотивациялайды және қуантады.
+          <p style="color:rgba(255,255,255,0.9);font-size:12px;line-height:1.75;margin-bottom:12px;">
+            Тестіден өткен жүйені <strong style="color:#A7F3D0;">Şok Market 2015 жылдан бері әлі күнге дейін пайдалануда.</strong> Қазақстанда құрылған бұл жүйе қазір <strong style="color:#A7F3D0;">12 000 дүкенге</strong> орталық қойма жүйесін мінсіз атқарып тұр — яғни қазіргі заманға сай, заманауи деңгейде жұмыс істейді.
           </p>
           <div style="display:flex;flex-wrap:wrap;gap:7px;">
-            <div style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px;">
-              <span style="color:#10B981;font-size:20px;font-weight:900;font-family:'Manrope',sans-serif;">12 000</span>
-              <span style="color:rgba(255,255,255,0.65);font-size:11px;line-height:1.3;">дүкенге<br>қызмет етеді</span>
+            <div style="background:rgba(16,185,129,0.22);border:1px solid rgba(16,185,129,0.5);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+              <span style="color:#34D399;font-size:20px;font-weight:900;font-family:'Manrope',sans-serif;">12 000</span>
+              <span style="color:rgba(255,255,255,0.85);font-size:11px;line-height:1.3;">дүкенге<br>қызмет етеді</span>
             </div>
-            <div style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+            <div style="background:rgba(16,185,129,0.22);border:1px solid rgba(16,185,129,0.5);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px;">
               <span style="font-size:18px;">🇰🇿</span>
-              <span style="color:rgba(255,255,255,0.65);font-size:11px;line-height:1.3;">Қазақстанда<br>құрылған</span>
+              <span style="color:rgba(255,255,255,0.85);font-size:11px;line-height:1.3;">Қазақстанда<br>құрылған</span>
             </div>
-            <div style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+            <div style="background:rgba(16,185,129,0.22);border:1px solid rgba(16,185,129,0.5);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px;">
               <span style="font-size:18px;">⚙️</span>
-              <span style="color:rgba(255,255,255,0.65);font-size:11px;line-height:1.3;">Заманауи<br>деңгейде</span>
+              <span style="color:rgba(255,255,255,0.85);font-size:11px;line-height:1.3;">Заманауи<br>деңгейде</span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- online.ramstore.kz -->
-      <div style="position:relative;margin-bottom:28px;">
-        <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,11,0.25);"></div>
-        <div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.22);border-radius:16px;padding:16px 18px;">
+      <div style="position:relative;margin-bottom:24px;">
+        <div style="position:absolute;left:-24px;top:4px;width:13px;height:13px;border-radius:50%;background:#F59E0B;box-shadow:0 0 0 4px rgba(245,158,11,0.35);"></div>
+        <div style="background:rgba(245,158,11,0.18);border:1px solid rgba(245,158,11,0.45);border-radius:16px;padding:16px 18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
             <span style="background:#D97706;color:#fff;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;">online.ramstore.kz</span>
             <span style="color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;">Орта Азиядағы алғашқы онлайн дүкен · 5 жыл</span>
           </div>
-          <p style="color:rgba(255,255,255,0.75);font-size:12px;line-height:1.75;">
-            Migros орталық кеңсесінің стратегиялық шешімінен кейін <strong style="color:#FCD34D;">Орта Азиядағы алғашқы Ramstore онлайн дүкенін</strong> нөлден іске асырдым және 5 жыл бойы жетекшілік еттім. Бұл — мансабымдағы тізбекті сәттіліктердің ең маңыздыларының бірі болды.
+          <p style="color:rgba(255,255,255,0.9);font-size:12px;line-height:1.75;">
+            Migros орталық кеңсесінің стратегиялық шешімінен кейін <strong style="color:#FDE68A;">Орта Азиядағы алғашқы Ramstore онлайн дүкенін</strong> нөлден іске асырдым және 5 жыл бойы жетекшілік еттім. Бұл — мансабымдағы тізбекті сәттіліктердің ең маңыздыларының бірі болды.
           </p>
           <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">E-Commerce</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">5 жыл басқару</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">Migros стратегиясы</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">KPI +500%</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">E-Commerce</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">5 жыл басқару</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">Migros стратегиясы</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">KPI +500%</span>
           </div>
         </div>
       </div>
 
       <!-- 2020–2022 Ecober + Turkuaz -->
       <div style="position:relative;margin-bottom:8px;">
-        <div style="position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:#8B5CF6;box-shadow:0 0 0 3px rgba(139,92,246,0.25);"></div>
-        <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.22);border-radius:16px;padding:16px 18px;">
+        <div style="position:absolute;left:-24px;top:4px;width:13px;height:13px;border-radius:50%;background:#8B5CF6;box-shadow:0 0 0 4px rgba(139,92,246,0.35);"></div>
+        <div style="background:rgba(139,92,246,0.18);border:1px solid rgba(139,92,246,0.45);border-radius:16px;padding:16px 18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
             <span style="background:#7C3AED;color:#fff;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;letter-spacing:0.5px;">2020 – 2022</span>
             <span style="color:#fff;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;">Ecober + Turkuaz HoReCa — Екі алпауыт</span>
           </div>
-          <p style="color:rgba(255,255,255,0.75);font-size:12px;line-height:1.75;margin-bottom:12px;">
-            Қазақстан мен Орта Азиядағы <strong style="color:#C4B5FD;">екі алпауыт компанияның</strong> — Ecober-дің Turkuaz HoReCa-ны сатып алуы — маған бір мезгілде бірнеше ірі жобаны жүзеге асыру мүмкіндігін берді. Екі компанияның өнім портфелі мен мал қабылдау жүйелерін <strong style="color:#C4B5FD;">қысқа мерзімде реттеп шығу</strong> — маған берілген несібем деп санаймын.
+          <p style="color:rgba(255,255,255,0.9);font-size:12px;line-height:1.75;margin-bottom:12px;">
+            Қазақстан мен Орта Азиядағы <strong style="color:#DDD6FE;">екі алпауыт компанияның</strong> — Ecober-дің Turkuaz HoReCa-ны сатып алуы — маған бір мезгілде бірнеше ірі жобаны жүзеге асыру мүмкіндігін берді. Екі компанияның өнім портфелі мен товар қабылдау жүйелерін <strong style="color:#DDD6FE;">қысқа мерзімде реттеп шығу</strong> — маған берілген несібем деп санаймын.
           </p>
-          <!-- Clients -->
           <div style="margin-bottom:10px;">
-            <div style="color:rgba(255,255,255,0.45);font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Минуттық операциямен жұмыс жасаған клиенттер</div>
+            <div style="color:rgba(255,255,255,0.62);font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Минуттық операциямен жұмыс жасаған клиенттер</div>
             <div style="display:flex;flex-wrap:wrap;gap:5px;">
-              <span style="background:rgba(196,181,253,0.12);border:1px solid rgba(196,181,253,0.25);color:#DDD6FE;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;">🏨 Rixos · Marriott · Hilton</span>
-              <span style="background:rgba(196,181,253,0.12);border:1px solid rgba(196,181,253,0.25);color:#DDD6FE;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;">✈️ Air Astana</span>
-              <span style="background:rgba(196,181,253,0.12);border:1px solid rgba(196,181,253,0.25);color:#DDD6FE;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;">⛏️ KazMinerals</span>
-              <span style="background:rgba(196,181,253,0.12);border:1px solid rgba(196,181,253,0.25);color:#DDD6FE;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;">⛽ Tengizchevroil</span>
+              <span style="background:rgba(196,181,253,0.22);border:1px solid rgba(196,181,253,0.45);color:#EDE9FE;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;">🏨 Rixos · Marriott · Hilton</span>
+              <span style="background:rgba(196,181,253,0.22);border:1px solid rgba(196,181,253,0.45);color:#EDE9FE;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;">✈️ Air Astana</span>
+              <span style="background:rgba(196,181,253,0.22);border:1px solid rgba(196,181,253,0.45);color:#EDE9FE;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;">⛏️ KazMinerals</span>
+              <span style="background:rgba(196,181,253,0.22);border:1px solid rgba(196,181,253,0.45);color:#EDE9FE;font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;">⛽ Tengizchevroil</span>
             </div>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:5px;">
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">M&amp;A операция</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">Өнім портфелі</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">Agile Sprint</span>
-            <span style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);">WMS · Логистика</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">M&amp;A операция</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">Өнім портфелі</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">Agile Sprint</span>
+            <span style="background:rgba(255,255,255,0.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;border:1px solid rgba(255,255,255,0.28);">WMS · Логистика</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Quote -->
-    <div style="margin-top:22px;background:rgba(255,255,255,0.04);border-left:3px solid #10B981;border-radius:0 12px 12px 0;padding:14px 18px;">
-      <p style="color:rgba(255,255,255,0.7);font-size:12.5px;font-style:italic;line-height:1.7;margin:0;">"Жасаған жобаларымның өмір сүруі — адамды мотивациялайды және қуантады. Бұл — инженерлік жұмыстың ең үлкен марапаты."</p>
+    <div style="margin-top:22px;background:rgba(255,255,255,0.08);border-left:3px solid #34D399;border-radius:0 12px 12px 0;padding:14px 18px;">
+      <p style="color:rgba(255,255,255,0.9);font-size:12.5px;font-style:italic;line-height:1.7;margin:0;">"Жасаған жобаларымның өмір сүруі — адамды мотивациялайды және қуантады. Бұл — инженерлік жұмыстың ең үлкен марапаты."</p>
     </div>
 
   </div>
