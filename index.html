@@ -625,12 +625,16 @@
         <h3 class="font-bold text-gray-900 mb-2" data-i18n="exp2.t">Виртуал нарық &amp; E-Commerce</h3>
         <p class="text-gray-500 text-sm leading-relaxed" data-i18n="exp2.d">Migros Sanal Market негізін қалаушы. Нөлден іске асырып, %500 KPI өсімі қамтамасыз етілді.</p>
       </div>
-      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all">
+      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all" style="display:flex;flex-direction:column;">
         <div class="w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center text-teal-600 mb-4">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
         <h3 class="font-bold text-gray-900 mb-2" data-i18n="exp3.t">HoReCa нарығын орнату</h3>
-        <p class="text-gray-500 text-sm leading-relaxed" data-i18n="exp3.d">Ecober арқылы Орта Азия HoReCa нарығын салу. ҚЗ, Қырғызстан, Әзірбайжандағы тарату желісі.</p>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4" data-i18n="exp3.d">Ecober арқылы Орта Азия HoReCa нарығын салу. ҚЗ, Қырғызстан, Әзірбайжандағы тарату желісі.</p>
+        <button onclick="document.getElementById('ecoberHoRecaModal').style.display='flex'" style="margin-top:auto;display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;border:none;border-radius:10px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:opacity 0.18s;" onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          27+ жоба · Толығырақ
+        </button>
       </div>
       <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all">
         <div class="w-11 h-11 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 mb-4">
@@ -3190,6 +3194,216 @@ document.addEventListener('DOMContentLoaded', () => {
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 </a>
+
+<!-- ═══════ ECOBER HoReCa MODAL ═══════ -->
+<div id="ecoberHoRecaModal" style="display:none;position:fixed;inset:0;z-index:9100;background:rgba(4,10,24,0.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:linear-gradient(145deg,#0d1f3c 0%,#071428 100%);border:1px solid rgba(255,255,255,0.13);border-radius:26px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#1e3a5f transparent;">
+
+    <!-- Close -->
+    <button onclick="document.getElementById('ecoberHoRecaModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='rgba(255,255,255,0.15)'" onmouseleave="this.style.background='rgba(255,255,255,0.08)'">&times;</button>
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;padding-right:40px;">
+      <img src="imeges/Ecober/ecober.svg" alt="Ecober" style="height:44px;object-fit:contain;filter:brightness(1.1);" onerror="this.style.display='none'"/>
+      <div>
+        <div style="color:#10B981;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:3px;">HoReCa · B2B · E-Commerce · 2020–2021</div>
+        <div style="color:#fff;font-family:'Manrope',sans-serif;font-weight:900;font-size:20px;line-height:1.2;">Ecober — Орта Азия HoReCa Жобалары</div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6EE7B7;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">27+ объект</span>
+      <span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6EE7B7;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">7 ел</span>
+      <span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6EE7B7;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Пандемия кезеңі</span>
+      <span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6EE7B7;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Бірінші &amp; Ең ірі KZ HoReCa маркеті</span>
+    </div>
+
+    <!-- HOTELS -->
+    <div style="margin-bottom:22px;">
+      <div style="color:#fff;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:7px;">
+        <span style="background:rgba(13,148,136,0.25);border:1px solid rgba(13,148,136,0.4);color:#2DD4BF;padding:2px 10px;border-radius:20px;">🏨 Қонақүйлер</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/rixos.com" alt="Rixos" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Rixos Hotel Group</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/marriott.com" alt="Marriott" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Marriott Astana</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/ritzcarlton.com" alt="Ritz" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">The Ritz-Carlton Almaty</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/swissotel.com" alt="Swissotel" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Swissotel Almaty</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/hilton.com" alt="Hilton" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Hilton Astana</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/sheraton.com" alt="Sheraton" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Sheraton Astana</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/stregis.com" alt="St Regis" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">St Regis Astana</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/wyndham.com" alt="Wyndham" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Wyndham Garden Inn</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/wyndham.com" alt="Ramada" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Ramada Hotels</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/hardrockcafe.com" alt="Hard Rock" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Hard Rock Café Almaty</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <span style="font-size:22px;">🏨</span>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Race Otel</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <span style="font-size:22px;">🏨</span>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;line-height:1.3;">Resident Otel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- F&B -->
+    <div style="margin-bottom:22px;">
+      <div style="color:#fff;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;">
+        <span style="background:rgba(180,83,9,0.25);border:1px solid rgba(245,158,11,0.4);color:#FCD34D;padding:2px 10px;border-radius:20px;">🍔 Тамақтану желілері</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/kfc.com" alt="KFC" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;">KFC Kazakhstan</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/burgerking.com" alt="BK" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;">Burger King KZ</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/hawkerchan.com" alt="Hawker Chan" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;">Hawker Chan</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <img src="https://logo.clearbit.com/oceanbasket.com" alt="Ocean Basket" style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#fff;padding:3px;" onerror="this.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;">Ocean Basket</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
+          <span style="font-size:22px;">🍽️</span>
+          <span style="color:rgba(255,255,255,0.85);font-size:10px;font-weight:700;">STK Sokol</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aviation & Oil & Government & Sports -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;">
+      <!-- Aviation & Oil -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;">
+        <div style="margin-bottom:10px;display:flex;flex-wrap:wrap;gap:5px;">
+          <span style="background:rgba(30,64,175,0.25);border:1px solid rgba(96,165,250,0.3);color:#93C5FD;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;">✈️ Авиация</span>
+          <span style="background:rgba(120,53,15,0.25);border:1px solid rgba(253,186,116,0.3);color:#FED7AA;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;">⛏️ Мұнай</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <img src="https://logo.clearbit.com/airastana.com" alt="Air Astana" style="width:30px;height:30px;object-fit:contain;border-radius:6px;background:#fff;padding:2px;flex-shrink:0;" onerror="this.style.display='none'"/>
+            <span style="color:rgba(255,255,255,0.82);font-size:10.5px;font-weight:700;">Air Astana</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:18px;flex-shrink:0;">🚂</span>
+            <span style="color:rgba(255,255,255,0.82);font-size:10.5px;font-weight:700;line-height:1.3;">KazTrans Service<br><span style="font-weight:400;font-size:9.5px;opacity:0.7;">Tengiz лагерь асүйі</span></span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <img src="https://logo.clearbit.com/tengizchevroil.com" alt="TCO" style="width:30px;height:30px;object-fit:contain;border-radius:6px;background:#fff;padding:2px;flex-shrink:0;" onerror="this.style.display='none'"/>
+            <span style="color:rgba(255,255,255,0.82);font-size:10.5px;font-weight:700;line-height:1.3;">Tengizchevroil<br><span style="font-weight:400;font-size:9.5px;opacity:0.7;">лагерь асүйі жобасы</span></span>
+          </div>
+        </div>
+      </div>
+      <!-- Government & Sports -->
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;">
+        <div style="margin-bottom:10px;display:flex;flex-wrap:wrap;gap:5px;">
+          <span style="background:rgba(76,29,149,0.25);border:1px solid rgba(167,139,250,0.3);color:#C4B5FD;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;">🏛️ Мемлекеттік</span>
+          <span style="background:rgba(6,95,70,0.25);border:1px solid rgba(110,231,183,0.3);color:#6EE7B7;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;">🏋️ Спорт</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">🌐</span><span style="color:rgba(255,255,255,0.82);font-size:10px;font-weight:700;">Astana EXPO 2017</span></div>
+          <div style="display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">🏛️</span><span style="color:rgba(255,255,255,0.82);font-size:10px;font-weight:700;">Saltanat Sarayi</span></div>
+          <div style="display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">🕌</span><span style="color:rgba(255,255,255,0.82);font-size:10px;font-weight:700;">Hazret Sultan Мешіті</span></div>
+          <div style="display:flex;align-items:center;gap:7px;">
+            <img src="https://logo.clearbit.com/nu.edu.kz" alt="NU" style="width:22px;height:22px;object-fit:contain;border-radius:4px;background:#fff;padding:1px;flex-shrink:0;" onerror="this.style.display='none'"/>
+            <span style="color:rgba(255,255,255,0.82);font-size:10px;font-weight:700;">Nazarbayev University</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">🏥</span><span style="color:rgba(255,255,255,0.82);font-size:10px;font-weight:700;">Ұлттық Медицина Орталығы</span></div>
+          <div style="display:flex;align-items:center;gap:7px;"><span style="font-size:14px;">🏋️</span><span style="color:rgba(255,255,255,0.82);font-size:10px;font-weight:700;">World Class (барлық филиал)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partner brands -->
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:18px;margin-bottom:18px;">
+      <div style="color:rgba(255,255,255,0.5);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;">🤝 Серіктес брендтер</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <img src="https://logo.clearbit.com/ecolab.com" alt="Ecolab" style="width:36px;height:36px;object-fit:contain;border-radius:7px;background:#fff;padding:3px;" onerror="this.parentElement.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:700;">Ecolab</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <img src="https://logo.clearbit.com/electrolux.com" alt="Electrolux" style="width:36px;height:36px;object-fit:contain;border-radius:7px;background:#fff;padding:3px;" onerror="this.parentElement.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:700;">Electrolux</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <img src="https://logo.clearbit.com/henkel.com" alt="Henkel" style="width:36px;height:36px;object-fit:contain;border-radius:7px;background:#fff;padding:3px;" onerror="this.parentElement.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:700;">Henkel</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <img src="https://logo.clearbit.com/nilfisk.com" alt="Nilfisk" style="width:36px;height:36px;object-fit:contain;border-radius:7px;background:#fff;padding:3px;" onerror="this.parentElement.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:700;">Nilfisk</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <img src="https://logo.clearbit.com/rational-online.com" alt="Rational" style="width:36px;height:36px;object-fit:contain;border-radius:7px;background:#fff;padding:3px;" onerror="this.parentElement.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:700;">Rational</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <img src="https://logo.clearbit.com/focus-brands.com" alt="Focus" style="width:36px;height:36px;object-fit:contain;border-radius:7px;background:#fff;padding:3px;" onerror="this.parentElement.style.display='none'"/>
+          <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:700;">Focus</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <span style="font-size:22px;">🧹</span>
+          <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:700;">Bestfor</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <span style="font-size:22px;">🧻</span>
+          <span style="color:rgba(255,255,255,0.6);font-size:9px;font-weight:700;">Papia</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Geography -->
+    <div style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:14px;padding:12px 16px;">
+      <div style="color:#10B981;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;">🌍 Операция географиясы</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span style="color:rgba(255,255,255,0.75);font-size:11px;">🇰🇿 Алматы · Астана · Ақтау · Атырау · Шымкент</span>
+        <span style="color:rgba(255,255,255,0.75);font-size:11px;">🇰🇬 Бішкек</span>
+        <span style="color:rgba(255,255,255,0.75);font-size:11px;">🇦🇿 Баку</span>
+        <span style="color:rgba(255,255,255,0.75);font-size:11px;">🇺🇿 Ташкент</span>
+        <span style="color:rgba(255,255,255,0.75);font-size:11px;">🇹🇯 Душанбе</span>
+        <span style="color:rgba(255,255,255,0.75);font-size:11px;">🇬🇪 Тбилиси · Батуми</span>
+        <span style="color:rgba(255,255,255,0.75);font-size:11px;">🇦🇪 Дубай</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ═══════ END ECOBER HoReCa MODAL ═══════ -->
 
 </body>
 </html>
