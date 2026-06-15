@@ -17,14 +17,18 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   max-width: 100%;
+  width: 100%;
+  position: relative;
 }
 body {
   font-family: 'Inter', -apple-system, sans-serif;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   max-width: 100%;
   width: 100%;
+  position: relative;
+  touch-action: pan-y;
 }
 .font-manrope { font-family: 'Manrope', 'Inter', sans-serif; }
 
