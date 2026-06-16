@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 115">
+  <circle cx="50" cy="30" r="27" fill="none" stroke="#9E1A20" stroke-width="3"/>
+  <circle cx="50" cy="30" r="21" fill="none" stroke="#9E1A20" stroke-width="1.5"/>
+  <text x="50" y="40" font-family="Georgia,'Times New Roman',serif" font-size="30" font-weight="bold" fill="#9E1A20" text-anchor="middle">R</text>
+  <text x="50" y="74" font-family="'Arial Narrow',Arial,sans-serif" font-size="13" font-weight="bold" fill="#1a1a1a" text-anchor="middle" letter-spacing="1">RAMADA</text>
+  <text x="50" y="89" font-family="Arial,sans-serif" font-size="7.5" fill="#444" text-anchor="middle" letter-spacing="0.3">INTERNATIONAL</text>
+  <text x="50" y="102" font-family="Arial,sans-serif" font-size="7.5" fill="#444" text-anchor="middle" letter-spacing="0.3">HOTELS &amp; RESORTS</text>
+</svg>
