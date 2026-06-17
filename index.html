@@ -681,87 +681,56 @@
         <h3 class="font-bold text-gray-900 mb-2" data-i18n="exp5.t">Халықаралық тарату желісі</h3>
         <p class="text-gray-500 text-sm leading-relaxed" data-i18n="exp5.d">Түркия, Қытай, Қазақстан, Әзірбайжан мен Қырғызстандағы B2B сату және логистика операциялары.</p>
       </div>
-      <!-- exp6 + exp11 merged — full-width -->
-      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all md:col-span-3">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="w-11 h-11 bg-green-50 rounded-xl flex items-center justify-center text-green-600 flex-shrink-0">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div>
-            <h3 class="font-bold text-gray-900 mb-1" data-i18n="exp6.t">IT жүйелерін басқару</h3>
-            <p class="text-gray-500 text-sm leading-relaxed" data-i18n="exp6.d">NCR кассалық жүйелері, штрих-код автоматизациясы, қор менеджменті бағдарламалары және цифрлық трансформация.</p>
-          </div>
+      <!-- exp6 + exp11 merged — HoReCa-style pill format, full-width -->
+      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all md:col-span-3" style="display:flex;flex-direction:column;">
+        <div class="w-11 h-11 bg-green-50 rounded-xl flex items-center justify-center text-green-600 mb-4">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2" data-i18n="exp6.t">IT жүйелерін басқару</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4" data-i18n="exp6.d">NCR кассалық жүйелері, штрих-код автоматизациясы, қор менеджменті бағдарламалары және цифрлық трансформация.</p>
+
+        <!-- Historic project pills -->
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+          <span style="background:#f0fdf4;border:1px solid #86efac;color:#15803d;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">🏭 Ramstore Орталық Қоймасы</span>
+          <span style="background:#f0fdf4;border:1px solid #86efac;color:#15803d;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">🖥️ NCR / Encore — 30 дүкен · 1 апта</span>
+          <span style="background:#f0fdf4;border:1px solid #86efac;color:#15803d;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">📦 obase — 30 дүкен</span>
+          <span style="background:#f0fdf4;border:1px solid #86efac;color:#15803d;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">🛒 Орта Азияның 1-ші E-Commerce</span>
         </div>
 
-        <!-- 4 historic achievements -->
-        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:14px;margin-bottom:14px;">
-          <div class="font-manrope font-black text-sm mb-3" style="color:#15803d;" data-i18n="car.sg.achh">🏆 Тарихи жобалар мен жетістіктер</div>
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
-            <div style="background:#dcfce7;border-radius:8px;padding:8px 11px;font-size:10.5px;color:#166534;line-height:1.55;" data-i18n="car.sg.b1">
-              🏭 <strong>Ramstore Орталық Қоймасы</strong><br>Негізін қалаушы – алғаш рет іске қосу
-            </div>
-            <div style="background:#dcfce7;border-radius:8px;padding:8px 11px;font-size:10.5px;color:#166534;line-height:1.55;" data-i18n="car.sg.b2">
-              🖥️ <strong>NCR / Encore — 30 дүкен</strong><br>Linux кассалық жүйесі — 1 аптада аймақтарға іске қосу
-            </div>
-            <div style="background:#dcfce7;border-radius:8px;padding:8px 11px;font-size:10.5px;color:#166534;line-height:1.55;" data-i18n="car.sg.b3">
-              📦 <strong>obase — 30 дүкен</strong><br>Тауар қабылдау IT жүйесін оқыту және іске асыру
-            </div>
-            <div style="background:#dcfce7;border-radius:8px;padding:8px 11px;font-size:10.5px;color:#166534;line-height:1.55;" data-i18n="car.sg.b4">
-              🛒 <strong>Орта Азияның 1-ші E-Commerce</strong><br>Қазақстанда тұңғыш бөлшек сауда виртуал маркеті
-            </div>
-          </div>
+        <!-- Activity pills -->
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+          <span data-i18n="exp11.a1" style="background:#f0fdfa;border:1px solid #5eead4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">Инженерлік және құрылыс жобаларын дамыту.</span>
+          <span data-i18n="exp11.a2" style="background:#f0fdfa;border:1px solid #5eead4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">Сауда және өнеркәсіп объектілерін жобалау мен іске асыру.</span>
+          <span data-i18n="exp11.a3" style="background:#f0fdfa;border:1px solid #5eead4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">Қазақстан және Орталық Азия нарығында серіктестік желілерін дамыту.</span>
+          <span data-i18n="exp11.a4" style="background:#f0fdfa;border:1px solid #5eead4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">Құрылыс, инженерлік жүйелер, жабдықтау және іске қосу жұмыстарын басқару.</span>
+          <span data-i18n="exp11.a5" style="background:#f0fdfa;border:1px solid #5eead4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">Инвестициялық және коммерциялық жобаларды ұйымдастыру.</span>
+          <span data-i18n="exp11.a6" style="background:#f0fdfa;border:1px solid #5eead4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">Келісімшарттар жүргізу және мердігер ұйымдарды басқару.</span>
+          <span data-i18n="exp11.a7" style="background:#f0fdfa;border:1px solid #5eead4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">Объектілерді пайдалануға беру және техникалық сүйемелдеу.</span>
         </div>
 
-        <!-- Activity areas + Key Achievements — two columns -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
-          <div>
-            <div class="font-manrope" style="font-size:11px;font-weight:800;color:#15803d;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;" data-i18n="exp11.ach">Негізгі қызмет бағыттары</div>
-            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#16a34a;flex-shrink:0;margin-top:2px;">▸</span><span data-i18n="exp11.a1">Инженерлік және құрылыс жобаларын дамыту.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#16a34a;flex-shrink:0;margin-top:2px;">▸</span><span data-i18n="exp11.a2">Сауда және өнеркәсіп объектілерін жобалау мен іске асыру.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#16a34a;flex-shrink:0;margin-top:2px;">▸</span><span data-i18n="exp11.a3">Қазақстан және Орталық Азия нарығында серіктестік желілерін дамыту.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#16a34a;flex-shrink:0;margin-top:2px;">▸</span><span data-i18n="exp11.a4">Құрылыс, инженерлік жүйелер, жабдықтау және іске қосу жұмыстарын басқару.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#16a34a;flex-shrink:0;margin-top:2px;">▸</span><span data-i18n="exp11.a5">Инвестициялық және коммерциялық жобаларды ұйымдастыру.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#16a34a;flex-shrink:0;margin-top:2px;">▸</span><span data-i18n="exp11.a6">Келісімшарттар жүргізу және мердігер ұйымдарды басқару.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#16a34a;flex-shrink:0;margin-top:2px;">▸</span><span data-i18n="exp11.a7">Объектілерді пайдалануға беру және техникалық сүйемелдеу.</span></li>
-            </ul>
-          </div>
-          <div>
-            <div class="font-manrope" style="font-size:11px;font-weight:800;color:#0f766e;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;" data-i18n="exp11.ach2">Негізгі жетістіктер</div>
-            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;">
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#0d9488;flex-shrink:0;margin-top:2px;">✓</span><span data-i18n="exp11.j1">Инженерлік және құрылыс жобаларын толық цикл бойынша басқару.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#0d9488;flex-shrink:0;margin-top:2px;">✓</span><span data-i18n="exp11.j2">Мемлекеттік және корпоративтік тендерлерге қатысу тәжірибесі.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#0d9488;flex-shrink:0;margin-top:2px;">✓</span><span data-i18n="exp11.j3">Сауда желілері, өндірістік кәсіпорындар және коммерциялық объектілермен жұмыс.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#0d9488;flex-shrink:0;margin-top:2px;">✓</span><span data-i18n="exp11.j4">Жеткізушілер мен халықаралық серіктестермен ұзақ мерзімді ынтымақтастық орнату.</span></li>
-              <li style="font-size:12px;color:#374151;line-height:1.5;display:flex;gap:6px;align-items:flex-start;"><span style="color:#0d9488;flex-shrink:0;margin-top:2px;">✓</span><span data-i18n="exp11.j5">Компанияның коммерциялық қызметін дамыту және жаңа нарықтарға шығару.</span></li>
-            </ul>
-          </div>
+        <!-- Achievement pills -->
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
+          <span data-i18n="exp11.j1" style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">✓ Инженерлік және құрылыс жобаларын толық цикл бойынша басқару.</span>
+          <span data-i18n="exp11.j2" style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">✓ Мемлекеттік және корпоративтік тендерлерге қатысу тәжірибесі.</span>
+          <span data-i18n="exp11.j3" style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">✓ Сауда желілері, өндірістік кәсіпорындар және коммерциялық объектілермен жұмыс.</span>
+          <span data-i18n="exp11.j4" style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">✓ Жеткізушілер мен халықаралық серіктестермен ұзақ мерзімді ынтымақтастық орнату.</span>
+          <span data-i18n="exp11.j5" style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;">✓ Компанияның коммерциялық қызметін дамыту және жаңа нарықтарға шығару.</span>
         </div>
 
-        <!-- Projects + Skills -->
-        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;">
-          <div>
-            <div class="font-manrope" style="font-size:11px;font-weight:800;color:#0f172a;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;" data-i18n="car.sg.ph">🚀 Іске асырылған жобалар</div>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;">
-              <span style="background:#eff6ff;border:1px solid #93c5fd;border-radius:6px;padding:3px 8px;font-size:10.5px;font-weight:600;color:#1d4ed8;">JAQYN</span>
-              <span style="background:#eff6ff;border:1px solid #93c5fd;border-radius:6px;padding:3px 8px;font-size:10.5px;font-weight:600;color:#1d4ed8;">ALATAU</span>
-              <span style="background:#eff6ff;border:1px solid #93c5fd;border-radius:6px;padding:3px 8px;font-size:10.5px;font-weight:600;color:#1d4ed8;">EVIM</span>
-              <span style="background:#eff6ff;border:1px solid #93c5fd;border-radius:6px;padding:3px 8px;font-size:10.5px;font-weight:600;color:#1d4ed8;">MATRELAX</span>
-              <span style="background:#eff6ff;border:1px solid #93c5fd;border-radius:6px;padding:3px 8px;font-size:10.5px;font-weight:600;color:#1d4ed8;">АШК</span>
-            </div>
-          </div>
-          <div style="margin-left:auto;">
-            <div class="flex flex-wrap gap-1.5">
-              <span class="mk-tag">Project Management</span>
-              <span class="mk-tag">Business Development</span>
-              <span class="mk-tag">Contract Administration</span>
-              <span class="mk-tag" data-i18n="car.sg.t4">Construction Management</span>
-              <span class="mk-tag">Engineering Solutions</span>
-              <span class="mk-tag" data-i18n="car.sg.t6">Budget Planning</span>
-              <span class="mk-tag">Negotiation &amp; Sales</span>
-            </div>
-          </div>
+        <!-- Skills + Projects button -->
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
+          <span class="mk-tag">Project Management</span>
+          <span class="mk-tag">Business Development</span>
+          <span class="mk-tag">Contract Administration</span>
+          <span class="mk-tag" data-i18n="car.sg.t4">Construction Management</span>
+          <span class="mk-tag">Engineering Solutions</span>
+          <span class="mk-tag" data-i18n="car.sg.t6">Budget Planning</span>
+          <span class="mk-tag">Negotiation &amp; Sales</span>
         </div>
+
+        <button style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;width:fit-content;" data-i18n="car.sg.ph">
+          🚀 Іске асырылған жобалар
+        </button>
       </div>
       <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all">
         <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4">
