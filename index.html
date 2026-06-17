@@ -667,12 +667,16 @@
           27+ жоба · Толығырақ
         </button>
       </div>
-      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all">
+      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all" style="display:flex;flex-direction:column;">
         <div class="w-11 h-11 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 mb-4">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <h3 class="font-bold text-gray-900 mb-2" data-i18n="exp4.t">Үдерісті оңтайландыру</h3>
-        <p class="text-gray-500 text-sm leading-relaxed" data-i18n="exp4.d">CRM, ERP жүйелерін интеграциялау. Бөлшек сауда, қонақ үй, мейрамхана секторларындағы тиімділік менеджменті.</p>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4" data-i18n="exp4.d">CRM, ERP жүйелерін интеграциялау. Бөлшек сауда, қонақ үй, мейрамхана секторларындағы тиімділік менеджменті.</p>
+        <button onclick="document.getElementById('processOptModal').style.display='flex'" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#d97706,#b45309);color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;width:fit-content;transition:opacity 0.18s;" onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          CRM · ERP · Толығырақ →
+        </button>
       </div>
       <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all">
         <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4">
@@ -4384,6 +4388,78 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 <!-- ═══════ END SAMGA-NIITS IT MODAL ═══════ -->
+
+<!-- ═══════ PROCESS OPT MODAL ═══════ -->
+<div id="processOptModal" style="display:none;position:fixed;inset:0;z-index:9100;background:rgba(4,10,24,0.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:linear-gradient(145deg,#1c1008 0%,#0f0a04 100%);border:1px solid rgba(255,200,80,0.15);border-radius:26px;max-width:780px;width:100%;max-height:90vh;overflow-y:auto;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#7c3a00 transparent;">
+
+    <!-- Close -->
+    <button onclick="document.getElementById('processOptModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;" onmouseenter="this.style.background='rgba(255,255,255,0.15)'" onmouseleave="this.style.background='rgba(255,255,255,0.08)'">&times;</button>
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;padding-right:40px;">
+      <div style="width:44px;height:44px;background:rgba(217,119,6,0.2);border:1px solid rgba(217,119,6,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div>
+        <div style="color:#f59e0b;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:3px;">CRM · ERP · Процесс оңтайландыру</div>
+        <div style="color:#fff;font-family:'Manrope',sans-serif;font-weight:900;font-size:20px;line-height:1.2;" data-i18n="exp4.t">Үдерісті оңтайландыру</div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <span style="background:rgba(217,119,6,0.15);border:1px solid rgba(217,119,6,0.3);color:#fcd34d;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">CRM · Bitrix24</span>
+      <span style="background:rgba(217,119,6,0.15);border:1px solid rgba(217,119,6,0.3);color:#fcd34d;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">CRM · MATRELAX</span>
+      <span style="background:rgba(217,119,6,0.15);border:1px solid rgba(217,119,6,0.3);color:#fcd34d;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">ERP · AKINSOFT</span>
+      <span style="background:rgba(217,119,6,0.15);border:1px solid rgba(217,119,6,0.3);color:#fcd34d;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">4+ объект</span>
+    </div>
+
+    <!-- CRM Section -->
+    <div style="margin-bottom:22px;">
+      <div style="margin-bottom:12px;">
+        <span style="background:rgba(217,119,6,0.2);border:1px solid rgba(217,119,6,0.4);color:#fcd34d;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;padding:3px 12px;border-radius:20px;">📊 CRM Жүйелері</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,200,80,0.12);border-radius:14px;padding:16px;">
+          <div style="color:#fcd34d;font-size:14px;font-weight:900;margin-bottom:6px;">MATRELAX</div>
+          <div style="color:rgba(255,255,255,0.65);font-size:11.5px;line-height:1.6;">Матрас және жиһаз сауда желісі · Клиент базасы, сатудан кейінгі қызмет, тапсырыс трекинг CRM жүйесі</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,200,80,0.12);border-radius:14px;padding:16px;">
+          <div style="color:#fcd34d;font-size:14px;font-weight:900;margin-bottom:6px;">Bitrix24</div>
+          <div style="color:rgba(255,255,255,0.65);font-size:11.5px;line-height:1.6;">Корпоративтік CRM · Жетекшілік, тапсырмалар, коммуникация және сату воронкасын автоматтандыру</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ERP Section -->
+    <div style="margin-bottom:22px;">
+      <div style="margin-bottom:12px;">
+        <span style="background:rgba(180,83,9,0.2);border:1px solid rgba(180,83,9,0.4);color:#fb923c;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;padding:3px 12px;border-radius:20px;">⚙️ ERP Жүйелері · AKINSOFT</span>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(180,83,9,0.2);border-radius:14px;padding:14px;margin-bottom:10px;">
+        <div style="color:#fb923c;font-size:13px;font-weight:800;margin-bottom:4px;">AKINSOFT <span style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);">— Түркия · ERP платформасы</span></div>
+        <div style="color:rgba(255,255,255,0.6);font-size:11.5px;line-height:1.6;">Кассалық жүйе, қор есебі, бухгалтерия, тапсырыс және тиеп-жөнелту модульдері интеграциясы</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:12px 14px;">
+          <div style="color:#fff;font-size:12px;font-weight:800;margin-bottom:3px;">TEA TIME KAFE</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:10px;">☕ Кафе желісі · ERP</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:12px 14px;">
+          <div style="color:#fff;font-size:12px;font-weight:800;margin-bottom:3px;">PAMUK KAFE</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:10px;">🫧 Мейрамхана · ERP</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:12px 14px;">
+          <div style="color:#fff;font-size:12px;font-weight:800;margin-bottom:3px;">PALOMA 365</div>
+          <div style="color:rgba(255,255,255,0.45);font-size:10px;">🌴 Мейрамхана · ERP</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ═══════ END PROCESS OPT MODAL ═══════ -->
 
 </body>
 </html>
