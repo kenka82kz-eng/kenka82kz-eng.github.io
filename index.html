@@ -2850,17 +2850,17 @@ const _STATIC_SEEDS = [
     files: ['20211213_185313.jpeg','20211228_132057.jpeg','20211228_132303.jpeg',
             '20211228_132459.jpeg','20211228_132513.jpeg','SON.jpeg','alatau.jpeg'] },
   { match: c => c === 'astoras',
-    dir: 'imeges/ASTORE/', cluster: 'workflow',
+    dir: 'imeges/ASTORE/', cluster: 'proekt',
     files: ['IMG-20200509-WA0002.jpg','IMG-20200509-WA0003.jpg','IMG-20200509-WA0006.jpg',
             'IMG-20200509-WA0008.jpg','IMG-20200509-WA0009.jpg','IMG-20200509-WA0010.jpg',
             'IMG-20200509-WA0011.jpg','IMG-20200509-WA0012.jpg','IMG-20200509-WA0013.jpg',
             'IMG-20200509-WA0014.jpg','IMG-20200509-WA0018.jpg'] },
   { match: c => c.includes('encore'),
-    dir: 'imeges/ENCORE/', cluster: 'workflow',
+    dir: 'imeges/ENCORE/', cluster: 'proekt',
     files: ['IMG-20200508-WA0005.jpg','IMG-20200508-WA0009.jpg','IMG-20200508-WA0010.jpg',
             'IMG-20200508-WA0011.jpg','IMG-20200508-WA0012.jpg'] },
   { match: c => c === 'migros',
-    dir: 'imeges/Migros/', cluster: 'workflow',
+    dir: 'imeges/Migros/', cluster: 'proekt',
     files: ['20160429_131340.jpg',
             'IMG-20200518-WA0009.jpg','IMG-20200518-WA0010.jpg','IMG-20200518-WA0011.jpg',
             'IMG-20200518-WA0012.jpg','IMG-20200518-WA0013.jpg','IMG-20200518-WA0015.jpg',
@@ -2876,7 +2876,7 @@ const _STATIC_SEEDS = [
             'WhatsApp%20Image%202026-06-15%20at%2002.53.23.jpeg',
             'WhatsApp%20Image%202026-06-15%20at%2002.53.24.jpeg'] },
   { match: c => c === 'ecober',
-    dir: 'imeges/Ecober/', cluster: 'workflow',
+    dir: 'imeges/Ecober/', cluster: 'proekt',
     files: ['IMG-20200927-WA0000.jpg','IMG-20200927-WA0001.jpg',
             'IMG-20201230-WA0051.jpg','IMG-20201230-WA0052.jpg','IMG-20201230-WA0053.jpg',
             'IMG-20201230-WA0060.jpg','IMG-20201230-WA0072.jpg',
@@ -2887,13 +2887,13 @@ const _STATIC_SEEDS = [
             'WhatsApp%20Image%202026-06-15%20at%2002.54.28%20(2).jpeg',
             'WhatsApp%20Image%202026-06-15%20at%2002.54.28.jpeg'] },
   { match: c => c === 'obase',
-    dir: 'imeges/OBASE/', cluster: 'workflow',
+    dir: 'imeges/OBASE/', cluster: 'proekt',
     files: ['IMG-20200508-WA0036.jpg','IMG-20200508-WA0037.jpg','IMG-20200508-WA0038.jpg',
             'IMG-20200508-WA0040.jpg','IMG-20200508-WA0041.jpg','IMG-20200508-WA0042.jpg',
             'IMG-20200508-WA0043.jpg','IMG-20200508-WA0044.jpg','IMG-20200508-WA0046.jpg',
             'IMG-20200508-WA0048.jpg'] },
   { match: c => c === 'hitachi',
-    dir: 'imeges/HITACHI/', cluster: 'workflow',
+    dir: 'imeges/HITACHI/', cluster: 'proekt',
     files: ['IMG-20200512-WA0011.jpg','IMG-20200512-WA0012.jpg','IMG-20200512-WA0013.jpg',
             'IMG-20200512-WA0014.jpg','IMG-20200512-WA0015.jpg','IMG-20200512-WA0016.jpg',
             'IMG-20200512-WA0017.jpg','IMG-20200512-WA0018.jpg','IMG-20200512-WA0019.jpg',
@@ -2901,17 +2901,17 @@ const _STATIC_SEEDS = [
             'IMG-20200512-WA0023.jpg','IMG-20200512-WA0024.jpg',
             'IMG-20200519-WA0001.jpg','IMG-20200520-WA0043.jpg'] },
   { match: c => c === 'ok_market',
-    dir: 'imeges/%C5%9Eok/', cluster: 'workflow',
+    dir: 'imeges/%C5%9Eok/', cluster: 'proekt',
     files: ['WhatsApp%20Image%202026-06-15%20at%2002.54.21%20(1).jpeg',
             'WhatsApp%20Image%202026-06-15%20at%2002.54.21.jpeg',
             'WhatsApp%20Image%202026-06-15%20at%2002.54.22.jpeg',
             'WhatsApp%20Image%202026-06-15%20at%2002.54.23.jpeg',
             'WhatsApp%20Image%202026-06-15%20at%2002.54.24.jpeg'] },
   { match: c => c === 'nurbank',
-    dir: 'imeges/nurbank/', cluster: 'workflow',
+    dir: 'imeges/nurbank/', cluster: 'proekt',
     files: ['FB_IMG_1588975624046.jpg','FB_IMG_1588975631020.jpg','IMG-20200509-WA0020.jpg'] },
   { match: c => c === 'ramstore_online',
-    dir: 'imeges/RAMSORE%20%20ONLINE/', cluster: 'workflow',
+    dir: 'imeges/RAMSORE%20%20ONLINE/', cluster: 'proekt',
     files: ['IMG-20200514-WA0007.jpg','IMG-20200514-WA0008.jpg','IMG-20200514-WA0009.jpg',
             'IMG-20200514-WA0010.jpg','IMG-20200514-WA0012.jpg','IMG-20200514-WA0013.jpg',
             'IMG-20200514-WA0014.jpg','IMG-20200514-WA0016.jpg','RAMON1.png','RAMON2.png',
@@ -2936,12 +2936,26 @@ async function _gAutoSeedStatic(company) {
   if (!seed) return;
   let existing = [];
   try { existing = await _gGetAll(company); } catch(e) { return; }
-  if (existing.length > 0) return;
-  if (!(_gCompanyClusters(company)||[]).length) _gSaveCompanyClusters(company, [seed.cluster]);
-  const cluster = (_gCompanyClusters(company)||[seed.cluster])[0];
+  // Migrate: if existing items have broken cluster 'workflow' as category, clear and re-seed
+  const hasBrokenCluster = existing.length > 0 && existing.every(i => i.category === 'workflow');
+  if (existing.length > 0 && !hasBrokenCluster) return;
+  if (hasBrokenCluster) {
+    // Wipe broken seeds, re-seed with correct cluster
+    try {
+      _gDb = null;
+      const db2 = await _gInitDB();
+      await new Promise((res,rej) => {
+        const tx = db2.transaction('media','readwrite');
+        const req = tx.objectStore('media').index('company').openCursor(company);
+        req.onsuccess = e => { const cur = e.target.result; if(cur){cur.delete();cur.continue();}};
+        tx.oncomplete = res; tx.onerror = e => rej(e.target.error);
+      });
+    } catch(e) { console.warn('migrate wipe:', e); }
+  }
+  _gSaveCompanyClusters(company, [seed.cluster]);
   for (const f of seed.files) {
     try {
-      await _gSave(company, 'image', seed.dir + f, decodeURIComponent(f), cluster, 'workflow');
+      await _gSave(company, 'image', seed.dir + f, decodeURIComponent(f), seed.cluster, 'workflow');
     } catch(e) { console.warn('seed:', f, e); }
   }
 }
@@ -2980,6 +2994,12 @@ async function openGallery(company, companyName) {
         _gBuildGalleryTabs(); _gBuildSubCatTabs(); _gRefreshAdminUI(); await _gRender();
       }
     } else {
+      // Auto-select single cluster + workflow subcategory for faster access
+      const companyClusters = _gCompanyClusters(company) || [];
+      if (companyClusters.length === 1) {
+        _gActiveCat = companyClusters[0];
+        _gActiveSubCat = 'workflow';
+      }
       _gShowView('galleryViewGallery');
       _gBuildGalleryTabs(); _gBuildSubCatTabs(); _gRefreshAdminUI(); await _gRender();
     }
@@ -3245,7 +3265,9 @@ async function _gRender() {
     // IndexedDB unavailable (iOS private mode) — fall back to static seed file paths
     const seed = _STATIC_SEEDS.find(s => s.match(_gCompany));
     if (seed) {
-      if (!(_gCompanyClusters(_gCompany)||[]).length) _gSaveCompanyClusters(_gCompany, [seed.cluster]);
+      try { _gSaveCompanyClusters(_gCompany, [seed.cluster]); } catch(_) {}
+      // Auto-activate cluster & subcategory so images show immediately
+      if (_gActiveCat === 'all') { _gActiveCat = seed.cluster; _gActiveSubCat = 'workflow'; }
       allItems = seed.files.map((f,i) => ({
         id: i, company: _gCompany, type: 'image',
         data: seed.dir + f, name: decodeURIComponent(f),
