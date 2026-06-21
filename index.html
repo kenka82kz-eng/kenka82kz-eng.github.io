@@ -2985,8 +2985,14 @@ async function openGallery(company, companyName) {
     }
   } catch(e) {
     console.warn('gallery open err:', e);
+    // Auto-activate static seed cluster so tabs & images show without IndexedDB
+    const seed = _STATIC_SEEDS.find(s => s.match(company));
+    if (seed) {
+      try { _gSaveCompanyClusters(company, [seed.cluster]); } catch(_) {}
+      _gActiveCat = seed.cluster; _gActiveSubCat = 'workflow';
+    }
     _gShowView('galleryViewGallery');
-    try { _gBuildGalleryTabs(); _gBuildSubCatTabs(); } catch(_) {}
+    try { _gBuildGalleryTabs(); _gBuildSubCatTabs(); await _gRender(); } catch(_) {}
   }
 }
 function closeGallery() {
@@ -3236,8 +3242,19 @@ async function _gRender() {
   const countEl = document.getElementById('galleryCount');
   let allItems = [];
   try { allItems = await _gGetAll(_gCompany); } catch(e) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#9CA3AF;font-size:13px;">Суреттерді жүктеу мүмкін болмады.<br>Браузер жадына рұқсат беріңіз.</div>';
-    return;
+    // IndexedDB unavailable (iOS private mode) — fall back to static seed file paths
+    const seed = _STATIC_SEEDS.find(s => s.match(_gCompany));
+    if (seed) {
+      if (!(_gCompanyClusters(_gCompany)||[]).length) _gSaveCompanyClusters(_gCompany, [seed.cluster]);
+      allItems = seed.files.map((f,i) => ({
+        id: i, company: _gCompany, type: 'image',
+        data: seed.dir + f, name: decodeURIComponent(f),
+        category: seed.cluster, subcategory: 'workflow', date: i
+      }));
+    } else {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#9CA3AF;font-size:13px;">Суреттерді жүктеу мүмкін болмады.<br>Браузер жадына рұқсат беріңіз.</div>';
+      return;
+    }
   }
   const allClusters = _gAllClusters();
   const enabled = _gCompanyClusters(_gCompany) || [];
@@ -3322,6 +3339,7 @@ async function _gRender() {
       media.src = item.data;
       media.style.cursor='zoom-in';
       media.onclick = () => _gOpenLightbox(sortedItems, itemIdx);
+      media.ontouchend = (e) => { e.preventDefault(); _gOpenLightbox(sortedItems, itemIdx); };
       outer.onmouseenter = () => {
         outer.style.transform='translateY(-4px)';
         outer.style.boxShadow='0 14px 32px rgba(0,0,0,0.24)';
@@ -3560,7 +3578,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <div id="galleryModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:12px;padding-top:env(safe-area-inset-top,12px);padding-bottom:env(safe-area-inset-bottom,12px);-webkit-overflow-scrolling:touch;">
 
   <!-- ── VIEW 1: Cluster selector ── -->
-  <div id="galleryViewClusters" style="display:none;flex-direction:column;background:#fff;border-radius:24px;width:100%;max-width:680px;max-height:88dvh;max-height:88vh;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);-webkit-overflow-scrolling:touch;">
+  <div id="galleryViewClusters" style="display:none;flex-direction:column;background:#fff;border-radius:24px;width:100%;max-width:680px;max-height:88vh;max-height:88dvh;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);-webkit-overflow-scrolling:touch;">
     <!-- Header -->
     <div style="padding:20px 24px 16px;border-bottom:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
       <div>
@@ -3581,7 +3599,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 
   <!-- ── VIEW 2: Gallery ── -->
-  <div id="galleryViewGallery" style="display:none;flex-direction:column;background:#fff;border-radius:24px;width:100%;max-width:980px;max-height:88dvh;max-height:88vh;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);-webkit-overflow-scrolling:touch;">
+  <div id="galleryViewGallery" style="display:none;flex-direction:column;background:#fff;border-radius:24px;width:100%;max-width:980px;max-height:88vh;max-height:88dvh;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.38);-webkit-overflow-scrolling:touch;">
     <!-- Header -->
     <div style="padding:18px 24px 14px;border-bottom:1px solid #F3F4F6;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
       <div>
@@ -3652,7 +3670,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ═══════ ONLINE.RAMSTORE.KZ MODAL ═══════ -->
 <div id="ramstoreOnlineModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9100;background:rgba(2,12,6,0.87);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:linear-gradient(145deg,#071a0e 0%,#041208 100%);border:1px solid rgba(22,163,74,0.22);border-radius:26px;max-width:780px;width:100%;max-height:88dvh;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#14532d transparent;">
+  <div style="background:linear-gradient(145deg,#071a0e 0%,#041208 100%);border:1px solid rgba(22,163,74,0.22);border-radius:26px;max-width:780px;width:100%;max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#14532d transparent;">
 
     <!-- Close button -->
     <button onclick="document.getElementById('ramstoreOnlineModal').style.display='none'" style="position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,0.6);font-size:18px;line-height:1;transition:all 0.18s;" onmouseenter="this.style.background='rgba(255,255,255,0.14)'" onmouseleave="this.style.background='rgba(255,255,255,0.07)'">&times;</button>
@@ -3816,7 +3834,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ═══════ WMS MODAL ═══════ -->
 <div id="wmsModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9100;background:rgba(2,8,20,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:linear-gradient(145deg,#152b50 0%,#0e1f3a 100%);border:1px solid rgba(255,255,255,0.22);border-radius:26px;max-width:780px;width:100%;max-height:88dvh;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#2a5080 transparent;">
+  <div style="background:linear-gradient(145deg,#152b50 0%,#0e1f3a 100%);border:1px solid rgba(255,255,255,0.22);border-radius:26px;max-width:780px;width:100%;max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#2a5080 transparent;">
 
     <!-- Close -->
     <button onclick="document.getElementById('wmsModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;" onmouseenter="this.style.background='rgba(255,255,255,0.22)'" onmouseleave="this.style.background='rgba(255,255,255,0.12)'">&times;</button>
@@ -3982,7 +4000,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ═══════ ECOBER HoReCa MODAL ═══════ -->
 <div id="ecoberHoRecaModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9100;background:rgba(4,10,24,0.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:linear-gradient(145deg,#0d1f3c 0%,#071428 100%);border:1px solid rgba(255,255,255,0.13);border-radius:26px;max-width:800px;width:100%;max-height:88dvh;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#1e3a5f transparent;">
+  <div style="background:linear-gradient(145deg,#0d1f3c 0%,#071428 100%);border:1px solid rgba(255,255,255,0.13);border-radius:26px;max-width:800px;width:100%;max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#1e3a5f transparent;">
 
     <!-- Close -->
     <button onclick="document.getElementById('ecoberHoRecaModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='rgba(255,255,255,0.15)'" onmouseleave="this.style.background='rgba(255,255,255,0.08)'">&times;</button>
@@ -4296,7 +4314,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ═══════ SAMGA-NIITS IT MODAL ═══════ -->
 <div id="samgaITModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9100;background:rgba(4,10,24,0.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:linear-gradient(145deg,#0d1f3c 0%,#071428 100%);border:1px solid rgba(255,255,255,0.13);border-radius:26px;max-width:820px;width:100%;max-height:88dvh;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#1e3a5f transparent;">
+  <div style="background:linear-gradient(145deg,#0d1f3c 0%,#071428 100%);border:1px solid rgba(255,255,255,0.13);border-radius:26px;max-width:820px;width:100%;max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#1e3a5f transparent;">
 
     <!-- Close -->
     <button onclick="document.getElementById('samgaITModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background 0.15s;" onmouseenter="this.style.background='rgba(255,255,255,0.15)'" onmouseleave="this.style.background='rgba(255,255,255,0.08)'">&times;</button>
@@ -4412,7 +4430,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ═══════ PROCESS OPT MODAL ═══════ -->
 <div id="processOptModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9100;background:rgba(4,10,24,0.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:linear-gradient(145deg,#1c1008 0%,#0f0a04 100%);border:1px solid rgba(255,200,80,0.15);border-radius:26px;max-width:780px;width:100%;max-height:88dvh;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#7c3a00 transparent;">
+  <div style="background:linear-gradient(145deg,#1c1008 0%,#0f0a04 100%);border:1px solid rgba(255,200,80,0.15);border-radius:26px;max-width:780px;width:100%;max-height:88vh;max-height:88dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 28px 28px;position:relative;scrollbar-width:thin;scrollbar-color:#7c3a00 transparent;">
 
     <!-- Close -->
     <button onclick="document.getElementById('processOptModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;" onmouseenter="this.style.background='rgba(255,255,255,0.15)'" onmouseleave="this.style.background='rgba(255,255,255,0.08)'">&times;</button>
