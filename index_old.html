@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAMGA-NIITS — Қазақстан нарығы | Стратегиялық серіктес</title>
+  <meta name="description" content="SAMGA-NIITS LLP — Казахстан бойынша эксклюзивті дистрибьюция, жергілікті брендинг, 12 000+ сату арнасы."/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="font-inter text-gray-800 bg-white overflow-x-hidden">
+
+<!-- NAV -->
+<header id="nav" class="nav fixed top-0 left-0 right-0 z-50 bg-white/92 backdrop-blur-lg border-b border-blue-900/8">
+  <div class="max-w-6xl mx-auto px-6 flex items-center h-17 gap-8">
+    <a href="#" class="flex items-center gap-3 no-underline flex-shrink-0">
+      <div class="logo-mark w-9 h-9 rounded-lg flex items-center justify-center text-white font-manrope font-black text-lg">S</div>
+      <span class="font-manrope font-bold text-base text-gray-900">SAMGA<span class="text-green-600">·</span>NIITS</span>
+    </a>
+    <nav id="navLinks" class="nav-links hidden md:flex items-center gap-1 ml-auto">
+      <a href="#about" data-i18n="nav_about" class="nav-link text-gray-700 text-sm font-medium px-3 py-2 rounded-md hover:text-blue-600 hover:bg-blue-50 transition-all">Компания</a>
+      <a href="#market" data-i18n="nav_market" class="nav-link text-gray-700 text-sm font-medium px-3 py-2 rounded-md hover:text-blue-600 hover:bg-blue-50 transition-all">Нарық</a>
+      <a href="#partnership" data-i18n="nav_partnership" class="nav-link text-gray-700 text-sm font-medium px-3 py-2 rounded-md hover:text-blue-600 hover:bg-blue-50 transition-all">Серіктестік</a>
+      <a href="#team" data-i18n="nav_team" class="nav-link text-gray-700 text-sm font-medium px-3 py-2 rounded-md hover:text-blue-600 hover:bg-blue-50 transition-all">Команда</a>
+      <a href="#contact" data-i18n="nav_contact" class="ml-2 px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-md hover:bg-blue-700 transition-all">Байланыс</a>
+    </nav>
+    <div class="lang-switcher flex gap-1 ml-4 md:ml-0">
+      <button onclick="setLang('kk')" class="lang-btn active text-xs font-bold px-2 py-1 rounded border border-gray-300 text-gray-500 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-all">KK</button>
+      <button onclick="setLang('ru')" class="lang-btn text-xs font-bold px-2 py-1 rounded border border-gray-300 text-gray-500 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-all">RU</button>
+      <button onclick="setLang('en')" class="lang-btn text-xs font-bold px-2 py-1 rounded border border-gray-300 text-gray-500 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-all">EN</button>
+      <button onclick="setLang('tr')" class="lang-btn text-xs font-bold px-2 py-1 rounded border border-gray-300 text-gray-500 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-all">TR</button>
+      <button onclick="setLang('zh')" class="lang-btn text-xs font-bold px-2 py-1 rounded border border-gray-300 text-gray-500 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-all">中</button>
+      <button onclick="setLang('mn')" class="lang-btn text-xs font-bold px-2 py-1 rounded border border-gray-300 text-gray-500 hover:border-blue-400 hover:text-blue-700 hover:bg-blue-50 transition-all">MN</button>
+    </div>
+    <button id="burger" onclick="toggleMenu()" class="md:hidden flex flex-col gap-1.5 p-1 bg-transparent border-0 cursor-pointer" aria-label="Menu">
+      <span class="block w-6 h-0.5 bg-gray-700 rounded transition-all"></span>
+      <span class="block w-6 h-0.5 bg-gray-700 rounded transition-all"></span>
+      <span class="block w-6 h-0.5 bg-gray-700 rounded transition-all"></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="hero-bg min-h-screen flex items-center pt-17 relative overflow-hidden">
+  <div class="shape-1 absolute rounded-full pointer-events-none"></div>
+  <div class="shape-2 absolute rounded-full pointer-events-none"></div>
+  <div class="shape-3 absolute rounded-full pointer-events-none"></div>
+  <div class="max-w-6xl mx-auto px-6 py-20 relative z-10 max-w-3xl">
+    <div data-i18n="hero_badge" class="inline-flex items-center gap-2 bg-white border border-blue-900/14 text-blue-900 text-xs font-semibold px-4 py-1.5 rounded-full mb-7 tracking-wide">🇰🇿 Қазақстан · Орта Азия</div>
+    <h1 class="font-manrope font-black text-5xl md:text-7xl leading-tight text-gray-900 mb-5">
+      <span data-i18n="hero_title_1">Қазақстан нарығына —</span><br/>
+      <span class="text-blue-600" data-i18n="hero_title_2">стратегиялық серіктес</span>
+    </h1>
+    <p data-i18n="hero_sub" class="text-lg text-gray-500 mb-10 max-w-xl leading-relaxed">Эксклюзивті дистрибьюция · Жергілікті брендинг · 12 000+ сату арнасы</p>
+    <div class="hero-stats flex items-center bg-white border border-blue-900/10 rounded-xl px-8 py-5 w-fit shadow-sm mb-11">
+      <div class="text-center px-7">
+        <span class="block font-manrope text-3xl font-black text-blue-600">12 000+</span>
+        <span data-i18n="stat_channels" class="block text-xs text-gray-500 font-medium mt-1 whitespace-nowrap">Сату арналары</span>
+      </div>
+      <div class="w-px h-10 bg-gray-300"></div>
+      <div class="text-center px-7">
+        <span class="block font-manrope text-3xl font-black text-blue-600">16+</span>
+        <span data-i18n="stat_years" class="block text-xs text-gray-500 font-medium mt-1 whitespace-nowrap">Жыл тәжірибе</span>
+      </div>
+      <div class="w-px h-10 bg-gray-300"></div>
+      <div class="text-center px-7">
+        <span class="block font-manrope text-3xl font-black text-blue-600">&lt;3 ай</span>
+        <span data-i18n="stat_ttm" class="block text-xs text-gray-500 font-medium mt-1 whitespace-nowrap">Нарыққа шығу</span>
+      </div>
+    </div>
+    <div class="flex gap-4 flex-wrap">
+      <a href="#contact" data-i18n="hero_cta1" class="btn-primary inline-flex items-center gap-2 px-7 py-3.5 bg-blue-600 text-white font-semibold text-sm rounded-lg shadow-lg hover:bg-blue-700 hover:-translate-y-0.5 transition-all">Кеңес алу</a>
+      <a href="#partnership" data-i18n="hero_cta2" class="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-blue-600 border-2 border-blue-600 font-semibold text-sm rounded-lg hover:bg-blue-50 hover:-translate-y-0.5 transition-all">Серіктестік форматтары</a>
+    </div>
+  </div>
+  <div class="scroll-dot absolute bottom-8 left-1/2 -translate-x-1/2"><span></span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span data-i18n="about_eyebrow" class="eyebrow">Компания туралы</span>
+      <h2 data-i18n="about_title" class="font-manrope font-black text-4xl md:text-5xl text-gray-900 mt-4 mb-4">SAMGA-NIITS кім?</h2>
+      <p data-i18n="about_sub" class="text-gray-500 text-lg max-w-xl mx-auto leading-relaxed">ТОО «SAMGA-NIITS» — Қазақстан нарығындағы стратегиялық дистрибьютор</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="about-card reveal bg-white border border-blue-900/8 rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
+        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-5">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 data-i18n="about_c1_title" class="font-bold text-gray-900 text-base mb-2">Kasipker серіктесі</h3>
+        <p data-i18n="about_c1_text" class="text-gray-500 text-sm leading-relaxed">Орта Азия кәсіпкерлер одағының мүшесі. Мемлекет және бизнес байланысы.</p>
+      </div>
+      <div class="about-card reveal bg-white border border-blue-900/8 rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
+        <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600 mb-5">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3 data-i18n="about_c2_title" class="font-bold text-gray-900 text-base mb-2">Халықаралық тәжірибе</h3>
+        <p data-i18n="about_c2_text" class="text-gray-500 text-sm leading-relaxed">16+ жыл: Қытай, Түркия, ритейл, e-commerce, WMS, HoReCa.</p>
+      </div>
+      <div class="about-card reveal bg-white border border-blue-900/8 rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
+        <div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center text-teal-600 mb-5">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 data-i18n="about_c3_title" class="font-bold text-gray-900 text-base mb-2">Блогерлер желісі</h3>
+        <p data-i18n="about_c3_text" class="text-gray-500 text-sm leading-relaxed">Макро және микро инфлюенсерлермен белсенді желілік инфрақұрылым.</p>
+      </div>
+      <div class="about-card reveal bg-white border border-blue-900/8 rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
+        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-5">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3 data-i18n="about_c4_title" class="font-bold text-gray-900 text-base mb-2">IT & E-commerce</h3>
+        <p data-i18n="about_c4_text" class="text-gray-500 text-sm leading-relaxed">CRM, ERP, WMS жүйелерін енгізу. Онлайн сату арналарын дамыту.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA: after ABOUT -->
+<section style="padding:60px 0;background:linear-gradient(135deg,#F0F8FF 0%,#E6F8F1 100%);">
+  <div style="max-width:820px;margin:0 auto;padding:0 24px;text-align:center;">
+    <span class="eyebrow">Тегін кеңес</span>
+    <h3 class="font-manrope" style="font-weight:900;font-size:clamp(1.6rem,3vw,2.1rem);color:#111827;margin:16px 0 12px;line-height:1.25;">Бизнесіңізге сай стратегияны бірге анықтайық</h3>
+    <p style="color:#6B7280;font-size:15px;margin:0 0 28px;line-height:1.7;">30 минуттық тегін байланыс — нарық мүмкіндіктерін талқылайық</p>
+    <button onclick="openLeadModal('Кеңес аламын')" style="display:inline-flex;align-items:center;gap:10px;padding:15px 38px;border-radius:100px;border:none;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:white;background:linear-gradient(135deg,#1A6FBA,#1A9266);box-shadow:0 8px 26px rgba(26,111,186,.32);transition:all .25s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 14px 36px rgba(26,111,186,.42)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 26px rgba(26,111,186,.32)'">
+      Кеңес аламын
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market" class="py-24 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span data-i18n="market_eyebrow" class="eyebrow">Нарық мүмкіндіктері</span>
+      <h2 data-i18n="market_title" class="font-manrope font-black text-4xl md:text-5xl text-gray-900 mt-4">Неге Қазақстан? Неге қазір?</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div class="flex flex-col items-center reveal">
+        <div class="market-circle-wrap relative w-56 h-56 mb-6">
+          <div class="market-ring ring1 absolute inset-0 rounded-full border-2 border-blue-200 animate-pulse"></div>
+          <div class="market-ring ring2 absolute rounded-full border-2 border-green-100"></div>
+          <div class="absolute inset-0 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center z-10">
+            <span class="font-manrope text-4xl font-black market-gradient-text">15–20%</span>
+            <span data-i18n="market_growth" class="text-xs text-gray-500 mt-1">жылдық өсім</span>
+          </div>
+        </div>
+        <p data-i18n="market_note" class="text-sm text-gray-500">Қазақстан косметика нарығы</p>
+      </div>
+      <div class="space-y-6 reveal">
+        <div class="flex gap-4 items-start">
+          <div class="w-2.5 h-2.5 rounded-full market-dot mt-1.5 flex-shrink-0"></div>
+          <div><strong data-i18n="fact1_title" class="block text-gray-900 font-semibold mb-1">2 300+ сату нүктесі</strong><p data-i18n="fact1_text" class="text-sm text-gray-500">Тек Алматыда оффлайн және онлайн нүктелер</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-2.5 h-2.5 rounded-full market-dot mt-1.5 flex-shrink-0"></div>
+          <div><strong data-i18n="fact2_title" class="block text-gray-900 font-semibold mb-1">Сенім артуда</strong><p data-i18n="fact2_text" class="text-sm text-gray-500">Орта Азиядa Қытай тауарына деген сұраныс жоғарылауда</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-2.5 h-2.5 rounded-full market-dot mt-1.5 flex-shrink-0"></div>
+          <div><strong data-i18n="fact3_title" class="block text-gray-900 font-semibold mb-1">Жергілікті брендинг</strong><p data-i18n="fact3_text" class="text-sm text-gray-500">Сертификация + KZ брендинг = бәсекеге қабілетті баға</p></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-2.5 h-2.5 rounded-full market-dot mt-1.5 flex-shrink-0"></div>
+          <div><strong data-i18n="fact4_title" class="block text-gray-900 font-semibold mb-1">600–1 200 белсенді нүкте</strong><p data-i18n="fact4_text" class="text-sm text-gray-500">12 000 арнаның 5–10% — ең консервативті бағалау</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA: after MARKET -->
+<section style="padding:64px 0;background:linear-gradient(135deg,#1A4B8C 0%,#0D6B4A 100%);">
+  <div style="max-width:820px;margin:0 auto;padding:0 24px;text-align:center;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 14px;">НАРЫҚ МҮМКІНДІГІ</p>
+    <h3 class="font-manrope" style="font-weight:900;font-size:clamp(1.6rem,3vw,2.1rem);color:white;margin:0 0 12px;line-height:1.25;">Қазақстан нарығына 3 айда шығуға дайынсыз ба?</h3>
+    <p style="color:rgba(255,255,255,.62);font-size:15px;margin:0 0 28px;">Тегін нарық талдауы — сіздің санатыңыз бойынша</p>
+    <button onclick="openLeadModal('Кездесуге жазылу')" style="display:inline-flex;align-items:center;gap:10px;padding:15px 38px;border-radius:100px;border:none;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:#1A4B8C;background:white;box-shadow:0 8px 28px rgba(0,0,0,.28);transition:all .25s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 14px 36px rgba(0,0,0,.38)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 28px rgba(0,0,0,.28)'">
+      Кездесуге жазылу
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- PARTNERSHIP -->
+<section id="partnership" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span data-i18n="partner_eyebrow" class="eyebrow">Серіктестік форматтары</span>
+      <h2 data-i18n="partner_title" class="font-manrope font-black text-4xl md:text-5xl text-gray-900 mt-4 mb-4">Ынтымақтастық жолдары</h2>
+      <p data-i18n="partner_sub" class="text-gray-500 text-lg max-w-md mx-auto">Сіздің бизнес-мақсатыңызға сай форматты таңдаңыз</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Format A -->
+      <div class="reveal bg-white border border-blue-900/10 rounded-3xl p-9 hover:-translate-y-1.5 hover:shadow-xl transition-all">
+        <span data-i18n="pc_badge_a" class="inline-block text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-2.5 py-1 rounded mb-4">Формат A</span>
+        <h3 data-i18n="pc_title_a" class="font-manrope font-black text-xl text-gray-900 mb-3">Эксклюзивті Дистрибьюция</h3>
+        <p data-i18n="pc_text_a" class="text-gray-500 text-sm leading-relaxed mb-6">Сіздің брендіңізді ҚР бойынша ресми таратушы. MOQ келісімі бойынша.</p>
+        <ul class="space-y-2.5 mb-8">
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_a1">ҚР аумағы бойынша эксклюзивті құқық</span></li>
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_a2">Кеден және сертификаттау қолдауы</span></li>
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_a3">3 айдан аз нарыққа шығу</span></li>
+        </ul>
+        <a href="#contact" data-i18n="pc_cta" class="block text-center py-3 bg-blue-50 text-blue-700 font-semibold text-sm rounded-lg hover:bg-blue-600 hover:text-white transition-all">Байланысу</a>
+      </div>
+      <!-- Format B — featured -->
+      <div class="reveal bg-white border-2 border-blue-600 rounded-3xl p-9 relative hover:-translate-y-1.5 hover:shadow-xl transition-all shadow-md">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-green-500 text-white text-xs font-bold px-4 py-1 rounded-full whitespace-nowrap" data-i18n="pc_best">Ең танымал</div>
+        <span data-i18n="pc_badge_b" class="inline-block text-xs font-bold uppercase tracking-widest text-white bg-blue-600 px-2.5 py-1 rounded mb-4">Формат Б</span>
+        <h3 data-i18n="pc_title_b" class="font-manrope font-black text-xl text-gray-900 mb-3">Жергілікті Өндіріс</h3>
+        <p data-i18n="pc_text_b" class="text-gray-500 text-sm leading-relaxed mb-6">Қазақстанда өндіру немесе буып-түю. KZ сертификациясымен нарыққа шығу.</p>
+        <ul class="space-y-2.5 mb-8">
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_b1">Контракт-буып-түю</span></li>
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_b2">KZ сертификациясы</span></li>
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_b3">Толық маркетинг қолдауы</span></li>
+        </ul>
+        <a href="#contact" data-i18n="pc_cta" class="block text-center py-3 bg-blue-600 text-white font-semibold text-sm rounded-lg hover:bg-blue-700 transition-all shadow-md">Байланысу</a>
+      </div>
+      <!-- Format C -->
+      <div class="reveal bg-white border border-blue-900/10 rounded-3xl p-9 hover:-translate-y-1.5 hover:shadow-xl transition-all">
+        <span data-i18n="pc_badge_c" class="inline-block text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-2.5 py-1 rounded mb-4">Формат В</span>
+        <h3 data-i18n="pc_title_c" class="font-manrope font-black text-xl text-gray-900 mb-3">OEM / Private Label</h3>
+        <p data-i18n="pc_text_c" class="text-gray-500 text-sm leading-relaxed mb-6">Біздің бренд астында Сіздің формуланы шығару. Толық маркетингтік қолдау.</p>
+        <ul class="space-y-2.5 mb-8">
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_c1">Өз брендіңізбен өнім</span></li>
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_c2">Блогерлер желісі арқылы жарнама</span></li>
+          <li class="flex items-start gap-2 text-sm text-gray-700"><span class="text-green-500 font-bold">✓</span><span data-i18n="pc_c3">Серіктестік сертификаты</span></li>
+        </ul>
+        <a href="#contact" data-i18n="pc_cta" class="block text-center py-3 bg-blue-50 text-blue-700 font-semibold text-sm rounded-lg hover:bg-blue-600 hover:text-white transition-all">Байланысу</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA: after PARTNERSHIP -->
+<section style="padding:44px 0;background:#F8FAFF;">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+    <div style="background:white;border-radius:24px;padding:36px 44px;border:1px solid rgba(30,58,138,.08);box-shadow:0 4px 28px rgba(26,111,186,.08);display:flex;flex-wrap:wrap;align-items:center;gap:24px;justify-content:space-between;">
+      <div style="min-width:260px;flex:1;">
+        <span class="eyebrow">Серіктестік форматы таңдалды ма?</span>
+        <h3 class="font-manrope" style="font-weight:900;font-size:1.6rem;color:#111827;margin:12px 0 8px;line-height:1.3;">Бірге талқылайық — тегін кеңес алыңыз</h3>
+        <p style="color:#6B7280;font-size:13.5px;margin:0;">MOQ, шарттар, мерзімдер — 30 минутта нақтылайық</p>
+      </div>
+      <button onclick="openLeadModal('Консультация жазылу')" style="flex-shrink:0;display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border-radius:100px;border:none;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;color:white;background:linear-gradient(135deg,#1A6FBA,#1A9266);box-shadow:0 6px 22px rgba(26,111,186,.3);white-space:nowrap;transition:all .25s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+        Консультация жазылу
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps" class="py-24 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span data-i18n="steps_eyebrow" class="eyebrow">Келесі қадамдар</span>
+      <h2 data-i18n="steps_title" class="font-manrope font-black text-4xl md:text-5xl text-gray-900 mt-4">Серіктестік жолы</h2>
+    </div>
+    <div class="flex flex-wrap justify-center gap-0 reveal">
+      <div class="step-item text-center px-4 min-w-36 max-w-48">
+        <div class="font-manrope text-4xl font-black market-gradient-text leading-none mb-3">01</div>
+        <h4 data-i18n="step1_title" class="text-sm font-bold text-gray-900 mb-2">Алғашқы кеңес</h4>
+        <p data-i18n="step1_text" class="text-xs text-gray-500 leading-relaxed">30 мин бейне-кеңес — нарық, MOQ, шарттарды талқылау</p>
+      </div>
+      <div class="text-2xl text-gray-300 px-2 pt-4 hidden md:block">→</div>
+      <div class="step-item text-center px-4 min-w-36 max-w-48">
+        <div class="font-manrope text-4xl font-black market-gradient-text leading-none mb-3">02</div>
+        <h4 data-i18n="step2_title" class="text-sm font-bold text-gray-900 mb-2">NDA қол қою</h4>
+        <p data-i18n="step2_text" class="text-xs text-gray-500 leading-relaxed">Конфиденциалдылық келісімі</p>
+      </div>
+      <div class="text-2xl text-gray-300 px-2 pt-4 hidden md:block">→</div>
+      <div class="step-item text-center px-4 min-w-36 max-w-48">
+        <div class="font-manrope text-4xl font-black market-gradient-text leading-none mb-3">03</div>
+        <h4 data-i18n="step3_title" class="text-sm font-bold text-gray-900 mb-2">Техникалық шарттар</h4>
+        <p data-i18n="step3_text" class="text-xs text-gray-500 leading-relaxed">Аумақ және дистрибьюция шарттары</p>
+      </div>
+      <div class="text-2xl text-gray-300 px-2 pt-4 hidden md:block">→</div>
+      <div class="step-item text-center px-4 min-w-36 max-w-48">
+        <div class="font-manrope text-4xl font-black market-gradient-text leading-none mb-3">04</div>
+        <h4 data-i18n="step4_title" class="text-sm font-bold text-gray-900 mb-2">Pilot жеткізілім</h4>
+        <p data-i18n="step4_text" class="text-xs text-gray-500 leading-relaxed">1 ай ішінде нарық реакциясы</p>
+      </div>
+      <div class="text-2xl text-gray-300 px-2 pt-4 hidden md:block">→</div>
+      <div class="step-item text-center px-4 min-w-36 max-w-48">
+        <div class="font-manrope text-4xl font-black market-gradient-text leading-none mb-3">05</div>
+        <h4 data-i18n="step5_title" class="text-sm font-bold text-gray-900 mb-2">Ресми келісімшарт</h4>
+        <p data-i18n="step5_text" class="text-xs text-gray-500 leading-relaxed">Серіктестік сертификаты</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA: after STEPS -->
+<section style="padding:60px 0;background:linear-gradient(135deg,#EBF4FF 0%,#E6F8F1 100%);">
+  <div style="max-width:680px;margin:0 auto;padding:0 24px;text-align:center;">
+    <div style="font-size:46px;margin-bottom:14px;line-height:1;">🚀</div>
+    <h3 class="font-manrope" style="font-weight:900;font-size:clamp(1.6rem,3vw,2rem);color:#111827;margin:0 0 10px;line-height:1.25;">01 қадамнан бастайық — қазір!</h3>
+    <p style="color:#6B7280;font-size:15px;margin:0 0 28px;line-height:1.7;">30 минуттық видео-кеңес: нарық, MOQ, шарттарды бірге талқылаймыз</p>
+    <button onclick="openLeadModal('Кеңес аламын')" style="display:inline-flex;align-items:center;gap:10px;padding:15px 38px;border-radius:100px;border:none;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:white;background:linear-gradient(135deg,#1A6FBA,#1A9266);box-shadow:0 8px 26px rgba(26,111,186,.32);transition:all .25s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 14px 36px rgba(26,111,186,.42)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 26px rgba(26,111,186,.32)'">
+      Кеңес аламын
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span data-i18n="team_eyebrow" class="eyebrow">Команда</span>
+      <h2 data-i18n="team_title" class="font-manrope font-black text-4xl md:text-5xl text-gray-900 mt-4">Жауапты тұлғалар</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+      <div class="reveal flex gap-6 bg-white border border-blue-900/8 rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
+        <div class="w-16 h-16 rounded-full avatar-blue flex items-center justify-center font-manrope text-xl font-black text-white flex-shrink-0">МК</div>
+        <div>
+          <h3 class="font-bold text-lg text-gray-900 mb-1">Мешітхан Кеңшілік</h3>
+          <span data-i18n="team_role1" class="block text-sm text-blue-600 font-semibold mb-2">Жоба авторы, негізін қалаушы</span>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700">KK</span>
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700">TR</span>
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700">MN</span>
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700">EN</span>
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700">RU</span>
+          </div>
+          <p data-i18n="team_bio1" class="text-xs text-gray-500 leading-relaxed">16+ жыл: ритейл, e-commerce, WMS, HoReCa, авто-бизнес. Қытай, Түркия нарықтарындағы тәжірибе.</p>
+        </div>
+      </div>
+      <div class="reveal flex gap-6 bg-white border border-blue-900/8 rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
+        <div class="w-16 h-16 rounded-full avatar-green flex items-center justify-center font-manrope text-xl font-black text-white flex-shrink-0">МС</div>
+        <div>
+          <h3 class="font-bold text-lg text-gray-900 mb-1">Минайхан Салтанат</h3>
+          <span data-i18n="team_role2" class="block text-sm text-blue-600 font-semibold mb-2">Компания директоры</span>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700">KK</span>
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700">RU</span>
+          </div>
+          <p data-i18n="team_bio2" class="text-xs text-gray-500 leading-relaxed">Kasipker бизнес қауымдастығы. Байтақ жасылдар партиясы — Алматы филиалы директорының орынбасары.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA: after TEAM -->
+<section style="padding:60px 0;background:linear-gradient(135deg,#1A4B8C 0%,#0D6B4A 100%);">
+  <div style="max-width:900px;margin:0 auto;padding:0 24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px;text-align:center;">
+    <div style="display:flex;align-items:center;">
+      <div style="width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:900;font-size:17px;color:white;border:2px solid rgba(255,255,255,.28);">МК</div>
+      <div style="width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:900;font-size:17px;color:white;border:2px solid rgba(255,255,255,.18);margin-left:-10px;">МС</div>
+    </div>
+    <div>
+      <h3 class="font-manrope" style="font-weight:900;font-size:clamp(1.4rem,3vw,1.85rem);color:white;margin:0 0 6px;">Командамен тікелей байланысыңыз</h3>
+      <p style="color:rgba(255,255,255,.62);font-size:14px;margin:0;">Кеңшілік пен Салтанат сіздің сұрақтарыңызды күтеді</p>
+    </div>
+    <button onclick="openLeadModal('Кездесуге жазылу')" style="flex-shrink:0;display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:100px;border:none;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;color:#1A4B8C;background:white;box-shadow:0 6px 22px rgba(0,0,0,.25);white-space:nowrap;transition:all .25s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+      Кездесуге жазылу
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal">
+      <span data-i18n="contact_eyebrow" class="eyebrow">Байланыс</span>
+      <h2 data-i18n="contact_title" class="font-manrope font-black text-4xl md:text-5xl text-gray-900 mt-4 mb-4">Бізбен хабарласыңыз</h2>
+      <p data-i18n="contact_sub" class="text-gray-500 text-lg max-w-md mx-auto">Сұрақтарыңызды жіберіңіз — 24 сағат ішінде жауап береміз</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+      <div class="space-y-7 reveal">
+        <div class="flex gap-4 items-start">
+          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 12 19.79 19.79 0 01.88 3.4 2 2 0 012.86 1.23h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div><span data-i18n="ci_phone" class="block text-xs font-bold uppercase tracking-wide text-gray-400 mb-1">Телефон</span><a href="tel:+77717805442" class="text-base font-medium text-gray-900 hover:text-blue-600 transition-colors">+7 771 780 5442</a></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div><span class="block text-xs font-bold uppercase tracking-wide text-gray-400 mb-1">Email</span><a href="mailto:kenka82kz@gmail.com" class="text-base font-medium text-gray-900 hover:text-blue-600 transition-colors">kenka82kz@gmail.com</a></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div><span data-i18n="ci_city" class="block text-xs font-bold uppercase tracking-wide text-gray-400 mb-1">Қала</span><span class="text-base font-medium text-gray-900">Алматы, Қазақстан</span></div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 flex-shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <div><span class="block text-xs font-bold uppercase tracking-wide text-gray-400 mb-1">Domain</span><span class="text-base font-medium text-gray-900">samganiits.kz</span></div>
+        </div>
+      </div>
+      <form id="contactForm" onsubmit="submitForm(event)" class="reveal bg-white border border-blue-900/10 rounded-3xl p-10 shadow-sm">
+        <div class="grid grid-cols-2 gap-5 mb-5">
+          <div class="flex flex-col gap-2">
+            <label data-i18n="form_name" class="text-xs font-semibold text-gray-700">Аты-жөні</label>
+            <input type="text" id="fname" required class="form-input px-4 py-3 border-1.5 border-gray-300 rounded-lg text-sm text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all"/>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label data-i18n="form_company" class="text-xs font-semibold text-gray-700">Компания</label>
+            <input type="text" id="company" required class="form-input px-4 py-3 border-1.5 border-gray-300 rounded-lg text-sm text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all"/>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-5 mb-5">
+          <div class="flex flex-col gap-2">
+            <label class="text-xs font-semibold text-gray-700">Email</label>
+            <input type="email" id="email" required class="form-input px-4 py-3 border-1.5 border-gray-300 rounded-lg text-sm text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all"/>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label data-i18n="form_phone" class="text-xs font-semibold text-gray-700">Телефон / WeChat</label>
+            <input type="text" id="phone" class="form-input px-4 py-3 border-1.5 border-gray-300 rounded-lg text-sm text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all"/>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 mb-5">
+          <label data-i18n="form_format" class="text-xs font-semibold text-gray-700">Серіктестік форматы</label>
+          <select id="format" class="form-input px-4 py-3 border-1.5 border-gray-300 rounded-lg text-sm text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all appearance-none cursor-pointer">
+            <option value="" data-i18n="form_select">Таңдаңыз...</option>
+            <option value="a" data-i18n="form_opt_a">Формат A — Эксклюзивті Дистрибьюция</option>
+            <option value="b" data-i18n="form_opt_b">Формат Б — Жергілікті Өндіріс</option>
+            <option value="c" data-i18n="form_opt_c">Формат В — OEM / Private Label</option>
+            <option value="other" data-i18n="form_opt_other">Басқа сұрақ</option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-2 mb-7">
+          <label data-i18n="form_message" class="text-xs font-semibold text-gray-700">Хабарлама</label>
+          <textarea id="message" rows="4" required data-i18n-placeholder="form_placeholder" class="form-input px-4 py-3 border-1.5 border-gray-300 rounded-lg text-sm text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all resize-y min-h-28"></textarea>
+        </div>
+        <button type="submit" id="submitBtn" class="submit-btn w-full flex items-center justify-center gap-3 py-4 rounded-lg font-semibold text-sm text-white transition-all">
+          <span class="btn-text" data-i18n="form_send">Жіберу</span>
+          <span class="btn-icon"><svg class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></span>
+          <span class="btn-loader hidden w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+        </button>
+        <div id="formSuccess" class="success-msg hidden items-center gap-3 bg-green-50 border border-green-200 rounded-lg px-4 py-3 mt-5 text-sm text-green-700 font-medium">
+          <svg class="w-5 h-5 text-green-500 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span data-i18n="form_success">Хабарлама жіберілді! Жақын арада хабарласамыз.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 py-12">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-3 text-center">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-white font-manrope font-black text-base logo-mark">S</div>
+      <span class="font-manrope font-bold text-white">SAMGA<span class="text-green-400">·</span>NIITS</span>
+    </div>
+    <p data-i18n="footer_copy" class="text-sm text-white/50">© 2025 SAMGA-NIITS LLP · samganiits.kz · Алматы, Қазақстан</p>
+    <p data-i18n="footer_member" class="text-xs text-white/30">Kasipker · Орта Азия кәсіпкерлер одағы мүшесі</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     LEAD MODAL
+══════════════════════════════════════════ -->
+<div id="leadModal" style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(8,16,46,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;" onclick="if(event.target===this)closeLeadModal()">
+  <div style="background:white;border-radius:28px;max-width:510px;width:100%;box-shadow:0 40px 100px rgba(8,24,80,.28),0 0 0 1px rgba(26,111,186,.1);position:relative;max-height:calc(100dvh - 32px);overflow-y:auto;animation:modalIn .28s cubic-bezier(.34,1.35,.64,1);">
+    <!-- gradient top stripe -->
+    <div style="height:5px;background:linear-gradient(90deg,#1A6FBA 0%,#0EA5A0 50%,#1A9266 100%);border-radius:28px 28px 0 0;flex-shrink:0;"></div>
+    <!-- Header -->
+    <div style="padding:24px 26px 16px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="width:44px;height:44px;background:linear-gradient(135deg,#E8F4FD,#E6F8F1);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🤝</div>
+          <div>
+            <div style="font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#1A9266;margin-bottom:2px;">SAMGA-NIITS</div>
+            <h3 id="leadModalTitle" style="font-family:'Manrope',sans-serif;font-weight:900;font-size:18px;color:#111827;margin:0;line-height:1.2;">Тегін кеңес алу</h3>
+          </div>
+        </div>
+        <button onclick="closeLeadModal()" style="width:34px;height:34px;background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#6B7280;font-size:20px;line-height:1;transition:all .18s;flex-shrink:0;padding:0;font-family:sans-serif;" onmouseover="this.style.background='#F3F4F6';this.style.color='#111827'" onmouseout="this.style.background='#F9FAFB';this.style.color='#6B7280'">×</button>
+      </div>
+      <p style="font-size:13px;color:#6B7280;margin:10px 0 0;line-height:1.6;padding-left:58px;">Форманы толтырыңыз — 24 сағат ішінде WhatsApp арқылы хабарласамыз</p>
+    </div>
+    <div style="height:1px;background:linear-gradient(90deg,transparent,#E9EBF0,transparent);margin:0 26px;"></div>
+    <!-- Form body -->
+    <form id="leadForm" onsubmit="submitLeadForm(event)" style="padding:18px 26px 26px;">
+      <!-- ФИО -->
+      <div style="margin-bottom:13px;">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:#374151;margin-bottom:5px;letter-spacing:.3px;">ФИО <span style="color:#EF4444;">*</span></label>
+        <input id="lf_name" type="text" required placeholder="Толық аты-жөніңіз" style="width:100%;padding:11px 13px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;color:#111827;box-sizing:border-box;font-family:'Inter',sans-serif;outline:none;background:#FAFAFA;transition:border-color .18s,box-shadow .18s;" onfocus="this.style.borderColor='#60A5FA';this.style.boxShadow='0 0 0 3px rgba(59,130,246,.1)';this.style.background='#fff'" onblur="this.style.borderColor='#E5E7EB';this.style.boxShadow='none';this.style.background='#FAFAFA'"/>
+      </div>
+      <!-- Компания -->
+      <div style="margin-bottom:13px;">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:#374151;margin-bottom:5px;letter-spacing:.3px;">Компания аты <span style="font-weight:400;color:#9CA3AF;font-size:11px;">— болмаса жазбаңыз</span></label>
+        <input id="lf_company" type="text" placeholder="ТОО «...» немесе жеке кәсіпкер" style="width:100%;padding:11px 13px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;color:#111827;box-sizing:border-box;font-family:'Inter',sans-serif;outline:none;background:#FAFAFA;transition:border-color .18s,box-shadow .18s;" onfocus="this.style.borderColor='#60A5FA';this.style.boxShadow='0 0 0 3px rgba(59,130,246,.1)';this.style.background='#fff'" onblur="this.style.borderColor='#E5E7EB';this.style.boxShadow='none';this.style.background='#FAFAFA'"/>
+      </div>
+      <!-- Айналым + Жыл (2 колонки) -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:13px;">
+        <div>
+          <label style="display:block;font-size:11.5px;font-weight:700;color:#374151;margin-bottom:5px;letter-spacing:.3px;">Жылдық айналым <span style="color:#EF4444;">*</span></label>
+          <div style="position:relative;">
+            <select id="lf_revenue" required style="width:100%;padding:11px 32px 11px 13px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:13px;color:#111827;box-sizing:border-box;font-family:'Inter',sans-serif;outline:none;background:#FAFAFA;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .18s;" onfocus="this.style.borderColor='#60A5FA'" onblur="this.style.borderColor='#E5E7EB'">
+              <option value="">Таңдаңыз...</option>
+              <option value="$0 – $50,000">$0 – $50,000</option>
+              <option value="$50k – $250k">$50k – $250k</option>
+              <option value="$250k – $1M">$250k – $1M</option>
+              <option value="$1M – $5M">$1M – $5M</option>
+              <option value="$5M жоғары">$5M жоғары</option>
+            </select>
+            <svg style="position:absolute;right:10px;top:50%;transform:translateY(-50%);pointer-events:none;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:11.5px;font-weight:700;color:#374151;margin-bottom:5px;letter-spacing:.3px;">Ашылған жыл <span style="color:#EF4444;">*</span></label>
+          <div style="position:relative;">
+            <select id="lf_year" required style="width:100%;padding:11px 32px 11px 13px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:13px;color:#111827;box-sizing:border-box;font-family:'Inter',sans-serif;outline:none;background:#FAFAFA;appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .18s;" onfocus="this.style.borderColor='#60A5FA'" onblur="this.style.borderColor='#E5E7EB'">
+              <option value="">Таңдаңыз...</option>
+            </select>
+            <svg style="position:absolute;right:10px;top:50%;transform:translateY(-50%);pointer-events:none;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <!-- Сайт/Instagram -->
+      <div style="margin-bottom:13px;">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:#374151;margin-bottom:5px;letter-spacing:.3px;">Сайт немесе Instagram <span style="font-weight:400;color:#9CA3AF;font-size:11px;">— міндетті емес</span></label>
+        <input id="lf_link" type="text" placeholder="https://example.com немесе @instagram" style="width:100%;padding:11px 13px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;color:#111827;box-sizing:border-box;font-family:'Inter',sans-serif;outline:none;background:#FAFAFA;transition:border-color .18s,box-shadow .18s;" onfocus="this.style.borderColor='#60A5FA';this.style.boxShadow='0 0 0 3px rgba(59,130,246,.1)';this.style.background='#fff'" onblur="this.style.borderColor='#E5E7EB';this.style.boxShadow='none';this.style.background='#FAFAFA'"/>
+      </div>
+      <!-- Мәселе -->
+      <div style="margin-bottom:20px;">
+        <label style="display:block;font-size:11.5px;font-weight:700;color:#374151;margin-bottom:5px;letter-spacing:.3px;">Қандай мәселені шешкіңіз келеді? <span style="color:#EF4444;">*</span></label>
+        <textarea id="lf_problem" required rows="3" placeholder="Нарыққа шығу, дистрибьюция каналдарын кеңейту, жергілікті брендинг, т.б." style="width:100%;padding:11px 13px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:14px;color:#111827;box-sizing:border-box;font-family:'Inter',sans-serif;outline:none;background:#FAFAFA;resize:vertical;min-height:86px;line-height:1.65;transition:border-color .18s,box-shadow .18s;" onfocus="this.style.borderColor='#60A5FA';this.style.boxShadow='0 0 0 3px rgba(59,130,246,.1)';this.style.background='#fff'" onblur="this.style.borderColor='#E5E7EB';this.style.boxShadow='none';this.style.background='#FAFAFA'"></textarea>
+      </div>
+      <!-- Submit -->
+      <button type="submit" id="leadSubmitBtn" style="width:100%;padding:15px;background:linear-gradient(135deg,#1A6FBA,#1A9266);border:none;border-radius:13px;color:white;font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 10px 28px rgba(26,111,186,.42)'" onmouseout="this.style.transform='';this.style.boxShadow='none'">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp арқылы жіберу
+      </button>
+      <p style="text-align:center;font-size:11px;color:#B0B8C8;margin:10px 0 0;">🔒 Деректеріңіз тек байланыс мақсатында пайдаланылады</p>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FLOATING WHATSAPP BUTTON
+══════════════════════════════════════════ -->
+<div id="waFloatWrap" style="position:fixed;bottom:26px;right:26px;z-index:1500;display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+  <div id="waTooltip" style="background:#111827;color:white;font-size:12px;font-weight:600;padding:7px 13px;border-radius:9px;white-space:nowrap;opacity:0;transform:translateX(10px);transition:opacity .22s,transform .22s;pointer-events:none;box-shadow:0 4px 14px rgba(0,0,0,.18);">WhatsApp арқылы жазыңыз</div>
+  <a href="https://wa.me/77717805442?text=Сәлем!%20SAMGA-NIITS%20туралы%20сұрағым%20бар." target="_blank" rel="noopener" id="waFloatBtn" style="width:56px;height:56px;background:linear-gradient(135deg,#25D366,#19a84b);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.46),0 2px 6px rgba(0,0,0,.14);text-decoration:none;transition:all .28s;position:relative;" onmouseover="this.style.transform='scale(1.12)';this.style.boxShadow='0 10px 30px rgba(37,211,102,.56),0 2px 8px rgba(0,0,0,.18)';document.getElementById('waTooltip').style.opacity='1';document.getElementById('waTooltip').style.transform='translateX(0)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 6px 22px rgba(37,211,102,.46),0 2px 6px rgba(0,0,0,.14)';document.getElementById('waTooltip').style.opacity='0';document.getElementById('waTooltip').style.transform='translateX(10px)'">
+    <svg width="29" height="29" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
