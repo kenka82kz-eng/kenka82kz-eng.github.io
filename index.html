@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Meshitkhan Kyenchilyeg — COO | SAMGA-NIITS</title>
   <meta name="description" content="Migros WMS жүйесін нөлден жасап, ŞOK Market-ті 11 000+ дүкенге жеткізген. SAMGA-NIITS COO."/>
-  <script src="gallery-seed.js" onerror="window._MK_GALLERY_SEED=null;"></script>
-  <script src="gallery-seed-2.js" onerror=""></script>
-  <script src="gallery-seed-3.js" onerror=""></script>
+  <!-- gallery-seed files loaded lazily on first gallery open -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -2962,8 +2960,25 @@ async function _gAutoSeedStatic(company) {
   }
 }
 
+// ── Lazy-load seed files on first gallery open ────────────────────
+let _gSeedLoaded = false;
+function _gLoadSeeds() {
+  if (_gSeedLoaded) return Promise.resolve();
+  _gSeedLoaded = true;
+  const files = ['gallery-seed.js','gallery-seed-2.js','gallery-seed-3.js'];
+  return files.reduce((chain, src) =>
+    chain.then(() => new Promise(res => {
+      const s = document.createElement('script');
+      s.src = src + '?v=' + (window._GS_VER||1);
+      s.onload = res; s.onerror = res;
+      document.head.appendChild(s);
+    }))
+  , Promise.resolve());
+}
+
 // ── Seed from gallery-seed.js (for all visitors) ─────────────────
 async function _gSeedFromFile(company) {
+  await _gLoadSeeds();
   if (!window._MK_GALLERY_SEED) return;
   const seeds = window._MK_GALLERY_SEED.filter(s => s.company === company);
   if (!seeds.length) return;
