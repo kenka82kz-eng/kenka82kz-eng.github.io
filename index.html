@@ -14,6 +14,9 @@
   <link rel="apple-touch-icon" href="imeges/logo/kk.png"/>
   <link rel="stylesheet" href="meshitkhan.css"/>
   <style>
+    html { scroll-behavior: smooth; }
+    .mk-card-target { scroll-margin-top: 90px; transition: box-shadow .4s, border-color .4s; }
+    .mk-card-target.mk-flash { box-shadow: 0 0 0 3px rgba(45,212,191,0.55), 0 12px 32px rgba(13,148,136,0.25) !important; border-color: rgba(45,212,191,0.6) !important; }
     /* ── ava.png fixed background ── */
     body {
       background-image: url('ava.png');
@@ -537,11 +540,11 @@
       <h1 class="gl-hero-name">Meshitkhan<br>Kyenchilyeg</h1>
       <p class="gl-hero-role" data-i18n="hero.role">Бас Операциялық Директор · SAMGA-NIITS</p>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;">
-        <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;">Retail</span>
-        <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;">HoReCa</span>
-        <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;">WMS</span>
-        <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;">Logistics</span>
-        <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;">E-Commerce</span>
+        <a href="#exp-retail" onclick="mkFlash('exp-retail')" style="text-decoration:none;cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;transition:background .18s,border-color .18s;" onmouseenter="this.style.background='rgba(255,255,255,0.2)'" onmouseleave="this.style.background='rgba(255,255,255,0.1)'">Retail</a>
+        <a href="#exp-horeca" onclick="mkFlash('exp-horeca')" style="text-decoration:none;cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;transition:background .18s,border-color .18s;" onmouseenter="this.style.background='rgba(255,255,255,0.2)'" onmouseleave="this.style.background='rgba(255,255,255,0.1)'">HoReCa</a>
+        <a href="#exp-wms" onclick="mkFlash('exp-wms')" style="text-decoration:none;cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;transition:background .18s,border-color .18s;" onmouseenter="this.style.background='rgba(255,255,255,0.2)'" onmouseleave="this.style.background='rgba(255,255,255,0.1)'">WMS</a>
+        <a href="#exp-logistics" onclick="mkFlash('exp-logistics')" style="text-decoration:none;cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;transition:background .18s,border-color .18s;" onmouseenter="this.style.background='rgba(255,255,255,0.2)'" onmouseleave="this.style.background='rgba(255,255,255,0.1)'">Logistics</a>
+        <a href="#exp-ecommerce" onclick="mkFlash('exp-ecommerce')" style="text-decoration:none;cursor:pointer;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.92);font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;letter-spacing:0.3px;transition:background .18s,border-color .18s;" onmouseenter="this.style.background='rgba(255,255,255,0.2)'" onmouseleave="this.style.background='rgba(255,255,255,0.1)'">E-Commerce</a>
       </div>
       <p class="gl-hero-tagline" data-i18n="hero.tag">Орта Азияның бөлшек сауда · HoReCa · қойма · логистика · электронды сауда экосистемасын салушы</p>
       <p class="gl-hero-desc" data-i18n="hero.desc">16+ жыл бойы Түркия мен Орта Азияда мыңдаған дүкенді, қамбаларды және HoReCa тізбектерін басқарған операциялық сарапшы.</p>
@@ -622,7 +625,7 @@
       <p class="text-gray-500 max-w-md mx-auto" data-i18n="exp.sub">Түркиядан Орта Азия нарығына тасымалданған операциялық тәжірибе</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all" style="display:flex;flex-direction:column;">
+      <div id="exp-wms" class="mk-card mk-card-target p-7 reveal hover:-translate-y-1 transition-all" style="display:flex;flex-direction:column;">
         <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         </div>
@@ -633,7 +636,7 @@
           16 жыл · WMS тарихы
         </button>
       </div>
-      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all" style="display:flex;flex-direction:column;">
+      <div id="exp-ecommerce" class="mk-card mk-card-target p-7 reveal hover:-translate-y-1 transition-all" style="display:flex;flex-direction:column;">
         <div class="w-11 h-11 bg-green-50 rounded-xl flex items-center justify-center text-green-600 mb-4">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/></svg>
         </div>
@@ -644,7 +647,7 @@
           5 жыл · online.ramstore.kz тарихы
         </button>
       </div>
-      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all" style="display:flex;flex-direction:column;">
+      <div id="exp-horeca" class="mk-card mk-card-target p-7 reveal hover:-translate-y-1 transition-all" style="display:flex;flex-direction:column;">
         <div class="w-11 h-11 bg-teal-50 rounded-xl flex items-center justify-center text-teal-600 mb-4">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         </div>
@@ -686,7 +689,7 @@
           CRM · ERP · Толығырақ →
         </button>
       </div>
-      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all">
+      <div id="exp-logistics" class="mk-card mk-card-target p-7 reveal hover:-translate-y-1 transition-all">
         <div class="w-11 h-11 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         </div>
@@ -744,7 +747,7 @@
         <h3 class="font-bold text-gray-900 mb-2" data-i18n="exp7.t">NCR &amp; encore.com.tr — Касса жүйесі</h3>
         <p class="text-gray-500 text-sm leading-relaxed" data-i18n="exp7.d">NCR және encore.com.tr платформаларында касса жүйесін орнату, интеграциялау, бағдарламалық қамтамасыз ету және техникалық қызмет.</p>
       </div>
-      <div class="mk-card p-7 reveal hover:-translate-y-1 transition-all">
+      <div id="exp-retail" class="mk-card mk-card-target p-7 reveal hover:-translate-y-1 transition-all">
         <div class="w-11 h-11 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 mb-4">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
         </div>
@@ -2592,6 +2595,15 @@ function waOpen(msg) {
   window.open('https://wa.me/77717805442?text=' + encodeURIComponent(msg), '_blank');
 }
 
+function mkFlash(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  setTimeout(function () {
+    el.classList.add('mk-flash');
+    setTimeout(function () { el.classList.remove('mk-flash'); }, 1500);
+  }, 500);
+}
+
 function pickLang(lang) {
   setLang(lang);
   document.getElementById('langPicker').classList.remove('open');
@@ -4082,6 +4094,40 @@ document.addEventListener('DOMContentLoaded', () => {
       <span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6EE7B7;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">7 ел</span>
       <span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6EE7B7;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Пандемия кезеңі</span>
       <span style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#6EE7B7;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;">Бірінші &amp; Ең ірі KZ HoReCa маркеті</span>
+    </div>
+
+    <!-- ORTA ASYA'DA OTEL & HORECA ÇÖZÜMLERİ -->
+    <div style="background:rgba(13,148,136,0.07);border:1px solid rgba(45,212,191,0.25);border-radius:16px;padding:20px 22px;margin-bottom:24px;">
+      <div style="color:#2DD4BF;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">🌍 Orta Asya'da Otel &amp; HoReCa Çözümleri</div>
+      <p style="color:rgba(255,255,255,0.8);font-size:13px;line-height:1.7;margin-bottom:14px;">
+        Orta Asya'nın gelişen otel, restoran, catering ve HoReCa sektörlerinde, işletme yöneticileri ve yatırımcılarla güçlü iş birlikleri kurarak profesyonel ürün, ekipman ve sarf malzemeleri çözümleri sunuyoruz.
+      </p>
+      <p style="color:rgba(255,255,255,0.6);font-size:12px;font-weight:700;margin-bottom:10px;">Büyük oteller, restoran grupları, catering şirketleri ve kurumsal işletmeler için:</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:7px 16px;margin-bottom:16px;">
+        <div style="color:rgba(255,255,255,0.78);font-size:11.5px;">🍳 Profesyonel mutfak ekipmanları</div>
+        <div style="color:rgba(255,255,255,0.78);font-size:11.5px;">🏨 Otel ve restoran ekipmanları</div>
+        <div style="color:rgba(255,255,255,0.78);font-size:11.5px;">🥤 Tek kullanımlık ürünler</div>
+        <div style="color:rgba(255,255,255,0.78);font-size:11.5px;">📦 Kağıt ürünleri ve ambalaj</div>
+        <div style="color:rgba(255,255,255,0.78);font-size:11.5px;">🧴 Hijyen ve temizlik ürünleri</div>
+        <div style="color:rgba(255,255,255,0.78);font-size:11.5px;">🍽️ Servis ve sunum ekipmanları</div>
+        <div style="color:rgba(255,255,255,0.78);font-size:11.5px;">⚙️ Profesyonel HoReCa sarf malzemeleri</div>
+        <div style="color:rgba(255,255,255,0.78);font-size:11.5px;">🚚 Proje bazlı tedarik ve lojistik çözümleri</div>
+      </div>
+      <p style="color:rgba(255,255,255,0.65);font-size:12px;line-height:1.6;margin-bottom:14px;">
+        konularında Orta Asya pazarına uygun, güvenilir ve sürdürülebilir çözümler sunuyoruz.
+      </p>
+      <div style="background:rgba(255,255,255,0.04);border-left:3px solid #2DD4BF;border-radius:8px;padding:10px 14px;margin-bottom:16px;">
+        <span style="color:#6EE7B7;font-size:11px;font-weight:800;">🎯 Hedefimiz:</span>
+        <span style="color:rgba(255,255,255,0.78);font-size:11.5px;"> Büyük otel ve HoReCa işletmelerinin doğru ürünleri, doğru tedarikçi ve doğru lojistik modeliyle buluşturulmasını sağlamak.</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        <span style="background:rgba(13,148,136,0.2);border:1px solid rgba(45,212,191,0.35);color:#5EEAD4;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:20px;">Kazakhstan</span>
+        <span style="background:rgba(13,148,136,0.2);border:1px solid rgba(45,212,191,0.35);color:#5EEAD4;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:20px;">Central Asia</span>
+        <span style="background:rgba(13,148,136,0.2);border:1px solid rgba(45,212,191,0.35);color:#5EEAD4;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:20px;">HoReCa</span>
+        <span style="background:rgba(13,148,136,0.2);border:1px solid rgba(45,212,191,0.35);color:#5EEAD4;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:20px;">Hotel</span>
+        <span style="background:rgba(13,148,136,0.2);border:1px solid rgba(45,212,191,0.35);color:#5EEAD4;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:20px;">Restaurant</span>
+        <span style="background:rgba(13,148,136,0.2);border:1px solid rgba(45,212,191,0.35);color:#5EEAD4;font-size:9.5px;font-weight:700;padding:3px 10px;border-radius:20px;">Catering</span>
+      </div>
     </div>
 
     <!-- HOTELS -->
